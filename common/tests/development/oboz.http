@@ -1,0 +1,52 @@
+###
+
+POST https://app.oboz.com/oboz2-api-gateway/oboz2-order-po-viewer/v3/clicar_orders?page=749&size=50
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3Nm1zVUxNNXoyVTdIaE5nb1FURW93VG9XYTE2OGM2YlNzUWVIMGZUOGdnIn0.eyJleHAiOjE3MDQ2Mzg3OTksImlhdCI6MTcwNDYwOTk5OSwianRpIjoiN2E4N2NkMDctZjZkZi00Yjk1LWJkNzAtOWZiZjQ5NzA4MTcwIiwiaXNzIjoiaHR0cDovL29ib3oyLWtleWNsb2FrLWh0dHAvYXV0aC9yZWFsbXMvb2JvejIiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo2NGFlMjU2NC01ZTI1LTQwN2ItYjA5NC0zMWI3M2E2ZDZmM2Y6NTc2YmEwY2UtMzk5NS00ZmUyLWJmMTUtNGM4ZDYyNzNiYWEyIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib2JvejItYmFja2VuZCIsInNlc3Npb25fc3RhdGUiOiI1ODg0MTVhZi0xMDY5LTQ4MDItOTU2ZS01ZmIwZTY4ZTkwNTUiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm1lbnVfY2xpY2FyX2FkdmFuY2VkIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI1ODg0MTVhZi0xMDY5LTQ4MDItOTU2ZS01ZmIwZTY4ZTkwNTUiLCJ1c2VyX3V1aWQiOiI1NzZiYTBjZS0zOTk1LTRmZTItYmYxNS00YzhkNjI3M2JhYTIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImNvbnRyYWN0b3Jfcm9sZV9jb2RlIjoiQ0xJQ0FSIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidG1rcnRjaHlhbkBvYm96LmNvbSIsImNvbnRyYWN0b3JfdXVpZCI6IjgxMWM5MjAwLWNmOTMtNDZjZS1iOWQ4LWRhNjAzODZlYjZhMCIsImVtYWlsIjoidG1rcnRjaHlhbkBvYm96LmNvbSJ9.J4OUn0slL0pQad2tsW2sVFHfgn_yNy7LvM_Y6zfgPXi6Yd6fn0Bc2gu3ZYM-9xhFn1GEKOHOlcGXugS9ydsgxlUFb6FzOIj7K5yCOu3W-PevcdoheLysTzCjY8sQyOiPJ4K_kjvist8qk58_9YhtwVaiidWqIKuYHZzgZUma6s1pzz1q60toDSvI_5I9yKgUDaz9FtAeGogHIz8CQECYJgc5OQ-eeYeGIBvJ5Ev2UJb20EQN0DAXWYwk52BQXzCcSaMq2mb3pr15jeJ0GBoqwHn8jhvxuBECfhUqK3gZJoDs2OqfV18gkFpmSQGvLpYxA1rK5hB3MIbNwKsj3HhR7w
+Content-Type: application/json
+
+{
+  "sort": [
+    {
+      "field": "created_at",
+      "direction": "DESC"
+    }
+  ],
+  "group": "ALL",
+  "filters": {
+    "isLoopExists": null,
+    "isEditable": null,
+    "creationType": null
+  }
+}
+
+###
+
+GET http://b2b.shinservice.localdev/api/v1/tyre/899392/available.json
+Authorization: Bearer l_DDMbXH_u6U30C3Y-zCVQ4qdUgNTlDu
+content-type: application/json
+
+###
+
+GET http://b2b.shinservice.localdev/api/v1/tyre/899392/available.json
+Authorization: Bearer l_DDMbXH_u6U30C3Y-zCVQ4qdUgNTlDu
+content-type: application/json
+
+###
+
+GET http://b2b.shinservice.localdev/api/v1/tyre/899392/available.json
+Authorization: Bearer l_DDMbXH_u6U30C3Y-zCVQ4qdUgNTlDu
+content-type: application/json
+
+###
+
+GET http://b2b.shinservice.localdev/api/v1/tyre/899392/available.json
+Authorization: Bearer l_DDMbXH_u6U30C3Y-zCVQ4qdUgNTlDu
+content-type: application/json
+
+###
+
+GET http://b2b.shinservice.localdev/api/v1/tyre/899392/available.json
+Authorization: Bearer l_DDMbXH_u6U30C3Y-zCVQ4qdUgNTlDu
+content-type: application/json
+
+###

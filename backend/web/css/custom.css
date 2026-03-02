@@ -1,0 +1,323 @@
+
+.img-bordered-gray {
+    border: 2px solid #e4eaec;
+    border-color: #efefef !important;
+}
+
+
+.blocks .images_bottom {
+
+    margin-bottom: 0px !important;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.color-primary {
+    color: #3e8ef7;
+}
+
+.color-success {
+    color: #11c26d;
+}
+
+.color-info {
+    color: #0bb2d4;
+}
+
+.color-danger {
+    color: #ff4c52;
+}
+
+.vcenter {
+    vertical-align: middle;
+    margin: auto;
+    position: relative; top: 50%;
+}
+
+.color-box {
+
+    border:2px solid #efefef !important;
+}
+
+.dropdown-menu .selected span.text {
+
+    visibility: visible !important;
+}
+
+.page-content div.page-header {
+
+    padding: 5px 0px !important;
+}
+
+.filters {
+
+  display: none !important;
+}
+
+
+.panel .panel-primary {
+
+  border: 0px;
+}
+
+.panel-primary > .panel-heading {
+
+  background-color: #fff !important;
+}
+
+.panel-heading .summary {
+
+  color: #000000;
+}
+
+.panel-primary {
+  border: 0px !important;
+}
+
+.kv-panel-before {
+
+  padding: 0px !important;
+}
+
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+
+  border: 1px solid #efefef;
+}
+.table > thead > th {
+  vertical-align: bottom;
+}
+
+.kv-table-header {
+   background: none;
+}
+
+.kv-table-header tr  {
+
+  border-bottom: 0px;
+
+}
+.kv-table-header th a  {
+
+  color: #a1a5b7 !important;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.kv-float-header {
+  box-shadow: none;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+   padding: 10px;
+   line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+  border-right: 0px !important;
+  border-left: 1px  solid #efefef;
+}
+
+
+.panel-footer {
+  padding: 10px 15px;
+   background-color: #fff;
+   border-top: 0px solid #ddd;
+  border-bottom: 0px solid #ddd;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.kv-panel-pager .pagination > li > a, .pagination > li > span {
+
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #337ab7;
+  text-decoration: none;
+  background-color: #fff;
+  border: 0px solid #ddd;
+}
+
+.pagination > .active > a {
+
+  color: #fff !important;
+  font-weight: bold;
+  border-radius: 8px !important;
+  background-color: #009ef7 !important;
+}
+
+.pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+  z-index: 3;
+  color: #000;
+  cursor: default;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+
+.select2-selection .select2-selection--single {
+
+  height: 34px !important;
+}
+
+
+
+.dropdown-toggle.kv-tree-input {
+
+  padding-top: 5px !important;
+  height: 34px !important;
+  margin-bottom: 10px !important;
+}
+
+
+.dropdown-toggle .kv-tree-input {
+
+  height: 34px !important;
+}
+
+
+.kv-node-detail .kv-node-label {
+
+  font-size: 12px !important;
+  margin-left: 8px !important;
+  cursor: pointer;
+}
+
+.kv-tree-list .kv-node-label {
+
+  font-size: 12px !important;
+}
+
+.kv-detail-crumbs {
+  font-size: 14px !important;
+
+}
+
+.kv-tree li {
+  padding-left: 10px !important;
+  border: dotted #333;
+  border-width: 0 0 1px 1px;
+  line-height: 1.4;
+}
+
+.field-tree-name.required:after {
+  content: none;
+  position: relative;
+  font-size: inherit;
+  color: var(--kt-danger);
+  padding-left: 0rem !important;
+  font-weight: 600;
+}
+
+.app-wrapper {
+
+  margin-top: 0px !important;
+}
+
+.form-group.required:after {
+  content: none !important;
+}
+
+
+.form-group .required:after {
+  content: none !important;
+}
+
+.app-header {
+
+  display: none;
+}
+
+.app-page {
+
+  display: none !important;
+}
+
+.kv-panel-before, .kv-panel-after {
+
+  border: 0px !important;
+
+}
+
+.table, .table > thead > tr > th {
+
+
+  border: 0px !important;
+
+}
+
+.table > tbody > tr > td {
+
+  border: 0px !important;
+  border-top: 1px solid #efefef !important;
+}
+
+
+.input-group-addon, .input-group-btn {
+
+  width: auto !important;
+}
+
+.input-group-addon.kv-date-picker, .input-group-addon.kv-date-remove {
+
+  padding-top: 10px !important;
+}
+
+.note-editor .dropdown-toggle::after {
+
+  content: none !important;
+}
+
+.form-control.kv-editor-container {
+
+  padding: 0px !important;
+}
+
+.required:after {
+
+  content: none !important;
+}
+
+.justify-content-between {
+
+  justify-content: flex-start !important;
+}
+
+.note-editor .fade {
+  opacity: 1 !important;
+}
+
+.actions {
+
+  vertical-align: middle !important;
+}
+ц
+.modal .show {
+
+  opacity: 1 !important;
+}
+
+.type-warning {
+
+  opacity: 1 !important;
+}
+
+.container-xxl {
+  max-width: 2320px !important;
+}
+
+.kv-panel-before .caret {
+
+  margin-top: -4px;
+  margin-right: -10px;
+}
+
+.item-show {
+
+  color: #009ef7 !important;
+}
+

@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+encoding//frontend/components/VerticalMenuWidget.php=UTF-8
+encoding//frontend/models/RegisterForm.php=UTF-8
+encoding//frontend/views/auth/login.php=UTF-8
+encoding//frontend/views/auth/register.php=UTF-8
+encoding//frontend/views/auth/resetPassword.php=UTF-8
+encoding//frontend/views/cart/checkout.php=UTF-8
+encoding//frontend/views/layouts/checkout.php=UTF-8
+encoding//frontend/views/layouts/content.php=UTF-8
+encoding//frontend/views/layouts/main.php=UTF-8
+encoding//frontend/views/layouts/main.php_=UTF-8
+encoding//frontend/views/layouts/normal.php=UTF-8
+encoding//frontend/views/layouts/product.php=UTF-8
+encoding//frontend/views/layouts/shop.php=UTF-8
+encoding//frontend/views/product/product.php=UTF-8

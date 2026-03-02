@@ -1,0 +1,43 @@
+
+.img-bordered-gray {
+    border: 2px solid #e4eaec;
+    border-color: #efefef !important;
+}
+
+
+.blocks .images_bottom {
+
+    margin-bottom: 0px !important;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.color-primary {
+    color: #3e8ef7;
+}
+
+.color-success {
+    color: #11c26d;
+}
+
+.color-info {
+    color: #0bb2d4;
+}
+
+.color-danger {
+    color: #ff4c52;
+}
+
+.vcenter {
+    vertical-align: middle;
+    margin: auto;
+    position: relative; top: 50%;
+}
+
+
+.color-box {
+
+    border:2px solid #efefef !important;
+}
