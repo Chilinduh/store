@@ -353,6 +353,26 @@ a .logo {
 }
 
 
+/*выпадающее меню  с авторизацией*/
+.account-menu__form-forgot-link:hover {
+  border-radius: 5px;
+}
+.account-menu__form-button button {
+  height: 40px;
+  border-radius: 8px;
+}
+
+.form-control-sm {
+  height: 40px;
+  border-radius: 8px;
+}
+.account-menu {
+  -webkit-border-radius: 10px  !important;
+  -moz-border-radius: 10px  !important;
+  border-radius: 10px !important;
+}
+
+
 /*Блоки с новинками и акциями */
 
 .product-card.product-card--layout--grid {
