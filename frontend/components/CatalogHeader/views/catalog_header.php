@@ -20,7 +20,7 @@
         <ul class="departments__list">
           <li class="departments__list-padding" role="presentation"></li>
           <?php foreach ($categories as $category) { ?>
-            <li class="departments__item departments__item--submenu--megamenu departments__item--has-submenu">
+            <li class="departments__item departments__item--submenu--megamenu departments__item--has-submenu <?= $i++ == 0 ? 'departments__item--hover' : '' ?>">
             <a href="/catalog/<?= $category['id'] ?>" class="departments__item-link">
               <?= $category['name'] ?><sup class="category-sup"><?= count($category['items']) ?></sup>
               <?php if (count($category['items'])) { ?>
@@ -31,51 +31,17 @@ C-0.1,9.8-0.1,10.4,0.3,10.7z"/>
                   </svg>
               </span>
               <?php } ?>
-
             </a>
 
             <?php if (count($category['items'])) { ?>
-
-              <div class="departments__item-menu">
-                <div class="megamenu departments__megamenu departments__megamenu--size--xl">
-                  <div class="megamenu__image">
-                    <?php if (0) { ?>
-                      <img src="/images/departments/departments-3.jpg" alt="">
-                    <?php } ?>
-                  </div>
-                  <div class="row">
-                    <?php foreach ($category['items'] as $subCat) { ?>
-                      <div class="col-1of2" style="min-width:320px !important">
-                        <ul class="megamenu__links megamenu-links megamenu-links--root">
-                          <?php foreach ($subCat as $cat) { ?>
-                            <li class="megamenu-links__item <?= is_array($cat['items']) && array_sum(array_column($cat['items'], 'count')) > 0 ? 'megamenu-links__item--has-submenu' : '' ?>">
-                             <a class="megamenu-links__item-link"
-                                 href="/catalog/<?= $cat['id'] ?>"><?= $cat['name'] ?><sup class="category-sup"><?= $cat['count'] ?></sup></a>
-
-                              <?php
-                              if (isset($cat['items']) && count($cat['items']) > 0) { ?>
-                                <ul class="megamenu-links">
-                                  <?php foreach ($cat['items'] as $child) { ?>
-                                    <?php if ($child['count']) { ?>
-                                      <li class="megamenu-links__item">
-                                        <a class="megamenu-links__item-link" href="/catalog/<?= $child['id'] ?>"><?= $child['name'] ?> </a>
-                                        <sup class="category-sup"><?= $child['count'] ?></sup>
-                                      </li>
-                                    <?php } ?>
-                                  <?php } ?>
-                                </ul>
-                              <?php } ?>
-                            </li>
-                          <?php } ?>
-                        </ul>
-                      </div>
-                    <?php } ?>
-                  </div>
-                </div>
-              </div>
-
-              </li>
+              <?php
+                    $sub = $this->render('sub_items', ['category' => $category, 'hover' => $j++ == 1 ? true : false]);
+                    $subHtml .= $this->render('sub_items_open', ['category' => $category, 'open' => $i++ == 1 ? true : false]);
+                    echo $sub;
+              ?>
             <?php } ?>
+
+            </li>
           <?php } ?>
 
           <?php if (0) { ?>
@@ -114,6 +80,7 @@ C-0.1,9.8-0.1,10.4,0.3,10.7z"/>
         </ul>
         <div class="departments__menu-container">
 
+          <?= $subHtml ?>
 
         </div>
       </div>

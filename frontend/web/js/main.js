@@ -574,9 +574,17 @@
     */
     $(function () {
         let currentItem = null;
+        let clearSubCatalog = false;
         const container = $('.departments__menu-container');
 
         $('.departments__item').on('mouseenter', function() {
+
+            if(!clearSubCatalog) {
+
+              $('.departments__menu-container').html('');
+              clearSubCatalog = true;
+            }
+
             if (currentItem) {
                 const megamenu = currentItem.data('megamenu');
 
@@ -621,11 +629,11 @@
                 const megamenu = currentItem.data('megamenu');
 
                 if (megamenu) {
-                    megamenu.removeClass('departments__megamenu--open');
+                    //megamenu.removeClass('departments__megamenu--open');
                 }
 
-                currentItem.removeClass('departments__item--hover');
-                currentItem = null;
+                //currentItem.removeClass('departments__item--hover');
+                //currentItem = null;
             }
         });
     });

@@ -42,8 +42,7 @@ use yii\bootstrap\ActiveForm;
          M118.4,14h1c0.5,0,0.9,0.3,1.2,0.7c0.2,0.3,0.4,0.6,0.8,0.8c0.5,0.3,1.4,0.5,2.1,0.5c1.5,0,2.8-0.9,2.8-2c0-0.7-0.5-1.3-1.2-1.6
         c-0.8-0.4-1.1-1.3-0.7-2.1l0.4-0.9c0.4-0.7,1.2-1,1.8-0.6c0.6,0.3,1.2,0.7,1.6,1.2c1,1.1,1.7,2.5,1.7,4c0,3.3-2.9,6-6.5,6
         c-2.8,0-5.5-1.7-6.4-4C116.7,15.1,117.4,14,118.4,14z"></path>
-            </svg>
-          <?php } ?>
+q          <?php } ?>
           <!-- mobile-logo / end -->
         </a>
         <div class="mobile-header__search mobile-search">
@@ -142,11 +141,9 @@ c-1.5,0-2.9,0.6-4,1.5C8.9,1.6,7.5,1,6,1C2.7,1,0,3.7,0,7c0,5,6,12,10,12s10-7,10-1
         <div class="header__topbar-classic">
       <div class="topbar topbar--classic">
         <?php foreach (Yii::$app->pages->display() as $item) { ?>
-
           <div class="topbar__item-text"><a class="topbar__link" href="<?= $item->url ?>"><?= $item->name ?></a></div>
-
         <?php } ?>
-        <div class="topbar__item-spring"></div>
+
         <?php if (0) { ?>
           <div class="topbar__item-button">
             <a href="/compare" class="topbar__button">
@@ -157,11 +154,21 @@ c-1.5,0-2.9,0.6-4,1.5C8.9,1.6,7.5,1,6,1C2.7,1,0,3.7,0,7c0,5,6,12,10,12s10-7,10-1
         <?php } ?>
 
       </div>
+          <div class="topbar__item-spring">
+
+            <div class="header__navbar-phone phone">
+              <a href="javascript:return void(0)" class="phone__body">
+                <div class="phone__title">Звоните нам:</div>
+                <div class="phone__number"><?= Yii::$app->params['phone'] ?? '' ?></div>
+              </a>
+              <a href="https://t.me/Gar_Hov" class="telegramm" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="27px" height="29px"><path fill="#29b6f6" d="M24 4A20 20 0 1 0 24 44A20 20 0 1 0 24 4Z"/><path fill="#fff" d="M33.95,15l-3.746,19.126c0,0-0.161,0.874-1.245,0.874c-0.576,0-0.873-0.274-0.873-0.274l-8.114-6.733 l-3.97-2.001l-5.095-1.355c0,0-0.907-0.262-0.907-1.012c0-0.625,0.933-0.923,0.933-0.923l21.316-8.468 c-0.001-0.001,0.651-0.235,1.126-0.234C33.667,14,34,14.125,34,14.5C34,14.75,33.95,15,33.95,15z"/><path fill="#b0bec5" d="M23,30.505l-3.426,3.374c0,0-0.149,0.115-0.348,0.12c-0.069,0.002-0.143-0.009-0.219-0.043 l0.964-5.965L23,30.505z"/><path fill="#cfd8dc" d="M29.897,18.196c-0.169-0.22-0.481-0.26-0.701-0.093L16,26c0,0,2.106,5.892,2.427,6.912 c0.322,1.021,0.58,1.045,0.58,1.045l0.964-5.965l9.832-9.096C30.023,18.729,30.064,18.416,29.897,18.196z"/></svg>
+              </a>
+            </div>
+          </div>
     </div>
+    <?php if(0) { ?>
     <div class="header__navbar">
-
-      <?php echo CatalogHeaderWidget::widget(); ?>
-
       <div class="header__navbar-menu">
         <div class="main-menu">
           <?php if (Yii::$app->params['news']) { ?>
@@ -176,16 +183,8 @@ c-1.5,0-2.9,0.6-4,1.5C8.9,1.6,7.5,1,6,1C2.7,1,0,3.7,0,7c0,5,6,12,10,12s10-7,10-1
         </div>
       </div>
 
-      <div class="header__navbar-phone phone">
-        <a href="javascript:return void(0)" class="phone__body">
-          <div class="phone__title">Звоните нам: </div>
-          <div class="phone__number"><?= Yii::$app->params['phone'] ?? '' ?></div>
-        </a>
-        <a href="https://t.me/Gar_Hov" class="telegramm" target="_blank">
-          <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="34px" height="34px"><path fill="#29b6f6" d="M24 4A20 20 0 1 0 24 44A20 20 0 1 0 24 4Z"/><path fill="#fff" d="M33.95,15l-3.746,19.126c0,0-0.161,0.874-1.245,0.874c-0.576,0-0.873-0.274-0.873-0.274l-8.114-6.733 l-3.97-2.001l-5.095-1.355c0,0-0.907-0.262-0.907-1.012c0-0.625,0.933-0.923,0.933-0.923l21.316-8.468 c-0.001-0.001,0.651-0.235,1.126-0.234C33.667,14,34,14.125,34,14.5C34,14.75,33.95,15,33.95,15z"/><path fill="#b0bec5" d="M23,30.505l-3.426,3.374c0,0-0.149,0.115-0.348,0.12c-0.069,0.002-0.143-0.009-0.219-0.043 l0.964-5.965L23,30.505z"/><path fill="#cfd8dc" d="M29.897,18.196c-0.169-0.22-0.481-0.26-0.701-0.093L16,26c0,0,2.106,5.892,2.427,6.912 c0.322,1.021,0.58,1.045,0.58,1.045l0.964-5.965l9.832-9.096C30.023,18.729,30.064,18.416,29.897,18.196z"/></svg>
-        </a>
-      </div>
     </div>
+    <?php } ?>
     <div class="header__logo">
 
       <a href="/" class="logo" style="height:50px !important">
@@ -196,6 +195,9 @@ c-1.5,0-2.9,0.6-4,1.5C8.9,1.6,7.5,1,6,1C2.7,1,0,3.7,0,7c0,5,6,12,10,12s10-7,10-1
         </div>
       </a>
 
+    </div>
+    <div class="header__catalog">
+      <?php echo CatalogHeaderWidget::widget(); ?>
     </div>
     <div class="header__search">
       <div class="search">
@@ -430,6 +432,7 @@ c-1.5,0-2.9,0.6-4,1.5C8.9,1.6,7.5,1,6,1C2.7,1,0,3.7,0,7c0,5,6,12,10,12s10-7,10-1
         </form>
       </div>
     </div>
+
     <div class="header__indicators">
       <div class="indicator">
         <a href="/favorites" class="indicator__button">
