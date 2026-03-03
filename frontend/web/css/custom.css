@@ -353,12 +353,22 @@ a .logo {
 }
 
 
+/*Блоки с новинками и акциями */
+
+.product-card.product-card--layout--grid {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+
+
 /*Каталог */
 
 .category-card__image .image__tag {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  border-radius: 5px;  
+  border-radius: 5px;
 }
 
 
