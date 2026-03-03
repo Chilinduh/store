@@ -1,3 +1,9 @@
+<?php
+$i = 0;
+$j = 0;
+
+?>
+
 <div class="header__navbar-departments">
   <div class="departments">
     <button class="departments__button" type="button">
