@@ -243,7 +243,7 @@ class OrderController extends Controller
         if($orderForm->validate()) {
 
           $order = new Orders([
-            'user_id' => Yii::$app->user->identity->id,
+            'user_id' => Yii::$app->user->identity->id??null,
             'status_id' => OrderStatus::STATUS_ACTIVE,
             'price' => Yii::$app->cart->getTotalCost(),
             'comment' => $orderForm->comment
