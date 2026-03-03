@@ -353,3 +353,15 @@ a .logo {
 }
 
 
+/*Каталог*/
+
+.departments__list {
+  width: 300px !important;
+  padding: 10px !important;
+}
+
+.megamenu-links {
+  padding: 10px !important;
+}
+
+
