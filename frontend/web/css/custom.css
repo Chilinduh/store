@@ -353,7 +353,16 @@ a .logo {
 }
 
 
-/*Каталог*/
+/*Каталог */
+
+.category-card__image .image__tag {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;  
+}
+
+
+/*Каталог выпадающее меню*/
 
 .departments__list {
   width: 300px !important;
