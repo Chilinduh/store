@@ -74,8 +74,8 @@
             </a><sup><span class="badge badge-light-'.$class.'">'.($images? count($images) : 0).'</span></sup>
             <div class="ms-5">
               <a href="/products/' . $model->id . '">
-                  <div class="fw-bold fs-5 text-left">' . $model->name . '</div>                  
-              </a>            
+                  <div class="fw-bold fs-5 text-left">' . $model->name . '</div>
+              </a>
               <div class="text-left">Арт: '.($model->code??'').', Произв.: '.($manufacturer->name??'').', Бренд: '.($brand->name??'').'</div>
               <div class="text-left">'.$source.' Описание: '.strlen($model->description).' / '.$sourceRewrite.' символов, </div>
               <div class="text-left">Количество аттрибутов: <span class="badge badge-light-'.($classOptions[$emptyAttributesCount]??'primary').'">'.$emptyAttributesCount.'</span> из '.count($model->attributesValues).'</div>
@@ -126,6 +126,11 @@
       'hAlign' => 'center',
       'vAlign' => 'middle',
       'attribute' => 'show',
+      'format' => 'raw',
+      'value' => function($model) {
+
+        return \yii\helpers\Html::tag('i', '', ['class' => 'fa fa-eye '.($model->show ? 'item-show' : '')]);
+      }
     ],
     [
       'hAlign' => 'center',
