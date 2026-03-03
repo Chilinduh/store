@@ -3,6 +3,8 @@ namespace common\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use common\models\BlocksTypes;
+use common\models\Pages;
 
 
 class Blocks extends ActiveRecord
@@ -39,6 +41,19 @@ class Blocks extends ActiveRecord
       'block_group_id' => 'Группа',
     ];
   }
+
+  public function getType()
+  {
+
+    return $this->hasOne(BlocksTypes::class, ['id' => 'block_type_id']);
+  }
+
+  public function getPage()
+  {
+
+    return $this->hasOne(Pages::class, ['id' => 'page_id']);
+  }
+
 
 
 }

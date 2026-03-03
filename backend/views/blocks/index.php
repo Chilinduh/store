@@ -61,6 +61,28 @@ use app\components\BreadcrumbWidget;
       'attribute' => 'name',
       'filter' => false,
     ],
+    [
+      'hAlign' => 'center',
+      'vAlign' => 'middle',
+      'attribute' => 'page_id',
+      'filter' => false,
+      'format' => 'raw',
+      'value' => function($model) {
+
+        return $model->page->name??'';
+      }
+    ],
+    [
+      'hAlign' => 'center',
+      'vAlign' => 'middle',
+      'attribute' => 'block_type_id',
+      'filter' => false,
+      'format' => 'raw',
+      'value' => function($model) {
+
+        return $model->type->name??'';
+      }
+    ],
 
     [
       'class' => 'yii\grid\ActionColumn',
