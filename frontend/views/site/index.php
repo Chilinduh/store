@@ -16,7 +16,12 @@ use frontend\components\Blocks\BlocksWidget;
         <div class="block-split__item block-split__item-content col-auto">
 
           <div class="block">
-            <?= BlocksWidget::widget(['model' => $block]) ?>
+            <div class="block-banners block">
+              <div class="container">
+                <img src="/images/banners/banner3.jpg" width="">
+              </div>
+              </div>
+            <?php BlocksWidget::widget(['model' => $block]) ?>
           </div>
 
           <?php if (0) { ?>
@@ -639,7 +644,9 @@ use frontend\components\Blocks\BlocksWidget;
           <?php } ?>
         </div>
       </div>
+      <?php if (1) { ?>
       <div class="block-space block-space--layout--before-footer"></div>
+      <?php } ?>
     </div>
   </div>
 <?php } ?>
@@ -671,110 +678,7 @@ use frontend\components\Blocks\BlocksWidget;
 <?php if ($block = Blocks::findOne(['page_id' => Pages::PAGE_MAIN, 'block_type_id' => BlocksTypes::BLOCK_PRODUCTS_BEST])) { ?>
   <?= BlocksWidget::widget(['model' => $block, 'property_id' => Property::BEST_SELLERS_ID]) ?>
 <?php } ?>
-
 <?php if (0) { ?>
-  <div class="block block-split">
-    <div class="container">
-      <div class="block-split__row row no-gutters">
-        <div class="block-split__item block-split__item-content col-auto">
-          <div class="block">
-            <div class="categories-list categories-list--layout--columns-4-full">
-              <ul class="categories-list__body">
-                <?php foreach ($categories as $item) { ?>
-
-                  <li class="categories-list__item">
-                    <a href="">
-                      <div class="image image--type--category">
-                        <div class="image__body">
-                          <img class="image__tag" src="<?= $item->getFiles()->one()->thumbnail ?>" alt="">
-                        </div>
-                      </div>
-                      <div class="categories-list__item-name"><?= $item->name ?></div>
-                    </a>
-                    <?php if (0) { ?>
-                      <div class="categories-list__item-products"><?= $item['count'] ?> товаров</div>
-                    <?php } ?>
-                  </li>
-                  <li class="categories-list__divider"></li>
-
-                <?php } ?>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="block-space block-space--layout--before-footer"></div>
-    </div>
-  </div>
-  <div class="block block-slideshow">
-    <div class="container">
-      <div class="block-slideshow__carousel">
-        <div class="owl-carousel">
-          <a class="block-slideshow__item" href="#">
-            <span class="block-slideshow__item-image block-slideshow__item-image--desktop"
-                  style="background-image: url('/images/slides/slide-3.jpg')"></span>
-            <span class="block-slideshow__item-image block-slideshow__item-image--mobile"
-                  style="background-image: url('/images/slides/slide-3-mobile.jpg')"></span>
-            <span class="block-slideshow__item-offer">
-                                    30% Дисконт
-                                </span>
-            <span class="block-slideshow__item-title">
-                              При покупке запчастей <br>
-                                     с установкой
-                                </span>
-            <span class="block-slideshow__item-details">
-                                    Установка запчастей в сервисах <br>
-                                    наших партнеры.
-                                </span>
-            <span class="block-slideshow__item-button">
-                                    Купить сейчас
-                                </span>
-          </a>
-          <a class="block-slideshow__item" href="#">
-            <span class="block-slideshow__item-image block-slideshow__item-image--desktop"
-                  style="background-image: url('/images/slides/slide-2.jpg')"></span>
-            <span class="block-slideshow__item-image block-slideshow__item-image--mobile"
-                  style="background-image: url('/images/slides/slide-2-mobile.jpg')"></span>
-            <span class="block-slideshow__item-title">
-                                    Не хватает <br>
-                                    запчастей?
-                                </span>
-            <span class="block-slideshow__item-details">
-                                    У нас есть все необходимое - запасные части, рабочие детали, <br>
-                                    аксессуары, масла и жидкости, <br>
-                                    инструменты и многое другое ...
-                                </span>
-            <span class="block-slideshow__item-button">
-                                    Купить сейчас
-                                </span>
-          </a>
-          <a class="block-slideshow__item" href="#">
-            <span class="block-slideshow__item-image block-slideshow__item-image--desktop"
-                  style="background-image: url('/images/slides/slide-1.jpg')"></span>
-            <span class="block-slideshow__item-image block-slideshow__item-image--mobile"
-                  style="background-image: url('/images/slides/slide-1-mobile.jpg')"></span>
-            <span class="block-slideshow__item-offer">
-                                    30% Дисконт
-                                </span>
-            <span class="block-slideshow__item-title">
-                                    Большой выбор <br>
-                                    колесных шин
-                                </span>
-            <span class="block-slideshow__item-details">
-                                    Любого размера и диаметра, с шипами или без них,<br>
-                                    лето или зима, дождь или снег.
-                                </span>
-            <span class="block-slideshow__item-button">
-                                    Купить сейчас
-                                </span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="block-space block-space--layout--divider-nl"></div>
 
   <div class="block-space block-space--layout--divider-nl"></div>
   <div class="block block-brands block-brands--layout--columns-8-full">

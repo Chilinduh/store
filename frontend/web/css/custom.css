@@ -339,4 +339,17 @@ a .logo {
   background-color: #333 !important;
 }
 
+.block-split__row.row {
+   justify-content: center;
+}
+
+.block-split__row.row img {
+  width: -webkit-fill-available;
+  border-radius: 10px;
+}
+
+.block-space--layout--before-footer {
+  height: 40px;
+}
+
 
