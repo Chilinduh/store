@@ -21,32 +21,45 @@ use kartik\tree\TreeViewInput;
 
 $form = ActiveForm::begin(['method' => 'get']); ?>
 
-<?php
+<div class="row">
+  <div class="col-md">
+    <?= $form->field($searchModel, 'name'); ?>
+  </div>
+  <div class="col-md">
+    <?php
+    echo $form->field($searchModel, 'category_id')->widget(
+      TreeViewInput::className(),
+      [
+        // single query fetch to render the tree
+        'query' => Tree::find()->addOrderBy('root, lft'),
+        'headingOptions' => ['label' => 'Categories'],
+        'name' => 'Products[category_id]',    // input name
+        'asDropdown' => true,            // will render the tree input widget as a dropdown.
+        'multiple' => false,            // set to false if you do not need multiple selection
+        'fontAwesome' => false,            // render font awesome icons
+        'rootOptions' => [
+          'label' => '<i class="fa fa-tree"></i>',
+          'class' => 'text-success'
+        ],                                      // custom root label
+      ]
+    );
+    ?>
+  </div>
+  <div class="col-md">
+    <?php
+    echo $form->field($searchModel, 'property_id')->widget(Select2::classname(), [
+      'data' => ArrayHelper::map(\common\models\Property::find()->asArray()->all(), 'id', 'name'),
+      'options' => ['placeholder' => ''],
+      'pluginOptions' => [
+        'allowClear' => true,
+      ],
+    ]);
 
-echo $form->field($searchModel, 'name');
+    ?>
+  </div>
+</div>
 
-echo $form->field($searchModel, 'category_id')->widget(
-  TreeViewInput::className(),
-  [
-    // single query fetch to render the tree
-    'query' => Tree::find()->addOrderBy('root, lft'),
-    'headingOptions' => ['label' => 'Categories'],
-    'name' => 'Products[category_id]',    // input name
-    'asDropdown' => true,            // will render the tree input widget as a dropdown.
-    'multiple' => false,            // set to false if you do not need multiple selection
-    'fontAwesome' => false,            // render font awesome icons
-    'rootOptions' => [
-      'label' => '<i class="fa fa-tree"></i>',
-      'class' => 'text-success'
-    ],                                      // custom root label
-  ]
-);
 
-echo $form->field($searchModel, 'property_id')->widget(Select2::classname(), [
-  'data' => ArrayHelper::map(\common\models\Property::find()->asArray()->all(), 'id', 'name'),
-]);
-
-?>
 
 <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
 

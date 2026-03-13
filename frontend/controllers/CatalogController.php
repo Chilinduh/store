@@ -3,37 +3,22 @@
 namespace frontend\controllers;
 
 use api\modules\regular\components\Order;
-use common\models\CategoryNestedSets;
 use common\models\Forms\OrderForm\OrderFormExtended;
 use common\models\Forms\OrderForm\OrderFormFactory;
 use common\models\Search\ProductsSearchArrayProvider;
-use frontend\models\ResendVerificationEmailForm;
-use frontend\models\VerifyEmailForm;
 use Yii;
-use yii\base\InvalidArgumentException;
-use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\RegisterForm;
-use frontend\models\ContactForm;
-use frontend\models\News;
-use common\models\User;
+
 use common\models\Products;
 use common\models\Tree;
-use yii\helpers\Html;
 use yii\base\Module;
 use yii\helpers\ArrayHelper;
 use common\models\UserFavorites;
 use common\components\Catalog;
-use common\models\AttributesGroups;
-use common\models\Brands;
-use common\models\Search\ProductsSearch;
-use common\models\Property;
-use common\models\ProductProperty;
+
 
 use common\models\ProductStockBalance;
 
@@ -311,10 +296,26 @@ class CatalogController extends Controller
           $to = max(ArrayHelper::map($prices, 'id', 'price'));
         }
 
-        //$attributesGroup = AttributesGroups::
+        $productAttributes = Products::getProductAttributes($category['id']);
 
+        $filter = [];
+        foreach ($productAttributes as $item) {
 
-        $filters = [
+          $attributes = Attributes::findOne($item['product_attribute_id']);
+
+          if(!empty($item['value'])) {
+            $filter[] = [
+              'id' => uniqid(),
+              'items' => ArrayHelper::toArray(Products::getProductsBrands($params['category_id']??'')),
+              'value' => $item['value'] ?? 0,
+              'type' => 'checkbox',
+              'field' => 'brands',
+              'title' => 'Бренд'
+            ];
+          }
+        }
+
+        $defaultFilters = [
           [
             'id' => uniqid(),
             'items' => ArrayHelper::toArray(Products::getProductsBrands($params['category_id']??'')),

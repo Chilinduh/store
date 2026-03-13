@@ -16,7 +16,7 @@ class AppAsset extends AssetBundle
     public $js = [
 
         'vendor/bootstrap/js/bootstrap.bundle.min.js',
-        'vendor/owl-carousel/owl.carousel.min.js',
+        'vendor/owl-carousel/owl.carousel.js',
         'vendor/nouislider/nouislider.min.js',
         'vendor/photoswipe/photoswipe.min.js',
         'vendor/photoswipe/photoswipe-ui-default.min.js',

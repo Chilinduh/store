@@ -48,7 +48,7 @@ use common\models\Property;
                       <?php } ?>
                     </ul>
 
-                    <?php if (count($cat['items']) > 5) { ?>
+                    <?php if (0 && count($cat['items']) > 5) { ?>
                       <ul class="widget-categories-list__child" data-collapse-content>
                         <?php foreach (array_slice($cat['items'], 0, 5) as $item) { ?>
                           <li class="widget-categories-list__child-item">

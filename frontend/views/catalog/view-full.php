@@ -310,15 +310,18 @@ use yii\bootstrap\ActiveForm;
             </div>
             <div class="product__tabs product-tabs product-tabs--layout--sidebar">
               <ul class="product-tabs__list">
-                <li class="product-tabs__item product-tabs__item--active"><a
-                    href="#product-tab-description">Описание</a></li>
-                <li class="product-tabs__item"><a href="#product-tab-specification">Характеристики</a></li>
+                <?php if(!empty($product['description'])) { ?>
+                <li class="product-tabs__item product-tabs__item--active"> <a href="#product-tab-description">Описание</a> </li>
+                <?php } ?>
+                <li class="product-tabs__item product-tabs__item<?= empty($product['description']) ? '--active' : '' ?>"><a href="#product-tab-specification">Характеристики</a></li>
               </ul>
               <div class="product-tabs__content">
+                <?php if(!empty($product['description'])) { ?>
                 <div class="product-tabs__pane product-tabs__pane--active" id="product-tab-description">
                   <a name="description"></a><?= $product['description'] ?>
                 </div>
-                <div class="product-tabs__pane" id="product-tab-specification">
+                <?php } ?>
+                <div class="product-tabs__pane<?= empty($product['description']) ? '--active' : ''   ?>" id="product-tab-specification">
                   <div class="spec">
                     <div class="spec__section">
                       <?php foreach ($product['materials'] as $material) { ?>
@@ -351,10 +354,9 @@ use yii\bootstrap\ActiveForm;
           </div>
         </div>
 
-
         <?php if(count($productsRelated)) { ?>
         <div class="block-space block-space--layout--divider-nl"></div>
-        <div class="block block-products-carousel" data-layout="grid-4-sidebar">
+        <div class="block block-products-carousel" data-layout="grid-5">
           <div class="container">
             <div class="section-header">
               <div class="section-header__body">

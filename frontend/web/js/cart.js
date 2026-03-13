@@ -40,8 +40,9 @@ jQuery(document).ready(function(){
           });
         });
 
-        $('.cart-add').each(function () {
+        console.log($('.cart-add'));
 
+        $('.cart-add').each(function () {
           $(this).on('click', function (e) {
 
             let productId = this.getAttribute('data-id');

@@ -33,7 +33,7 @@ use kartik\form\ActiveForm;
     </div>
     <div class="block-products-carousel__carousel">
       <div class="block-products-carousel__carousel-loader"></div>
-      <div class="owl-carousel">
+      <div class="owl-carousel" data-loop="false" data-items="<?= count($data) ?>">
 
         <?php foreach ($data as $item) { ?>
           <div class="block-products-carousel__column">

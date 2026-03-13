@@ -78,7 +78,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
 
                       <?php //} ?>
                     </div>
-                    <?php if ($catalogComponent->getCategoryLvl($category['id']) > 1) { ?>
+                    <?php if ($catalogComponent->getCategoryLvl($category['id']) > 0) { ?>
                       <div class="widget-filters__actions d-flex">
                         <button class="btn btn-primary btn-sm">Поиск</button>
                       </div>

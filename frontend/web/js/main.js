@@ -863,11 +863,14 @@
             const block = $(this);
             const layout = $(this).data('layout');
             const owlCarousel = $(this).find('.owl-carousel');
+            const items = $(this).data('items');
+            const loop = $(this).data('loop');
 
             owlCarousel.owlCarousel(Object.assign({}, {
                 dots: false,
+                items: items,
                 margin: 20,
-                loop: true,
+                loop: loop,
                 rtl: isRTL()
             }, carouselOptions[layout]));
 

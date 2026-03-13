@@ -80,7 +80,7 @@ class ProductsSearch extends Model
 
     $query = Products::find();
 
-    if (isset($params['property_id'])) {
+    if (isset($params['property_id']) && $params['property_id']) {
 
       $query->leftJoin(ProductProperty::tableName(), 'product_property.product_id = products.id')
         ->andWhere(['product_property.property_id' => $params['property_id']]);

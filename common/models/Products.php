@@ -2,27 +2,12 @@
 
 namespace common\models;
 
-use common\models\Manufacturers;
 use Yii;
-use yii\base\NotSupportedException;
-use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use common\models\Images;
-use common\models\Colors;
-use common\models\Category;
-use common\models\ProductStockBalance;
-use common\models\ProductsWeightGroup;
-use common\models\Groups;
-use common\models\ProductsIngredients;
-use common\models\ProductProperty;
-use common\models\Property;
-use common\models\Brands;
+
 use common\models\ProductsSizes;
-use yii\helpers\ArrayHelper;
 use common\components\ArrayableTrait;
-use common\models\ProductsSources;
-use common\models\AttributesGroups;
 
 class Products extends ActiveRecord
 {
@@ -211,6 +196,13 @@ class Products extends ActiveRecord
     return $this->hasMany(Materials::class, ['id' => 'material_id'])->via('productMaterials');
   }
 
+  public static function getProductAttributes($category_id)
+  {
+    return ProductAttributesValues::find()->select('product_attributes_values.product_attribute_id, product_attributes_values.value')
+      ->leftJoin(Products::tableName(), 'products.id = product_attributes_values.product_id')
+      ->where(['products.category_id' => $category_id])->groupBy(['product_attribute_id', 'product_attributes_values.value'])
+      ->all();
+  }
 
   public function getProducts($settings)
   {

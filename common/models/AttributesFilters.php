@@ -14,6 +14,10 @@ use Yii;
  */
 class AttributesFilters extends \yii\db\ActiveRecord
 {
+
+    const SLIDER = 1;
+    const CHECKBOX = 2;
+
     /**
      * {@inheritdoc}
      */
