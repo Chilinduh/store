@@ -299,23 +299,23 @@ class CatalogController extends Controller
         $productAttributes = Products::getProductAttributes($category['id']);
 
         $filter = [];
-        foreach ($productAttributes as $item) {
+//        foreach ($productAttributes as $item) {
+//
+//          $attributes = Attributes::findOne($item['product_attribute_id']);
+//
+//          if(!empty($item['value'])) {
+//            $filter[] = [
+//              'id' => uniqid(),
+//              'items' => ArrayHelper::toArray(Products::getProductsBrands($params['category_id']??'')),
+//              'value' => $item['value'] ?? 0,
+//              'type' => 'checkbox',
+//              'field' => 'brands',
+//              'title' => 'Бренд'
+//            ];
+//          }
+//        }
 
-          $attributes = Attributes::findOne($item['product_attribute_id']);
-
-          if(!empty($item['value'])) {
-            $filter[] = [
-              'id' => uniqid(),
-              'items' => ArrayHelper::toArray(Products::getProductsBrands($params['category_id']??'')),
-              'value' => $item['value'] ?? 0,
-              'type' => 'checkbox',
-              'field' => 'brands',
-              'title' => 'Бренд'
-            ];
-          }
-        }
-
-        $defaultFilters = [
+      $filter = $defaultFilters = [
           [
             'id' => uniqid(),
             'items' => ArrayHelper::toArray(Products::getProductsBrands($params['category_id']??'')),
