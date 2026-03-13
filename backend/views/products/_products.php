@@ -1,3 +1,7 @@
+<?php
+use common\models\Products;
+
+?>
 <?= \kartik\grid\GridView::widget([
   'dataProvider' => $dataProvider,
   'filterModel' => $searchModel,
@@ -30,12 +34,12 @@
   ],
   'columns' => [
     //['class' => 'yii\grid\SerialColumn'],
-    [
-      'hAlign' => 'center',
-      'vAlign' => 'middle',
-      'attribute' => 'id',
-      'filter' => false,
-    ],
+//    [
+//      'hAlign' => 'center',
+//      'vAlign' => 'middle',
+//      'attribute' => 'id',
+//      'filter' => false,
+//    ],
 
     [
       'hAlign' => 'center',
@@ -84,6 +88,22 @@
           </div>';
 
         return '';
+      }
+    ],
+    [
+      'hAlign' => 'left',
+      'vAlign' => 'left',
+      'label' => 'Сопутсвующие товары',
+      'filter' => false,
+      'format' => 'raw',
+      'value' => static function ($model) {
+
+        $productsRelated = Products::find()->leftJoin('products_related pr', 'pr.product_related_id = products.id')->andWhere(['pr.product_id' => $model->id])->asArray()->all();
+        if(count($productsRelated)) {
+          $productsRelated = \yii\helpers\ArrayHelper::map($productsRelated, 'id', 'name');
+          return implode(',<br>', $productsRelated);
+        }
+        return  '';
       }
     ],
     [
