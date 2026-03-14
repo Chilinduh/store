@@ -306,20 +306,21 @@ class CatalogController extends Controller
 
           if(!empty($item['value'])) {
 
-            $productAttribute = ProductAttributes::findOne($item['product_attribute_id']);
+            if($productAttribute = ProductAttributes::findOne($item['product_attribute_id'])) {
 
-            if(!isset($productAttributesFilter[$productAttribute['attribute_id']])) {
-              $productAttributesFilter[$productAttribute['attribute_id']] = [];
-              $temp[$productAttribute['attribute_id']] = [];
-            }
+              if(!isset($productAttributesFilter[$productAttribute['attribute_id']])) {
+                $productAttributesFilter[$productAttribute['attribute_id']] = [];
+                $temp[$productAttribute['attribute_id']] = [];
+              }
 
-            if(!in_array($item['value'], $temp[$productAttribute['attribute_id']])) {
+              if(!in_array($item['value'], $temp[$productAttribute['attribute_id']])) {
 
-              $temp[$productAttribute['attribute_id']][] = $item['value'];
-              $productAttributesFilter[$productAttribute['attribute_id']][] = [
-                'id' => $item['product_attribute_id'],
-                'name' => $item['value']
-              ];
+                $temp[$productAttribute['attribute_id']][] = $item['value'];
+                $productAttributesFilter[$productAttribute['attribute_id']][] = [
+                  'id' => $item['product_attribute_id'],
+                  'name' => $item['value']
+                ];
+              }
             }
           }
         }
