@@ -41,6 +41,7 @@ class AppAsset extends AssetBundle
       'vendor/select2/css/select2.min.css',
       'css/blue/style.ltr.css',
       'css/custom.css',
+      'css/products_view.css',
       'vendor/fontawesome/css/all.min.css',
     ];
 

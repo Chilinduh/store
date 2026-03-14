@@ -205,10 +205,7 @@ class CatalogController extends Controller
     $stock = ProductStockBalance::find()->where(['product_id' => $id])->one();
 
     $cartForm = OrderFormFactory::get(isset($model['colors']) && count($model['colors']) ? OrderFormFactory::CART_EXTENDED : '');
-
     $productsRelated = Products::find()->leftJoin('products_related pr', 'pr.product_related_id = products.id')->andWhere(['pr.product_id' => $id])->all();
-
-
 
     if($model ) {
 

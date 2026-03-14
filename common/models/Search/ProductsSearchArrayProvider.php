@@ -4,6 +4,7 @@ namespace common\models\Search;
 
 use common\models\Brands;
 use common\models\Category;
+use common\models\ProductsAvailability;
 use common\models\Sizes;
 use yii\base\Model;
 use yii\data\ArrayDataProvider;
@@ -110,7 +111,7 @@ class ProductsSearchArrayProvider extends Model
       $query->leftJoin(Brands::tableName(), 'brands.id = products.brand_id')
         ->leftJoin(Category::tableName(), 'category.id = products.category_id')
         ->leftJoin(Manufacturers::tableName(), 'manufacturers.id = products.manufacturer_id')
-
+        ->leftJoin(ProductsAvailability::tableName(), 'products_availability.id = products.availability_id')
         ->orWhere(new Expression('lower(products.name) LIKE \'%' . mb_convert_case($search, MB_CASE_LOWER, "UTF-8") . '%\''))
         ->orWhere(new Expression('lower(products.name) LIKE \'%' . mb_convert_case($search, MB_CASE_TITLE, "UTF-8") . '%\''))
 
@@ -121,7 +122,10 @@ class ProductsSearchArrayProvider extends Model
         ->orWhere(new Expression('lower(manufacturers.name) LIKE \'%' . mb_convert_case($search, MB_CASE_TITLE, "UTF-8") . '%\''))
 
         ->orWhere(new Expression('lower(brands.name) LIKE \'%' . mb_convert_case($search, MB_CASE_TITLE, "UTF-8") . '%\''))
-        ->orWhere(new Expression('lower(brands.name) LIKE \'%' . mb_convert_case($search, MB_CASE_TITLE, "UTF-8") . '%\''));
+        ->orWhere(new Expression('lower(brands.name) LIKE \'%' . mb_convert_case($search, MB_CASE_TITLE, "UTF-8") . '%\''))
+
+        ->orWhere(new Expression('lower(products.code) LIKE \'%' . mb_convert_case($search, MB_CASE_TITLE, "UTF-8") . '%\''))
+        ->orWhere(new Expression('lower(products.code) LIKE \'%' . mb_convert_case($search, MB_CASE_TITLE, "UTF-8") . '%\''));
     }
 
     if (isset($params['property_id'])) {
@@ -296,6 +300,8 @@ class ProductsSearchArrayProvider extends Model
         'inFavorite' => $inFavorite,
         'property' => $property,
         'colors' => $colors ?? [],
+        'availability' => $item->availability->name??'',
+        'availability_color' => $item->availability->color??''
       ];
     }
 

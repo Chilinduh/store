@@ -53,7 +53,7 @@ class Products extends ActiveRecord
     return [
       [['name', 'code', 'description'], 'string'],
       [['show', 'main', 'show_previous_price'], 'boolean'],
-      [['id', 'attribute_group_id', 'price', 'property_id', 'color_id', 'size_id', 'brand_id', 'packaging_type_id', 'category_id', 'city_id', 'stock_id', 'manufacturer_id'], 'integer'],
+      [['id', 'attribute_group_id','availability_id',  'price', 'property_id', 'color_id', 'size_id', 'brand_id', 'packaging_type_id', 'category_id', 'city_id', 'stock_id', 'manufacturer_id'], 'integer'],
       [['name', 'category_id'], 'required'],
       [['attributes', 'manufacturer', 'file', 'color_id', 'size_id', 'color', 'size', 'weight', 'previous_price'], 'safe'],
     ];
@@ -67,6 +67,7 @@ class Products extends ActiveRecord
       'category_id' => 'Категория',
       'attribute_group_id' => 'Группа атрибутов',
       'group_id' => 'Группа',
+      'availability_id' => 'Наличие товара',
       'stock_id' => 'ID Склада',
       'brand_id' => 'Бренд',
       'color_id' => 'Цвет',
@@ -233,6 +234,13 @@ class Products extends ActiveRecord
 
     return $this->hasOne(City::className(), ['id' => 'city_id'])->one();
   }
+
+  public function getAvailability()
+  {
+
+    return $this->hasOne(ProductsAvailability::className(), ['id' => 'availability_id'])->one();
+  }
+
 
   public function getStock()
   {

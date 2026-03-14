@@ -37,9 +37,11 @@ $cartForm = new OrderForm();
                 </div>
               </div>
               <div class="product-card__info">
+                <?php if(!empty($item['code'])) { ?>
                 <div class="product-card__meta">
                   <span class="product-card__meta-title">Артикул: </span><?= $item['code'] ?>
                 </div>
+                <?php } ?>
                 <div class="product-card__name">
                   <div>
                     <?php if (!empty($item['property'])) { ?>

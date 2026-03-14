@@ -48,6 +48,7 @@ return [
   'cargo-driver/<id:\d+>' => 'cargo-driver/update',
   'cargo-carrier/<id:\d+>' => 'cargo-carrier/update',
   'cargo-counterparty/<id:\d+>' => 'cargo-counterparty/update',
+  'products-availability/<id:\d+>' => 'products-availability/update',
 
   'cargo-request/<id:\d+>/update-good' => 'cargo-request/update-good',
   'cargo-request/<id:\d+>/update-driver' => 'cargo-request/update-driver',

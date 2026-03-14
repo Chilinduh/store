@@ -144,6 +144,14 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
           ],
         ]);
 
+        echo $form->field($model, 'availability_id')->widget(Select2::classname(), [
+          'data' => ArrayHelper::map(\common\models\ProductsAvailability::find()->all(), 'id', 'name'),
+          'options' => ['placeholder' => 'Выбрать наличие'],
+          'pluginOptions' => [
+            'allowClear' => true
+          ],
+        ]);
+
         echo $form->field($model, 'description')->widget(Summernote::class, [
           'useKrajeePresets' => true,
           // other widget settings

@@ -4,6 +4,7 @@ namespace common\models\Search;
 
 use common\models\Manufacturers;
 use common\models\Category;
+use common\models\ProductsAvailability;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Products;
@@ -33,6 +34,7 @@ class ProductsSearch extends Model
   public $created_at = null;
   public $updated_at = null;
   public $city_id = null;
+  public $availability_id = null;
 
 
   public function rules()
@@ -41,7 +43,7 @@ class ProductsSearch extends Model
     return [
       [['name', 'description'], 'string'],
       [['show', 'main'], 'boolean'],
-      [['price', 'color_id', 'weight', 'property_id', 'packaging_type_id', 'weight', 'category_id', 'city_id', 'stock_id', 'manufacturer_id'], 'integer'],
+      [['price', 'color_id', 'weight', 'property_id', 'availability_id', 'packaging_type_id', 'weight', 'category_id', 'city_id', 'stock_id', 'manufacturer_id'], 'integer'],
     ];
   }
 
@@ -92,6 +94,7 @@ class ProductsSearch extends Model
       $query->leftJoin(Brands::tableName(), 'brands.id = products.brand_id')
         ->leftJoin(Category::tableName(), 'category.id = products.brand_id')
         ->leftJoin(Manufacturers::tableName(), 'manufacturers.id = products.manufacturer_id')
+        ->leftJoin(ProductsAvailability::tableName(), 'products_availability = products.availability_id')
         ->where(['like', 'products.name', ':search', [':search' => $search]])
         ->orWhere(['like', 'category.name', ':search', [':search' => $search]])
         ->orWhere(['like', 'manufacturers.name', ':search', [':search' => $search]])
