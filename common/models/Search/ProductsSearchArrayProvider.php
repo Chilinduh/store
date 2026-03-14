@@ -54,6 +54,8 @@ class ProductsSearchArrayProvider extends Model
   public $size_id = null;
   public $previous_price = null;
   public $attribute_group_id = null;
+  public $availability = null;
+  public $availability_color = null;
 
   public function rules()
   {

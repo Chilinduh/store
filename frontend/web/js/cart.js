@@ -40,7 +40,6 @@ jQuery(document).ready(function(){
           });
         });
 
-        console.log($('.cart-add'));
 
         $('.cart-add').each(function () {
           $(this).on('click', function (e) {
@@ -48,6 +47,8 @@ jQuery(document).ready(function(){
             let productId = this.getAttribute('data-id');
             let icon = this.getAttribute('data-icon');
             let elem = $(this);
+
+            console.log(elem)
 
             $.ajax({
               url: "/cart/" + productId,
