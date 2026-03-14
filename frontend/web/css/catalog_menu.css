@@ -1,0 +1,11 @@
+.departments__menu .departments__body {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.departments__item--has-submenu.departments__item--hover a {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}

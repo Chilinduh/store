@@ -1,4 +1,4 @@
-.product__card.product__card--one, .product__info-card {
+.product__card.product__card--one, .product-card {
   border-radius: 10px;
 }
 
@@ -13,3 +13,4 @@
 .product__tabs.product-tabs--layout--sidebar {
   border-radius: 10px;
 }
+

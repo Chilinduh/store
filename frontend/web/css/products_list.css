@@ -1,0 +1,13 @@
+.products-list__item, .products-view__options.view-options {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.product-card__addtocart-full.cart-add {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+

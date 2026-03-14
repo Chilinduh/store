@@ -14,26 +14,23 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
 
     public $js = [
+      'vendor/bootstrap/js/bootstrap.bundle.min.js',
+      'vendor/owl-carousel/owl.carousel.js',
+      'vendor/nouislider/nouislider.min.js',
+      'vendor/photoswipe/photoswipe.min.js',
+      'vendor/photoswipe/photoswipe-ui-default.min.js',
+      'vendor/select2/js/select2.min.js',
 
-        'vendor/bootstrap/js/bootstrap.bundle.min.js',
-        'vendor/owl-carousel/owl.carousel.js',
-        'vendor/nouislider/nouislider.min.js',
-        'vendor/photoswipe/photoswipe.min.js',
-        'vendor/photoswipe/photoswipe-ui-default.min.js',
-        'vendor/select2/js/select2.min.js',
-
-      //'js/gallery.js',
-        'js/custom.js',
-        'js/number.js',
-        'js/main.js',
-        'js/favorite.js',
-
-        'js/cart.js',
+    //'js/gallery.js',
+      'js/custom.js',
+      'js/number.js',
+      'js/main.js',
+      'js/favorite.js',
+      'js/cart.js',
       'js/modal.js',
     ];
 
     public $css = [
-
       'vendor/bootstrap/css/bootstrap.css',
       'vendor/owl-carousel/assets/owl.carousel.min.css',
       'vendor/photoswipe/photoswipe.css',
@@ -42,6 +39,8 @@ class AppAsset extends AssetBundle
       'css/blue/style.ltr.css',
       'css/custom.css',
       'css/products_view.css',
+      'css/products_list.css',
+      'css/catalog_menu.css',
       'vendor/fontawesome/css/all.min.css',
     ];
 
