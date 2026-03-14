@@ -12,7 +12,7 @@ class m260303_045035_drop_field_user_id_orders extends Migration
 
     public function safeUp()
     {
-        $this->dropColumn(self::TABLE_NAME,'user_id');
-        $this->addColumn(self::TABLE_NAME, 'user_id', $this->integer());
+        //$this->dropColumn(self::TABLE_NAME,'user_id');
+        //$this->addColumn(self::TABLE_NAME, 'user_id', $this->integer());
     }
 }
