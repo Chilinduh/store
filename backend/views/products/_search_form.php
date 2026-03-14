@@ -19,7 +19,7 @@ use kartik\tree\TreeViewInput;
 
 <?php
 
-$form = ActiveForm::begin(['method' => 'get']); ?>
+$form = ActiveForm::begin(['method' => 'get', 'action' => '/products']); ?>
 
 <div class="row">
   <div class="col-md">
