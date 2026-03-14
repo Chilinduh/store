@@ -35,13 +35,14 @@ class ProductsSearch extends Model
   public $updated_at = null;
   public $city_id = null;
   public $availability_id = null;
+  public $search = '';
 
 
   public function rules()
   {
 
     return [
-      [['name', 'description'], 'string'],
+      [['name', 'description', 'search'], 'string'],
       [['show', 'main'], 'boolean'],
       [['price', 'color_id', 'weight', 'property_id', 'availability_id', 'packaging_type_id', 'weight', 'category_id', 'city_id', 'stock_id', 'manufacturer_id'], 'integer'],
     ];
@@ -89,16 +90,22 @@ class ProductsSearch extends Model
     }
 
     $search = $params['search'] ?? null;
-    if ($search) {
 
+    if ($search) {
       $query->leftJoin(Brands::tableName(), 'brands.id = products.brand_id')
         ->leftJoin(Category::tableName(), 'category.id = products.brand_id')
         ->leftJoin(Manufacturers::tableName(), 'manufacturers.id = products.manufacturer_id')
-        ->leftJoin(ProductsAvailability::tableName(), 'products_availability = products.availability_id')
+        ->leftJoin(ProductsAvailability::tableName(), 'products_availability.id = products.availability_id')
         ->where(['like', 'products.name', ':search', [':search' => $search]])
+        ->orWhere(['like', 'products.code', ':search', [':search' => $search]])
         ->orWhere(['like', 'category.name', ':search', [':search' => $search]])
         ->orWhere(['like', 'manufacturers.name', ':search', [':search' => $search]])
         ->orWhere(['like', 'brands.name', ':search', [':search' => $search]]);
+    }
+
+    if (isset($params['category_id']) && $params['category_id']) {
+
+      $query->orWhere(['products.category_id' => $params['category_id']]);
     }
 
     if (isset($params['productsIds'])) {
@@ -113,10 +120,10 @@ class ProductsSearch extends Model
 //      ->andWhere(['products_ballance.show' => Products::STATUS_ACTIVE]);
 
 
-    $query->andFilterWhere([
-      'category_id' => $this->category_id,
+    $query->orFilterWhere([
+      'products.category_id' => $this->category_id,
     ]);
-    $query->andFilterWhere(['like', 'name', $this->name ]);
+    $query->orFilterWhere(['like', 'products.name', $this->name ]);
 
     $dataProvider = new ActiveDataProvider([
       'query' => $query,

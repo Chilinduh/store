@@ -23,7 +23,7 @@ $form = ActiveForm::begin(['method' => 'get']); ?>
 
 <div class="row">
   <div class="col-md">
-    <?= $form->field($searchModel, 'name'); ?>
+    <?= $form->field($searchModel, 'search'); ?>
   </div>
   <div class="col-md">
     <?php
