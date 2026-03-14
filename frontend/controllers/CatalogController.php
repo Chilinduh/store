@@ -385,8 +385,8 @@ class CatalogController extends Controller
           'items' => $manufacturers,
           'value' => $params['manufacturers'] ?? 0,
           'type' => 'checkbox',
-          'field' => 'brands',
-          'title' => 'Бренд'
+          'field' => 'manufacturer',
+          'title' => 'Производитель'
         ];
       }
 
