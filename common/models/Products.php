@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
 
 use common\models\ProductsSizes;
 use common\components\ArrayableTrait;
+use common\models\Attributes;
 
 class Products extends ActiveRecord
 {
@@ -199,9 +200,21 @@ class Products extends ActiveRecord
 
   public static function getProductAttributes($category_id)
   {
-    return ProductAttributesValues::find()->select('product_attributes_values.product_attribute_id, product_attributes_values.value')
+    return ProductAttributesValues::find()->select(['product_attribute_id'])
       ->leftJoin(Products::tableName(), 'products.id = product_attributes_values.product_id')
-      ->where(['products.category_id' => $category_id])->groupBy(['product_attribute_id', 'product_attributes_values.value'])
+      ->where(['products.category_id' => $category_id])
+      ->andWhere(['!=', 'product_attributes_values.value', ''])
+      ->groupBy(['product_attribute_id'])
+      ->indexBy('product_attribute_id')
+      ->all();
+  }
+
+  public static function getProductAttributesValues($category_id, $attributeIds)
+  {
+    return ProductAttributesValues::find()
+      ->leftJoin(Products::tableName(), 'products.id = product_attributes_values.product_id')
+      ->where(['products.category_id' => $category_id])
+      ->andWhere(['in', 'product_attributes_values.product_attribute_id', $attributeIds])
       ->all();
   }
 

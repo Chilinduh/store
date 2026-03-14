@@ -8,6 +8,7 @@ use yii\web\View;
 use frontend\components\BreadCrumbsWidget;
 use frontend\components\CatalogMenuLeft\CatalogMenuLeftWidget;
 use yii\bootstrap\ActiveForm;
+use common\models\Pages;
 
 ?>
 

@@ -47,19 +47,15 @@ Yii::$app->metaTags->register('main');
 <?= lavrentiev\widgets\toastr\NotificationFlash::widget(); ?>
 <!-- site -->
 <div class="site">
-  <!--  --><? //= $this->render('@frontend/views/site/_header.php', ['categories' => $this->context->categories]) ?>
+  <? //= $this->render('@frontend/views/site/_header.php', ['categories' => $this->context->categories]) ?>
   <?= $this->render('@frontend/views/site/_header.php') ?>
 
-  <!--        --><? //= HeaderMenuWidget::widget(['pages' => $this->params['pages']]) ?>
+  <? //= HeaderMenuWidget::widget(['pages' => $this->params['pages']]) ?>
   <div class="site__body">
     <?php echo $content; ?>
   </div>
 
-  <!-- site__body / end -->
-  <!-- site__footer -->
-  <?php include_once(Yii::getAlias('@frontend/views/site/_footer.php')); ?>
-  <!-- site__footer / end -->
-
+  <?= $this->render('@frontend/views/site/_footer.php') ?>
 </div>
 
 <?php include_once(Yii::getAlias('@frontend/views/site/_mobile-menu.php')); ?>
@@ -69,6 +65,7 @@ Yii::$app->metaTags->register('main');
 <div id="quickview-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <!-- quickview-modal / end -->
 <!-- add-vehicle-modal -->
+<?php if(0) { ?>
 <div id="add-vehicle-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="vehicle-picker-modal modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -303,6 +300,7 @@ Yii::$app->metaTags->register('main');
 <!-- photoswipe / end -->
 <!-- scripts -->
 
+<?php } ?>
 
 <?php
 
