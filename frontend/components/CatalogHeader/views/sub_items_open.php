@@ -9,7 +9,7 @@
               <?php foreach ($subCat as $cat) { ?>
                 <li class="megamenu-links__item <?= is_array($cat['items']) && array_sum(array_column($cat['items'], 'count')) > 0 ? 'megamenu-links__item--has-submenu' : '' ?>">
                   <a class="megamenu-links__item-link"
-                     href="/catalog/<?= $cat['id'] ?>"><?= $cat['name'] ?><sup class="category-sup"><?= $cat['count'] ?></sup></a>
+                     href="/catalog/<?= $cat['id'] ?>"><?= $cat['name'] ?><sup class="category-sup"></sup></a>
 
                   <?php
                   if (isset($cat['items']) && count($cat['items']) > 0) { ?>

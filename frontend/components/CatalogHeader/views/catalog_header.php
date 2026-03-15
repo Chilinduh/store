@@ -4,6 +4,7 @@ $j = 0;
 $sub = '';
 $subHtml = '';
 
+
 ?>
 
 <div class="header__navbar-departments">
@@ -30,7 +31,7 @@ $subHtml = '';
           <?php foreach ($categories as $category) { ?>
             <li class="departments__item departments__item--submenu--megamenu departments__item--has-submenu <?= $i++ == 0 ? 'departments__item--hover' : '' ?>">
             <a href="/catalog/<?= $category['id'] ?>" class="departments__item-link">
-              <?= $category['name'] ?><sup class="category-sup"><?= count($category['items']) ?></sup>
+              <?= $category['name'] ?><sup class="category-sup"><?= $category['count'] ?></sup>
               <?php if (count($category['items'])) { ?>
                 <span class="departments__item-arrow">
                 <svg width="7" height="11">
@@ -52,39 +53,6 @@ C-0.1,9.8-0.1,10.4,0.3,10.7z"/>
             </li>
           <?php } ?>
 
-          <?php if (0) { ?>
-            <li class="departments__item">
-              <a href="/catalog" class="departments__item-link">
-                Клатчи
-              </a>
-            </li>
-            <li class="departments__item">
-              <a href="/catalog" class="departments__item-link">
-                Топливные системы
-              </a>
-            </li>
-            <li class="departments__item">
-              <a href="/catalog" class="departments__item-link">
-                Рулевое управление
-              </a>
-            </li>
-            <li class="departments__item">
-              <a href="/catalog" class="departments__item-link">
-                Подвеска
-              </a>
-            </li>
-            <li class="departments__item">
-              <a href="/catalog" class="departments__item-link">
-                Кузовные части
-              </a>
-            </li>
-            <li class="departments__item">
-              <a href="/catalog" class="departments__item-link">
-                Воздушные фильтры
-              </a>
-            </li>
-            <li class="departments__list-padding" role="presentation"></li>
-          <?php } ?>
         </ul>
         <div class="departments__menu-container">
 

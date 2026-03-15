@@ -50,12 +50,13 @@ class CatalogHeaderWidget extends Widget
     $tree = [];
     foreach ($roots as $root) {
 
-      $tree [] = [
+      $tree[] = [
         'id' => $root->id,
         'label' => $root->name,
         'items' => self::getTree($root->children()->andWhere(['visible' => true])->all()),
       ];
     }
+
     return $tree;
   }
 
@@ -90,6 +91,30 @@ class CatalogHeaderWidget extends Widget
         }
         $categories[$cKey]['items'][$index][] = $item;
       }
+    }
+
+    $counts = [];
+    foreach ($categories as $key=>$one) {
+
+      $counts[$key] = 0;
+      if(isset($one['items']) && count($one['items'])) {
+
+        foreach ($one['items'] as $two) {
+
+          foreach ($two as $three) {
+
+            if(isset($three['items']) && count($three['items'])) {
+
+              foreach ($three['items'] as $four) {
+
+                $counts[$key] += $four['count'];
+              }
+            }
+          }
+        }
+      }
+
+      $categories[$key] = array_merge($categories[$key], ['count' => $counts[$key]]);
     }
 
     return $this->render('catalog_header', [
