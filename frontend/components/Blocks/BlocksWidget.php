@@ -2,6 +2,7 @@
 
 namespace frontend\components\Blocks;
 
+use common\models\BlocksBanners;
 use common\models\Property;
 use common\models\Search\ProductsSearchArrayProvider;
 use yii\base\Widget;
@@ -18,6 +19,8 @@ class BlocksWidget extends Widget
 {
 
   public $model;
+  public $left;
+  public $right;
   public $data = [];
   public $property_id = null;
 
@@ -138,9 +141,13 @@ class BlocksWidget extends Widget
 
         break;
 
-      case BlocksTypes::BLOCK_BANNERS:
+      case BlocksTypes::BLOCK_BANNERS_LEFT:
+      case BlocksTypes::BLOCK_BANNERS_RIGHT:
 
-        return $this->render('banners');
+        return $this->render('banners', [
+          'left' => $this->left,
+          'right' => $this->right
+        ]);
         break;
 
       case BlocksTypes::BLOCK_FEATURES:

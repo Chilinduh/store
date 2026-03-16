@@ -1,0 +1,6 @@
+.block-banners__item {
+  border-radius: 16px;
+}
+.block-banners__item.background:before {
+  background: unset;
+}

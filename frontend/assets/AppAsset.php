@@ -41,6 +41,7 @@ class AppAsset extends AssetBundle
       'css/products_view.css',
       'css/products_list.css',
       'css/catalog_menu.css',
+      'css/banners.css',
       'vendor/fontawesome/css/all.min.css',
     ];
 

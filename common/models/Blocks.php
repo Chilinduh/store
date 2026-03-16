@@ -29,13 +29,14 @@ class Blocks extends ActiveRecord
       [['name'], 'string'],
       [['page_id', 'block_type_id'], 'integer'],
       [['name'], 'required'],
-      [['group_id'], 'safe'],
+      [['group_id', 'show'], 'safe'],
     ];
   }
 
   public function attributeLabels() {
     return [
       'name' => 'Название',
+      'show' => 'Показать/скрыть',
       'page_id' => 'Страница',
       'block_type_id' => 'Тип блока',
       'block_group_id' => 'Группа',
@@ -52,6 +53,18 @@ class Blocks extends ActiveRecord
   {
 
     return $this->hasOne(Pages::class, ['id' => 'page_id']);
+  }
+
+
+  public function getFiles()
+  {
+
+    return $this->hasOne(Files::className(), ['table_id' => 'id'])->andWhere(['table_name' => 'blocks']);
+  }
+  public function getBanners()
+  {
+
+    return $this->hasOne(BlocksBanners::class, ['block_id' => 'id']);
   }
 
 

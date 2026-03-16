@@ -40,6 +40,8 @@ return [
   'GET orders/<id:\d+>/products' => 'orders/products',
   'GET orders/<id:\d+>' => 'orders/update',
 
+  'blocks/<id:\d+>/banners' => 'blocks/banners',
+
   'blocks-types/<id:\d+>' => 'blocks-types/update',
   'blocks-types/<id:\d+>/delete' => 'blocks-types/delete',
   'category-groups/<id:\d+>' => 'category-groups/update',

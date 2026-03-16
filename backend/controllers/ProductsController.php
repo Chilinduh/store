@@ -21,7 +21,7 @@ use common\models\ProductMaterials;
 use common\models\ProductsSources;
 use common\models\Category;
 use yii\data\ActiveDataProvider;
-use common\models\ProductItems;    
+use common\models\ProductItems;
 use common\models\ProductsRelated;
 
 
@@ -380,7 +380,6 @@ class ProductsController extends Controller
             'table_id' => $model->id,
             'file_path' => $file_path,
             'file_name' => ucfirst(Yii::$app->controller->id) . '[file]',
-//        'file_name' => $_FILES[ucfirst(Yii::$app->controller->id)]['name']['file'][0],
             'path' => $path,
             'path_to_save' => $path_to_save,
           ], ['width' => 100, 'height' => 100]);

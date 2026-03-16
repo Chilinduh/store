@@ -15,8 +15,7 @@ use app\components\BreadcrumbWidget;
 use backend\models\Menu;
 use common\models\Pages;
 use common\models\BlocksTypes;
-use common\models\Groups;
-use common\models\BlocksGroups;
+use kartik\checkbox\CheckboxX;
 use kartik\select2\Select2;
 
 
@@ -50,16 +49,29 @@ $form = ActiveForm::begin(); ?>
   'data' => ArrayHelper::map(BlocksTypes::find()->asArray()->all(), 'id', 'name'),
   'options' => ['placeholder' => 'Выбрать тип'],
 ]); ?>
-<?= $form->field($model, 'group_id')->widget(Select2::classname(), [
-  'data' => ArrayHelper::map(Groups::find()->asArray()->all(), 'id', 'name'),
-  'options' => ['placeholder' => 'Выбрать группу'],
-]); ?>
+<?//= $form->field($model, 'group_id')->widget(Select2::classname(), [
+//  'data' => ArrayHelper::map(Groups::find()->asArray()->all(), 'id', 'name'),
+//  'options' => ['placeholder' => 'Выбрать группу'],
+//]); ?>
 
-
+<?php
+echo $form->field($model, 'show')->widget(CheckboxX::classname(), [
+  'autoLabel' => true,
+  'pluginOptions' => [
+    'threeState' => false,
+    'size' => 'md'
+  ]
+])->label(false);
+?>
 
 <?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
 <?php ActiveForm::end(); ?>
 <?php PanelWidget::finish() ?>
+
+<?php if($model->banners && !$model->isNewRecord) { ?>
+
+  <?=  $this->render('_short_banner', ['model' => $model->banners]); ?>
+<?php } ?>
 
 

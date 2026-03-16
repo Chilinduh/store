@@ -849,8 +849,17 @@ use frontend\components\Blocks\BlocksWidget;
   <div class="block-space block-space--layout--divider-nl"></div>
 <?php } ?>
   <div class="block-space block-space--layout--divider-nl"></div>
-<?php if ($block = Blocks::findOne(['block_type_id' => BlocksTypes::BLOCK_BANNERS])) { ?>
-  <?= BlocksWidget::widget(['model' => $block]) ?>
+<?php
+
+  $blockLeft = Blocks::find()->where(['block_type_id' => BlocksTypes::BLOCK_BANNERS_LEFT])->one();
+  $blockRight = Blocks::find()->where(['block_type_id' => BlocksTypes::BLOCK_BANNERS_RIGHT])->one();
+
+  if ($blockLeft || $blockRight) { ?>
+  <?= BlocksWidget::widget([
+    'model' => $blockLeft,
+    'left' => $blockLeft,
+    'right' => $blockRight
+  ]) ?>
 <?php } ?>
 
 <?php if (0) { ?>

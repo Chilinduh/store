@@ -83,7 +83,17 @@ use app\components\BreadcrumbWidget;
         return $model->type->name??'';
       }
     ],
+    [
+      'hAlign' => 'center',
+      'vAlign' => 'middle',
+      'attribute' => 'show',
+      'filter' => false,
+      'format' => 'raw',
+      'value' => function($model) {
 
+        return \yii\helpers\Html::tag('i', '', ['class' => 'fa fa-eye '.($model->show ? 'item-show' : '')]);
+      }
+    ],
     [
       'class' => 'yii\grid\ActionColumn',
       'headerOptions' => ['width' => '120'],

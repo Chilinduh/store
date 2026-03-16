@@ -134,6 +134,40 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                 <div class="products-view__options view-options">
                   <div class="view-options__body">
 
+                    <?php if(0) { ?>
+                    <div class="view-options__layout layout-switcher">
+                      <div class="layout-switcher__list">
+                        <button type="button" class="layout-switcher__button" data-layout="grid" data-with-features="false">
+                          <svg width="16" height="16">
+                            <path d="M15.2,16H9.8C9.4,16,9,15.6,9,15.2V9.8C9,9.4,9.4,9,9.8,9h5.4C15.6,9,16,9.4,16,9.8v5.4C16,15.6,15.6,16,15.2,16z M15.2,7
+        H9.8C9.4,7,9,6.6,9,6.2V0.8C9,0.4,9.4,0,9.8,0h5.4C15.6,0,16,0.4,16,0.8v5.4C16,6.6,15.6,7,15.2,7z M6.2,16H0.8
+        C0.4,16,0,15.6,0,15.2V9.8C0,9.4,0.4,9,0.8,9h5.4C6.6,9,7,9.4,7,9.8v5.4C7,15.6,6.6,16,6.2,16z M6.2,7H0.8C0.4,7,0,6.6,0,6.2V0.8
+        C0,0.4,0.4,0,0.8,0h5.4C6.6,0,7,0.4,7,0.8v5.4C7,6.6,6.6,7,6.2,7z"></path>
+                          </svg>
+                        </button>
+                        <button type="button" class="layout-switcher__button" data-layout="grid" data-with-features="true">
+                          <svg width="16" height="16">
+                            <path d="M16,0.8v14.4c0,0.4-0.4,0.8-0.8,0.8H9.8C9.4,16,9,15.6,9,15.2V0.8C9,0.4,9.4,0,9.8,0l5.4,0C15.6,0,16,0.4,16,0.8z M7,0.8
+        v14.4C7,15.6,6.6,16,6.2,16H0.8C0.4,16,0,15.6,0,15.2L0,0.8C0,0.4,0.4,0,0.8,0l5.4,0C6.6,0,7,0.4,7,0.8z"></path>
+                          </svg>
+                        </button>
+                        <button type="button" class="layout-switcher__button" data-layout="list" data-with-features="false">
+                          <svg width="16" height="16">
+                            <path d="M15.2,16H0.8C0.4,16,0,15.6,0,15.2V9.8C0,9.4,0.4,9,0.8,9h14.4C15.6,9,16,9.4,16,9.8v5.4C16,15.6,15.6,16,15.2,16z M15.2,7
+        H0.8C0.4,7,0,6.6,0,6.2V0.8C0,0.4,0.4,0,0.8,0h14.4C15.6,0,16,0.4,16,0.8v5.4C16,6.6,15.6,7,15.2,7z"></path>
+                          </svg>
+                        </button>
+                        <button type="button" class="layout-switcher__button layout-switcher__button--active" data-layout="table" data-with-features="false" disabled="disabled">
+                          <svg width="16" height="16">
+                            <path d="M15.2,16H0.8C0.4,16,0,15.6,0,15.2v-2.4C0,12.4,0.4,12,0.8,12h14.4c0.4,0,0.8,0.4,0.8,0.8v2.4C16,15.6,15.6,16,15.2,16z
+         M15.2,10H0.8C0.4,10,0,9.6,0,9.2V6.8C0,6.4,0.4,6,0.8,6h14.4C15.6,6,16,6.4,16,6.8v2.4C16,9.6,15.6,10,15.2,10z M15.2,4H0.8
+        C0.4,4,0,3.6,0,3.2V0.8C0,0.4,0.4,0,0.8,0h14.4C15.6,0,16,0.4,16,0.8v2.4C16,3.6,15.6,4,15.2,4z"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <?php } ?>
+
                     <div class="view-options__spring"></div>
                     <form style="display:flex" action="<?= Yii::$app->request->url ?>" on-change="submit()">
                       <div class="view-options__select">

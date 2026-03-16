@@ -3,14 +3,49 @@
 namespace backend\controllers;
 
 use Yii;
+use common\models\Files;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
 use common\models\Blocks;
 use common\models\BlocksTypes;
 use common\models\BlocksGroups;
+use common\models\BlocksBanners;
 
 class BlocksController extends Controller
 {
+
+  public function actionBanners($id)
+  {
+
+    $model = BlocksBanners::find()->where(['block_id' => $id])->one();
+
+    $files = new Files();
+
+    if (Yii::$app->request->isPost) {
+
+      if ($id && $model->load(Yii::$app->request->post())) {
+        if ($model->save(false) && isset($_FILES['BlocksBanners']['tmp_name']['file']) && !empty($_FILES['BlocksBanners']['tmp_name']['file'])) {
+
+          $path = \Yii::getAlias('@bannersImages') . '/' . $id;
+          $path_to_save = '/images/banners/' . $id;
+          $file_path = $_FILES['BlocksBanners']['tmp_name']['file'];
+
+          $files->saveFiles([
+            'replace' => true,
+            'table_name' => Yii::$app->controller->id,
+            'table_id' => $id,
+            'file_path' => $file_path,
+            'file_name' => 'BlocksBanners[file]',
+            'path' => $path,
+            'path_to_save' => $path_to_save,
+          ], ['width' => 660, 'height' => 210]);
+
+        }
+      }
+    }
+
+    return $this->redirect('/blocks/' . $id);
+  }
 
   public function actionUpdate($id)
   {
@@ -61,6 +96,14 @@ class BlocksController extends Controller
 
     if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
+      if($model->block_type_id == BlocksTypes::BLOCK_BANNERS_LEFT || $model->block_type_id == BlocksTypes::BLOCK_BANNERS_RIGHT) {
+
+        $blockBanners = new BlocksBanners([ 'block_id' => $model->id , 'link' => '']);
+        $blockBanners->save(false);
+
+      }
+
+      return $this->redirect('/blocks/' . $model->id);
 
     }
 
