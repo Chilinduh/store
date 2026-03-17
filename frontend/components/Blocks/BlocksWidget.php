@@ -134,6 +134,13 @@ class BlocksWidget extends Widget
 
       case BlocksTypes::BLOCK_BANNERS_CAROUSEL:
 
+        echo "<pre>";
+        print_r($this->model);
+        print_r($this->model->bannersCarousel);
+        echo "</pre>";
+        die;
+
+
         return $this->render('carousel', [
           'model' => $this->model->bannersCarousel
         ]);
