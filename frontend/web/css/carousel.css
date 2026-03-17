@@ -2,7 +2,7 @@
   height: 240px;
 }
 
-.block-slideshow__item-image.block-slideshow__item-image--desktop {
+.owl-stage-outer, .block-slideshow__item-image.block-slideshow__item-image--desktop {
   border-radius: 16px;
 }
 
@@ -15,3 +15,5 @@
   line-height: 50px;
   font-weight: 700;
 }
+
+
