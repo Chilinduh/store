@@ -152,7 +152,7 @@ use lavrentiev\widgets\toastr\Notification;
                 </tfoot>
               </table>
               <a class="btn btn-primary btn-xl btn-block" href="/order">
-                Перейти к оплате
+                Перейти к оформлению
               </a>
             </div>
           </div>

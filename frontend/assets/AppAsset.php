@@ -44,6 +44,7 @@ class AppAsset extends AssetBundle
       'css/banners.css',
       'css/carousel.css',
       'css/news.css',
+      'css/cart.css',
       'vendor/fontawesome/css/all.min.css',
     ];
 
