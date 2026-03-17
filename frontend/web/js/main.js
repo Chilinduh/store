@@ -1247,7 +1247,7 @@
                 dots: true,
                 cloned: false,
                 loop: true,
-                autoplaySpeed:4000,
+                autoplaySpeed:2000,
                 autoplay:true,
                 rtl: isRTL()
             });
