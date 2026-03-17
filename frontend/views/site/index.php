@@ -22,7 +22,7 @@ use frontend\components\Blocks\BlocksWidget;
 <?php } ?>
 
 <?php if ($block = Blocks::findOne(['page_id' => Pages::PAGE_MAIN, 'block_type_id' => BlocksTypes::BLOCK_CATEGORY_WITH_SUBCATEGORY])) { ?>
-<!--  --><?//= BlocksWidget::widget(['model' => $block]) ?>
+  <?= BlocksWidget::widget(['model' => $block]) ?>
 <?php } ?>
 <?php if ($block = Blocks::findOne(['page_id' => Pages::PAGE_MAIN, 'block_type_id' => BlocksTypes::BLOCK_PRODUCTS_SALE])) { ?>
   <?= BlocksWidget::widget(['model' => $block, 'property_id' => Property::STATUS_SALE_ID]) ?>
