@@ -16,4 +16,9 @@
   font-weight: 700;
 }
 
+.block-slideshow__carousel .owl-dots {
+  bottom: 20px;  
+}
+
+
 
