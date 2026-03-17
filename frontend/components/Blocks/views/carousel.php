@@ -7,9 +7,11 @@
           <a class="block-slideshow__item" href="<?= $item->link??'#' ?>">
             <span class="block-slideshow__item-image block-slideshow__item-image--desktop" style="background-image: url('<?= $item->files->original??''?>')"></span>
             <span class="block-slideshow__item-image block-slideshow__item-image--mobile" style="background-image: url('<?= $item->files->original??''?>')"></span>
+            <?php if(0) { ?>
             <span class="block-slideshow__item-offer"></span>
             <span class="block-slideshow__item-title"><?= $item->title??'' ?></span>
             <span class="block-slideshow__item-details"><?= $item->announce ?></span>
+            <?php } ?>
           </a>
         <?php } ?>
 
