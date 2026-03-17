@@ -30,11 +30,13 @@ $subHtml = '';
           <li class="departments__list-padding" role="presentation"></li>
           <?php foreach ($categories as $category) { ?>
             <li class="departments__item departments__item--submenu--megamenu departments__item--has-submenu <?= $i++ == 0 ? 'departments__item--hover' : '' ?>">
+
             <a href="/catalog/<?= $category['id'] ?>" class="departments__item-link">
-              <?= $category['name'] ?><sup class="category-sup"><?= $category['count'] ?></sup>
+              <div class="departments__item--icon"><?= $category['icon'] ?></div>
+              <div class="departments__item-link-title"><?= $category['name'] ?><sup class="category-sup"><?= $category['count'] ?></sup></div>
               <?php if (count($category['items'])) { ?>
                 <span class="departments__item-arrow">
-                <svg width="7" height="11">
+                <svg class="link-arrow" width="7" height="11">
                       <path d="M0.3,10.7L0.3,10.7c0.4,0.4,0.9,0.4,1.3,0L7,5.5L1.6,0.3C1.2-0.1,0.7,0,0.3,0.3l0,0c-0.4,0.4-0.4,1,0,1.3l4,3.9l-4,3.9
 C-0.1,9.8-0.1,10.4,0.3,10.7z"/>
                   </svg>

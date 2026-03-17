@@ -30,15 +30,15 @@ class BlocksWidget extends Widget
 
     switch ($this->model->block_type_id) {
 
-      case BlocksTypes::BLOCK_CATEGORY:
-
-        $blockGroup = BlocksGroups::findOne(['block_id' => $this->model->id]);
-        if (!empty($blockGroup->category)) {
-
-          $this->data = $blockGroup->category;
-        }
-
-        break;
+//      case BlocksTypes::BLOCK_CATEGORY:
+//
+//        $blockGroup = BlocksGroups::findOne(['block_id' => $this->model->id]);
+//        if (!empty($blockGroup->category)) {
+//
+//          $this->data = $blockGroup->category;
+//        }
+//
+//        break;
 
       case BlocksTypes::BLOCK_CATEGORY_WITH_SUBCATEGORY:
 
@@ -132,11 +132,10 @@ class BlocksWidget extends Widget
 
         break;
 
-      case BlocksTypes::BLOCK_CATEGORY:
+      case BlocksTypes::BLOCK_BANNERS_CAROUSEL:
 
-        return $this->render('category', [
-          'model' => $this->model,
-          'data' => $this->data
+        return $this->render('carousel', [
+          'model' => $this->model->bannersCarousel
         ]);
 
         break;

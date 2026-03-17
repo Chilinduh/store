@@ -41,6 +41,7 @@ return [
   'GET orders/<id:\d+>' => 'orders/update',
 
   'blocks/<id:\d+>/banners' => 'blocks/banners',
+  'blocks/<id:\d+>/banners-carousel-delete' => 'blocks/banners-carousel-delete',
 
   'blocks-types/<id:\d+>' => 'blocks-types/update',
   'blocks-types/<id:\d+>/delete' => 'blocks-types/delete',

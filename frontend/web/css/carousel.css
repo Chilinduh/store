@@ -1,0 +1,7 @@
+.block-slideshow__item  {
+  height: 240px;
+}
+
+.block-slideshow__item-image.block-slideshow__item-image--desktop {
+  border-radius: 16px;
+}

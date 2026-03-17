@@ -1245,7 +1245,10 @@
             owlCarousel.owlCarousel({
                 items: 1,
                 dots: true,
+                cloned: false,
                 loop: true,
+                autoplaySpeed:4000,
+                autoplay:true,
                 rtl: isRTL()
             });
         });

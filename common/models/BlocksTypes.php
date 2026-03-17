@@ -14,7 +14,7 @@ class BlocksTypes extends ActiveRecord
   public const BLOCK_PRODUCTS_BEST = 4; //Блок с товарами (Лучшее предложение)
   public const BLOCK_PRODUCTS_PROMOTION = 5; //Блок с товарами (Акции)
 
-  public const BLOCK_CATEGORY = 8;
+  public const BLOCK_BANNERS_CAROUSEL = 8;
   public const BLOCK_CATEGORY_WITH_SUBCATEGORY = 9;
   public const BLOCK_FEATURES = 10;
   public const BLOCK_NEWS_V1 = 11;

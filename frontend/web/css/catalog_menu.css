@@ -9,3 +9,33 @@
   -moz-border-radius: 10px;
   border-radius: 10px;
 }
+
+.departments__item--has-submenu .departments__item-link .departments__item--icon {
+  margin-right: 10px;
+}
+.departments__item--has-submenu .departments__item-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.departments__item--icon img  {
+  width: 25px;
+}
+
+.departments__list {
+  width: 350px !important;
+  padding: 10px !important;
+}
+
+.megamenu-links {
+  padding: 10px !important;
+}
+
+.departments__list li:hover,
+.departments__item-link .departments__item-arrow .link-arrow:hover,
+.departments__item-link .departments__item-link-title div:hover,
+.departments__item-link .departments__item-link-title:hover {
+  color: #0064f0;
+  fill: #0064f0;
+}

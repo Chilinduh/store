@@ -395,24 +395,12 @@ a .logo {
   border-radius: 5px;
 }
 
-
-/*Каталог выпадающее меню*/
-
-.departments__list {
-  width: 300px !important;
-  padding: 10px !important;
-}
-
-.megamenu-links {
-  padding: 10px !important;
-}
-
-
 /*поисковая стора*/
 
 .search .search__input {
   background-color: #fff;
 }
+
 
 
 

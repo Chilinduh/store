@@ -80,6 +80,7 @@ class Catalog extends Component
         'id' => $root->id,
         'name' => $root->name,
         'visible' => $root->visible,
+        'icon' => $root->icon,
         'lvl' => $root->lvl,
         'count' => $count,
         'image' => $root->getFiles()->asArray()->one(),

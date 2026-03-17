@@ -45,28 +45,26 @@ class Blocks extends ActiveRecord
 
   public function getType()
   {
-
     return $this->hasOne(BlocksTypes::class, ['id' => 'block_type_id']);
   }
 
   public function getPage()
   {
-
     return $this->hasOne(Pages::class, ['id' => 'page_id']);
   }
 
-
   public function getFiles()
   {
-
     return $this->hasOne(Files::className(), ['table_id' => 'id'])->andWhere(['table_name' => 'blocks']);
   }
+
   public function getBanners()
   {
-
     return $this->hasOne(BlocksBanners::class, ['block_id' => 'id']);
   }
 
-
-
+  public function getBannersCarousel()
+  {
+    return $this->hasMany(BlocksBannersCarousel::class, ['block_id' => 'id']);
+  }
 }

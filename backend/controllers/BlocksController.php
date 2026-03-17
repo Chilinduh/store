@@ -10,6 +10,7 @@ use common\models\Blocks;
 use common\models\BlocksTypes;
 use common\models\BlocksGroups;
 use common\models\BlocksBanners;
+use common\models\BlocksBannersCarousel;
 
 class BlocksController extends Controller
 {
@@ -39,7 +40,40 @@ class BlocksController extends Controller
             'path' => $path,
             'path_to_save' => $path_to_save,
           ], ['width' => 660, 'height' => 210]);
+        }
+      }
+    }
 
+    return $this->redirect('/blocks/' . $id);
+  }
+
+  public function actionBannersCarouselCreate($id)
+  {
+
+    $model = new BlocksBannersCarousel();
+    $files = new Files();
+
+    if (Yii::$app->request->isPost) {
+
+      if ($model->load(Yii::$app->request->post())) {
+        $model->block_id = $id;
+        if ($model->save()) {
+          if (isset($_FILES['BlocksBannersCarousel']['tmp_name']['file']) && !empty($_FILES['BlocksBannersCarousel']['tmp_name']['file'])) {
+
+            $path = \Yii::getAlias('@bannersImages') . '/' . $id;
+            $path_to_save = '/images/banners/' . $id;
+            $file_path = $_FILES['BlocksBannersCarousel']['tmp_name']['file'];
+
+            $files->saveFiles([
+              'replace' => true,
+              'table_name' => 'blocks_banners_carousel',
+              'table_id' => $model->id,
+              'file_path' => $file_path,
+              'file_name' => 'BlocksBannersCarousel[file]',
+              'path' => $path,
+              'path_to_save' => $path_to_save,
+            ], ['width' => 660, 'height' => 210]);
+          }
         }
       }
     }
@@ -57,8 +91,8 @@ class BlocksController extends Controller
 
       if (isset($model->group_id)) {
 
-        $blocksGroups =  BlocksGroups::findOne(['block_id' => $model->id]);
-        if($blocksGroups) {
+        $blocksGroups = BlocksGroups::findOne(['block_id' => $model->id]);
+        if ($blocksGroups) {
 
           $blocksGroups->group_id = $model->group_id;
         } else {
@@ -71,16 +105,16 @@ class BlocksController extends Controller
         $blocksGroups->save();
       }
     } else {
-
-      if($model->block_type_id == BlocksTypes::BLOCK_CATEGORY) {
-
-
-        $blocksGroups =  BlocksGroups::findOne(['block_id' => $model->id]);
-        if($blocksGroups) {
-
-          $model->group_id = $blocksGroups->group_id;
-        }
-      }
+//
+//      if($model->block_type_id == BlocksTypes::BLOCK_CATEGORY) {
+//
+//
+//        $blocksGroups =  BlocksGroups::findOne(['block_id' => $model->id]);
+//        if($blocksGroups) {
+//
+//          $model->group_id = $blocksGroups->group_id;
+//        }
+//      }
 
     }
 
@@ -96,9 +130,9 @@ class BlocksController extends Controller
 
     if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-      if($model->block_type_id == BlocksTypes::BLOCK_BANNERS_LEFT || $model->block_type_id == BlocksTypes::BLOCK_BANNERS_RIGHT) {
+      if ($model->block_type_id == BlocksTypes::BLOCK_BANNERS_LEFT || $model->block_type_id == BlocksTypes::BLOCK_BANNERS_RIGHT || $model->block_type_id == BlocksTypes::BLOCK_BANNERS_CAROUSEL) {
 
-        $blockBanners = new BlocksBanners([ 'block_id' => $model->id , 'link' => '']);
+        $blockBanners = new BlocksBanners(['block_id' => $model->id, 'link' => '']);
         $blockBanners->save(false);
 
       }
@@ -129,6 +163,19 @@ class BlocksController extends Controller
       'dataProvider' => $dataProvider,
       'searchModel' => $searchModel,
     ]);
+  }
+
+  public function actionBannersCarouselDelete($id)
+  {
+
+    $model = new BlocksBannersCarousel();
+    $model = $model->find()->where(['id' => $id])->one();
+    $blockId = $model->block_id;
+    if ($model) {
+      $model->delete(false);
+    }
+
+    return $this->redirect('/blocks/'.$blockId);
   }
 
   public function actionDelete($id)

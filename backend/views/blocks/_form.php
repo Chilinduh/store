@@ -18,10 +18,8 @@ use common\models\BlocksTypes;
 use kartik\checkbox\CheckboxX;
 use kartik\select2\Select2;
 
-
 $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
 ?>
-
 
 <?= BreadcrumbWidget::widget([
   'title' => 'Блоки',
@@ -39,16 +37,22 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
 
 $form = ActiveForm::begin(); ?>
 
-<?= $form->field($model, 'name'); ?>
+<div class="row">
+  <div class="col-md-3"><?= $form->field($model, 'name'); ?></div>
+  <div class="col-md-3">
+    <?= $form->field($model, 'page_id')->widget(Select2::classname(), [
+      'data' => ArrayHelper::map(Pages::find()->asArray()->all(), 'id', 'name'),
+      'options' => ['placeholder' => 'Выбрать страницу'],
+    ]); ?>
+  </div>
+  <div class="col-md-3">
+    <?= $form->field($model, 'block_type_id')->widget(Select2::classname(), [
+      'data' => ArrayHelper::map(BlocksTypes::find()->asArray()->all(), 'id', 'name'),
+      'options' => ['placeholder' => 'Выбрать тип'],
+    ]); ?>
+  </div>
+</div>
 
-<?= $form->field($model, 'page_id')->widget(Select2::classname(), [
-  'data' => ArrayHelper::map(Pages::find()->asArray()->all(), 'id', 'name'),
-  'options' => ['placeholder' => 'Выбрать страницу'],
-]); ?>
-<?= $form->field($model, 'block_type_id')->widget(Select2::classname(), [
-  'data' => ArrayHelper::map(BlocksTypes::find()->asArray()->all(), 'id', 'name'),
-  'options' => ['placeholder' => 'Выбрать тип'],
-]); ?>
 <?//= $form->field($model, 'group_id')->widget(Select2::classname(), [
 //  'data' => ArrayHelper::map(Groups::find()->asArray()->all(), 'id', 'name'),
 //  'options' => ['placeholder' => 'Выбрать группу'],
@@ -69,9 +73,10 @@ echo $form->field($model, 'show')->widget(CheckboxX::classname(), [
 <?php ActiveForm::end(); ?>
 <?php PanelWidget::finish() ?>
 
-<?php if($model->banners && !$model->isNewRecord) { ?>
-
-  <?=  $this->render('_short_banner', ['model' => $model->banners]); ?>
+<?php if($model->banners && $model->block_type_id != BlocksTypes::BLOCK_BANNERS_CAROUSEL && !$model->isNewRecord) { ?>
+  <?= $this->render('_short_banner', ['model' => $model->banners]); ?>
+<?php } else { ?>
+  <?= $this->render('_carousel_banner', ['model' => $model, 'bannersCarousel' => new common\models\BlocksBannersCarousel()]); ?>
 <?php } ?>
 
 
