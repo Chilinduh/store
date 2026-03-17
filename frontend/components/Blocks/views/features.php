@@ -40,8 +40,8 @@
           </svg>
         </div>
         <div class="block-features__item-info">
-          <div class="block-features__item-title">Бесплатная доставка</div>
-          <div class="block-features__item-subtitle">При заказе от 50 $</div>
+          <div class="block-features__item-title">Доставка по России</div>
+          <div class="block-features__item-subtitle">В любой регион</div>
         </div>
       </li>
       <li class="block-features__item">
@@ -130,8 +130,8 @@
           </svg>
         </div>
         <div class="block-features__item-info">
-          <div class="block-features__item-title">100% безопасность</div>
-          <div class="block-features__item-subtitle">Только безопасные платежи</div>
+          <div class="block-features__item-title">Цены на сайте</div>
+          <div class="block-features__item-subtitle">Представлены за наличный расчёт </div>
         </div>
       </li>
       <li class="block-features__item">
@@ -159,7 +159,7 @@
         </div>
         <div class="block-features__item-info">
           <div class="block-features__item-title">Горячие предложения</div>
-          <div class="block-features__item-subtitle">Скидки до 90%</div>
+          <div class="block-features__item-subtitle">Скидки до 30%</div>
         </div>
       </li>
     </ul>
