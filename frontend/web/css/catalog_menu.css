@@ -41,7 +41,7 @@
 }
 
 
-.image--type--category .image__tag {
+.block-categories__list .image--type--category .image__tag {
   position: unset;
 }
 .image--type--category .image__tag {
