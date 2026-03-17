@@ -1,0 +1,19 @@
+.post__body--content {
+  display: flex;
+  flex-direction: row;
+  gap:  20px
+}
+
+.post__body--content--file img {
+  width: fit-content;
+  border-radius: 16px;
+}
+.post__body--content--file {
+  max-width: 400px;
+}
+
+.card.widget.widget-categories, .post-view__card.post {
+  border-radius: 16px;
+}
+
+

@@ -1,7 +1,7 @@
 <?php
 
 use frontend\components\BreadCrumbsWidget;
-
+$file = $model->getFiles()->one();
 ?>
 
 <div class="block-header block-header--has-breadcrumb block-header--has-title">
@@ -24,7 +24,10 @@ use frontend\components\BreadCrumbsWidget;
           <div class="post__body typography">
             <h2><?= $model->title ?></h2>
 
-           <?= $model->text ?>
+            <div class="post__body--content">
+              <div class="post__body--content--file" ><img src="<?= $file->original??'' ?>" alt=""></div>
+              <div class="post__body--content--text" ><?= $model->text ?></div>
+            </div>
           </div>
 
         </div>

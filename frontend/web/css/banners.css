@@ -4,3 +4,8 @@
 .block-banners__item.background:before {
   background: unset;
 }
+
+.block-banners__item--style--two .block-banners__item-title {
+  padding: 10px;
+  border-radius: 8px;
+}
