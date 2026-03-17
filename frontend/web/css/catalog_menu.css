@@ -43,6 +43,6 @@
 .image--type--product .image__tag, .image--type--category .image__tag {
   position: unset;
 }
-.image__tag {
+.image--type--category .image__tag {
   border-radius: 10px;
 }
