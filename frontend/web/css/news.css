@@ -16,4 +16,7 @@
   border-radius: 16px;
 }
 
+.post-card__image, .post-card.post-card--layout--list {
+  border-right: 16px;
+}
 
