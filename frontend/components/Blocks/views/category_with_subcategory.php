@@ -1,3 +1,8 @@
+<?php
+
+
+?>
+
 <div class="block-categories__body">
   <div class="container">
     <div class="block-categories__list">
@@ -15,8 +20,17 @@
                 <a href="/catalog/<?= $catalog['id'] ?>"><?= $catalog['name'] ?></a>
               </div>
               <ul class="category-card__children">
-                <?php foreach (array_slice($catalog['items'], 0, 6) as $item) { ?>
-                <li><a href="/catalog/<?= $item['id'] ?>"> <?= $item['name'] ?> <sup class="category-sup"><?= $item['count'] ?></sup></a></li>
+                <?php $count = 0; ?>
+                <?php foreach (array_slice($catalog['items'], 0, 6) as $item) {
+
+                    foreach ($catalog['items'] as $subs) {
+                      foreach ($subs['items'] as $sub) {
+                        $count += $sub['count'];
+                      }
+                    }
+
+                  ?>
+                <li><a href="/catalog/<?= $item['id'] ?>"> <?= $item['name'] ?> <sup class="category-sup"></sup></a></li>
                 <?php } ?>
               </ul>
               <div class="category-card__actions">
