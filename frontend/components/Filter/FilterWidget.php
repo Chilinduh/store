@@ -23,13 +23,14 @@ class FilterWidget extends Widget
         switch ($filter['type']) {
 
           case 'checkbox':
-
             $this->html .= $this->render('checkbox',
               [
                 'id' => $filter['id']??'',
+                'filter_id' => $filter['filter_id']??false,
                 'title' => $filter['title'],
                 'items' => $filter['items'],
                 'value' => $filter['value'],
+                'type' => $filter['type'],
                 'field' => $filter['field']
               ]);
             break;
@@ -38,8 +39,10 @@ class FilterWidget extends Widget
             $this->html .= $this->render('slider',
               [
                 'id' => $filter['id']??'',
+                'filter_id' => $filter['filter_id']??false,
                 'title' => $filter['title']??'',
                 'field' => $filter['field']??'',
+                'type' => $filter['type'],
                 'items' => $filter['items']??[],
                 'value' => $filter['value']??'',
                 'min' => $filter['min']??0,

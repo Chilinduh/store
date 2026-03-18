@@ -20,6 +20,7 @@ use common\models\UserFavorites;
 use common\components\Catalog;
 use common\models\Attributes;
 use common\models\ProductAttributes;
+use frontend\components\Services\CatalogFilterService;
 
 
 
@@ -40,6 +41,7 @@ class CatalogController extends Controller
    * @var Request
    */
   public $request;
+  public $filterService;
 
   public function __construct(
     $id,
@@ -48,6 +50,7 @@ class CatalogController extends Controller
   )
   {
     $this->request = Yii::$app->request;
+    $this->filterService = new CatalogFilterService();
     parent::__construct($id, $module, $config);
   }
 
@@ -263,7 +266,6 @@ class CatalogController extends Controller
       case Tree::LVL_ZERO:
 
         if($children = $catalog['sub']??false) {
-
           $params['categoryIds'] = $children;
         }
 
@@ -296,112 +298,42 @@ class CatalogController extends Controller
           $to = max(ArrayHelper::map($prices, 'id', 'price'));
         }
 
-        $productAttributes = Products::getProductAttributes($category['id']);
-        $productAttributes = ArrayHelper::toArray($productAttributes);
-        $productAttributesValues = Products::getProductAttributesValues($category['id'], array_keys($productAttributes));
-        $productAttributesValues = ArrayHelper::toArray($productAttributesValues);
+        $filterService = $this->filterService->getFilters($category['id'], $params);
 
-        $productAttributesFilter = [];
-        foreach ($productAttributesValues as $item) {
-
-          if(!empty($item['value'])) {
-
-            if($productAttribute = ProductAttributes::findOne($item['product_attribute_id'])) {
-
-              if(!isset($productAttributesFilter[$productAttribute['attribute_id']])) {
-                $productAttributesFilter[$productAttribute['attribute_id']] = [];
-                $temp[$productAttribute['attribute_id']] = [];
-              }
-
-              if(!in_array($item['value'], $temp[$productAttribute['attribute_id']])) {
-
-                $temp[$productAttribute['attribute_id']][] = $item['value'];
-                $productAttributesFilter[$productAttribute['attribute_id']][] = [
-                  'id' => $item['product_attribute_id'],
-                  'name' => $item['value']
-                ];
-              }
-            }
-          }
-        }
-
-        $filters = [];
-        foreach ($productAttributesFilter as $key=>$items) {
-
-            if(intval($key) && $attribute = Attributes::findOne($key)) {
-
-              if($attribute->attribute_filter_id  === 1) {
-
-                $filters[] = [
-                  'id' => uniqid(),
-                  'items' => $items,
-                  'value' => $item['value'] ?? 0,
-                  'type' => 'checkbox',
-                  'field' => 'filter',
-                  'filter_id' => $attribute->id,
-                  'title' => $attribute->name
-                ];
-              }
-
-              if($attribute->attribute_filter_id  === 2 && count($items)) {
-
-                $validateItems = [];
-                foreach ($items as $valid) {
-                  $validateItems[] = (float)($valid['name']);
-                }
-
-                $filters[] = [
-                  'id' => uniqid(),
-                  'type' => 'slider',
-                  'field' => 'filter',
-                  'filter_id' => $attribute->id,
-                  'title' => $attribute->name,
-                  'min' => $from,
-                  'max' => $to,
-                  'from' => $params['price_from'] ?? $from,
-                  'to' => $params['price_to'] ?? $to,
-                ];
-              }
-            }
-        }
-
-
-      $brands = ArrayHelper::toArray(Products::getProductsBrands($params['category_id']??''));
-      if($brands) {
-        $filters[] = [
-          'id' => uniqid(),
-          'items' => $brands,
-          'value' => $params['brands'] ?? 0,
-          'type' => 'checkbox',
-          'field' => 'brands',
-          'title' => 'Бренд'
-        ];
-      }
-
-      $manufacturers = ArrayHelper::toArray(Products::getProductsManufacturers($params['category_id']??''));
-      if($manufacturers) {
-        $filters[] = [
-          'id' => uniqid(),
-          'items' => $manufacturers,
-          'value' => $params['manufacturers'] ?? 0,
-          'type' => 'checkbox',
-          'field' => 'manufacturer',
-          'title' => 'Производитель'
-        ];
-      }
-
-      $filters[] = [
+        $brands = ArrayHelper::toArray(Products::getProductsBrands($params['category_id']??''));
+        if($brands) {
+          $filters[] = [
             'id' => uniqid(),
-            'type' => 'slider',
-            'field' => 'price',
-            'max' => $to, //max(ArrayHelper::map($products, 'id', 'price')),
-            'min' => 0, //min(ArrayHelper::map($products, 'id', 'price')),
-            'from' => $params['price_from'] ?? $from,
-            'to' => $params['price_to'] ?? $to,
-            'title' => 'Цена'
+            'items' => $brands,
+            'value' => $params['brands'] ?? 0,
+            'type' => 'checkbox',
+            'field' => 'brands',
+            'title' => 'Бренд'
+          ];
+        }
+
+        $manufacturers = ArrayHelper::toArray(Products::getProductsManufacturers($params['category_id']??''));
+        if($manufacturers) {
+          $filters[] = [
+            'id' => uniqid(),
+            'items' => $manufacturers,
+            'value' => $params['manufacturers'] ?? 0,
+            'type' => 'checkbox',
+            'field' => 'manufacturer',
+            'title' => 'Производитель'
+          ];
+        }
+
+        $filters[] = [
+          'id' => uniqid(),
+          'type' => 'slider',
+          'field' => 'price',
+          'max' => $to, //max(ArrayHelper::map($products, 'id', 'price')),
+          'min' => 0, //min(ArrayHelper::map($products, 'id', 'price')),
+          'from' => $params['price_from'] ?? $from,
+          'to' => $params['price_to'] ?? $to,
+          'title' => 'Цена'
         ];
-
-
 
         $cartForm = OrderFormFactory::get();
 

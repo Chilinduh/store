@@ -12,16 +12,16 @@
               <?php if (isset($cat['items']) && count($cat['items'])) { ?>
                 <ul class="widget-categories-list__child">
                   <?php foreach ($cat['items'] as $item) { ?>
-<!--                    --><?php //if ($item['count']) { ?>
+                    <?php if ($item['count']) { ?>
                       <li class="widget-categories-list__child-item">
                         <a href="/catalog/<?= $item['id'] ?>" class="widget-categories-list__child-link">
                           <?= $item['name'] ?>   <sup class="category-sup"><?= $item['count']??0 ?></sup>
                         </a>
                       </li>
                     <?php } ?>
-<!--                  --><?php //} ?>
+                  <?php } ?>
                 </ul>
-                <?php if (count($cat['items']) > 5) { ?>
+                <?php if (0 && count($cat['items']) > 5) { ?>
                   <ul class="widget-categories-list__child" data-collapse-content>
                     <?php foreach (array_slice($cat['items'], 0, 5) as $item) { ?>
                       <li class="widget-categories-list__child-item">
@@ -29,9 +29,9 @@
                       </li>
                     <?php } ?>
                   </ul>
-
+                  <?php if(0) { ?>
                   <button type="button" class="widget-categories-list__show-more" data-collapse-trigger>
-                    <span class="widget-categories-list__show-more-expand-text">Показать все</span>
+                    <span class="widget-categories-list__show-more-expand-text">Показать всеsdffsd</span>
                     <span class="widget-categories-list__show-more-collapse-text">Скрыть часть</span>
                     <span class="widget-categories-list__show-more-arrow">
                             <svg width="9" height="6">
@@ -40,6 +40,7 @@
                             </svg>
                         </span>
                   </button>
+                <?php } ?>
                 <?php } ?>
               <?php } ?>
             </li>

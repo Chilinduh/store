@@ -12,11 +12,11 @@
 
     <div class="filter__body" data-collapse-content>
       <div class="filter__container" id="#<?= $id ?>">
-        <div class="filter-price" data-field="<?= $field ?>" data-min="<?= $min ?>" data-max="<?= $max ?>"
+        <div class="filter-price" data-field="<?= $field.'_'.$type ?><?= $field == 'filter' ? '_'.$filter_id : '' ?>" data-min="<?= $min ?>" data-max="<?= $max ?>"
              data-from="<?= $from ?>"
              data-to="<?= $to ?>">
-          <input name="<?= $field ?>_from" type="hidden">
-          <input name="<?= $field ?>_to" type="hidden">
+          <input name="<?= $field.'_'.$type ?><?= $field == 'filter' ? '_'.$filter_id : '' ?>_from" type="hidden">
+          <input name="<?= $field.'_'.$type ?><?= $field == 'filter' ? '_'.$filter_id : '' ?>_to" type="hidden">
           <div class="filter-price__slider"></div>
           <div class="filter-price__title-button">
             <div class="filter-price__title">

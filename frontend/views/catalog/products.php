@@ -50,7 +50,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                       <h4>Фильтр</h4>
                     </div>
                   <?php } ?>
-                  <form method="get">
+                  <form method="get" action="">
                     <div class="widget-filters__list">
                       <?php //include_once(Yii::getAlias('@frontend/views/site/_categories.php')); ?>
                       <?php //require(Yii::getAlias('@frontend/views/site/_category-filter.php')); ?>

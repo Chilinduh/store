@@ -17,7 +17,7 @@
                 <label class="filter-list__item ">
                   <span class="input-check filter-list__input">
                       <span class="input-check__body">
-                          <input class="input-check__input" name="<?= $field ?>[<?= $item['id'] ?>]"
+                          <input class="input-check__input" name="<?= $field.'_'.$type ?><?= $field == 'filter' ? '_'.$filter_id : '' ?>"
                                  type="checkbox" <?= isset($value[$item['id']]) ? 'checked="checked"' : '' ?>>
                           <span class="input-check__box"></span>
                           <span class="input-check__icon">
