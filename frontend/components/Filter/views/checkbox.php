@@ -17,7 +17,7 @@
                 <label class="filter-list__item ">
                   <span class="input-check filter-list__input">
                       <span class="input-check__body">
-                          <input class="input-check__input <?= $filter ?>" data-collection="<?= $item['id'] ?>" data-attribute="<?= $item['key'] ?>" name="filter_<?= $item['key'] ?>"
+                          <input class="input-check__input <?= $filter ?>" data-collection="<?= $item['id'] ?>" data-attribute="<?= $item['key']??'' ?>" name="filter_<?= $item['key']??'' ?>"
                                  type="checkbox" <?= $value ? 'checked="checked"' : '' ?>>
                           <span class="input-check__box"></span>
                           <span class="input-check__icon">
