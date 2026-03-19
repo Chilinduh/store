@@ -66,6 +66,14 @@ class CatalogFilterService
         }
       }
 
+
+      echo "<pre>";
+      print_r($productAttributesFilter);
+      echo "</pre>";
+      die;
+
+
+
       $filters = [];
       foreach ($productAttributesFilter as $key=>$items) {
 

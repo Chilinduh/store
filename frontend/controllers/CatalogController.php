@@ -300,12 +300,6 @@ class CatalogController extends Controller
 
         $filters = $this->filterService->getFilters($category['id'], $params);
 
-        echo "<pre>";
-        print_r($filters);
-        echo "</pre>";
-        die;
-
-
         $brands = ArrayHelper::toArray(Products::getProductsBrands($params['category_id']??''));
         if($brands) {
           $filters[] = [
