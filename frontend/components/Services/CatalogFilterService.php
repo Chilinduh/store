@@ -9,12 +9,27 @@ use common\models\Products;
 use common\models\ProductStockBalance;
 use common\components\order\Model\OrderStatus;
 use yii\helpers\ArrayHelper;
+use common\components\Services\CatalogService;
 
 
 class CatalogFilterService
 {
 
   public function getFilters(int $catalog_id = null, array $params = []) {
+
+    //$catalog = new CatalogService();
+
+
+/*
+    [category_id] => 245
+    [filter_checkbox_131] => on
+    [filter_slider_134_from] => 19
+    [filter_slider_134_to] => 25
+    [filter_slider_133_from] => 128
+    [filter_slider_133_to] => 141
+    [price_slider_from] => 4700
+    [price_slider_to] => 158000
+*/
 
     if($catalog_id) {
 
@@ -39,10 +54,12 @@ class CatalogFilterService
 
             if(!in_array($item['value'], $temp[$productAttribute['attribute_id']])) {
 
+
               $temp[$productAttribute['attribute_id']][] = $item['value'];
               $productAttributesFilter[$productAttribute['attribute_id']][] = [
                 'id' => $item['product_attribute_id'],
-                'name' => $item['value']
+                'name' => $item['value'],
+                'key' => $item['id']
               ];
             }
           }
@@ -56,13 +73,18 @@ class CatalogFilterService
 
           if($attribute->attribute_filter_id  === 1) {
 
+            $value = false;
+            if(isset($params['filter_checkbox_'.$attribute->id]) && $params['filter_checkbox_'.$attribute->id] == 'on') {
+              $value = true;
+            }
+
             $filters[] = [
               'id' => uniqid(),
               'items' => $items,
-              'value' => $item['value']??0,
+              'value' => $value??false,
               'type' => 'checkbox',
-              'field' => 'filter',
-              'filter_id' => $attribute->id,
+              'filter' => 'filter-collections',
+              'attribute_id' => $attribute->id,
               'title' => $attribute->name
             ];
           }
@@ -74,16 +96,26 @@ class CatalogFilterService
               $validateItems[] = (float)($valid['name']);
             }
 
+            $from = false;
+            if(isset($params['filter_slider_'.$attribute->id.'_from'])) {
+              $from = $params['filter_slider_'.$attribute->id.'_from'];
+            }
+
+            $to = false;
+            if(isset($params['filter_slider_'.$attribute->id.'_to'])) {
+              $to = $params['filter_slider_'.$attribute->id.'_to'];
+            }
+
             $filters[] = [
               'id' => uniqid(),
               'type' => 'slider',
-              'field' => 'filter',
-              'filter_id' => $attribute->id,
+              'filter' => 'filter-collections',
+              'attribute_id' => $attribute->id,
               'title' => $attribute->name,
               'min' => min($validateItems),
               'max' => max($validateItems),
-              'from' => min($validateItems),
-              'to' => max($validateItems),
+              'from' => $from ? $from : min($validateItems),
+              'to' => $to ? $to : max($validateItems),
             ];
           }
         }

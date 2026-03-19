@@ -20,6 +20,8 @@
     // collapse
     */
     $(function () {
+
+
         $('[data-collapse]').each(function (i, element) {
             const collapse = element;
             const openedClass = $(element).data('collapse-opened-class');
@@ -64,6 +66,7 @@
     // .filter-price
     */
     $(function () {
+
         $('.filter-price').each(function (i, element) {
             const min = $(element).data('min');
             const max = $(element).data('max');
@@ -95,8 +98,12 @@
               titleValues[handle].innerHTML = Math.round(values[handle]);
               switch(handle) {
 
-                case 0: field_from.val(titleValues[handle].innerHTML); break;
-                case 1: field_to.val(titleValues[handle].innerHTML); break;
+                case 0: field_from.val(titleValues[handle].innerHTML);
+                        $(field_from).trigger('change');
+                        break;
+                case 1: field_to.val(titleValues[handle].innerHTML);
+                        $(field_to).trigger('change');
+                        break;
               }
             });
         });

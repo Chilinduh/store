@@ -10,8 +10,39 @@
   border-radius: 10px;
 }
 
+/*.filter-collections.hidden {*/
+/*  visibility: hidden;*/
+/*}*/
+
 /*.products-list[data-layout="list"] .product-card .product-card__image {*/
 /*  padding: 0px 24px;*/
 /*}*/
+
+.widget-filters--offcanvas--mobile {
+  background-color: #fafafa;
+}
+
+.widget-categories-list__body {
+  padding: 20px;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+.widget.widget-filters.widget-filters--offcanvas--mobile {
+  border-radius: 10px;
+}
+
+.widget-filters__actions.d-flex button {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 10px;
+}
+.widget-filters__actions {
+  justify-content: flex-end;
+  flex-direction: column;
+}
 
 

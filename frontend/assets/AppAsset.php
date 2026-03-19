@@ -16,7 +16,7 @@ class AppAsset extends AssetBundle
     public $js = [
       'vendor/bootstrap/js/bootstrap.bundle.min.js',
       'vendor/owl-carousel/owl.carousel.js',
-      'vendor/nouislider/nouislider.min.js',
+      'vendor/nouislider/nouislider.js',
       'vendor/photoswipe/photoswipe.min.js',
       'vendor/photoswipe/photoswipe-ui-default.min.js',
       'vendor/select2/js/select2.min.js',
@@ -28,6 +28,7 @@ class AppAsset extends AssetBundle
       'js/favorite.js',
       'js/cart.js',
       'js/modal.js',
+      'js/filter.js',
     ];
 
     public $css = [

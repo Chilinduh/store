@@ -12,11 +12,26 @@
 
     <div class="filter__body" data-collapse-content>
       <div class="filter__container" id="#<?= $id ?>">
-        <div class="filter-price" data-field="<?= $field.'_'.$type ?><?= $field == 'filter' ? '_'.$filter_id : '' ?>" data-min="<?= $min ?>" data-max="<?= $max ?>"
+        <div class="filter-price" data-field="collection_<?= $attribute_id ?>"
+             data-min="<?= $min ?>"
+             data-max="<?= $max ?>"
              data-from="<?= $from ?>"
              data-to="<?= $to ?>">
-          <input name="<?= $field.'_'.$type ?><?= $field == 'filter' ? '_'.$filter_id : '' ?>_from" type="hidden">
-          <input name="<?= $field.'_'.$type ?><?= $field == 'filter' ? '_'.$filter_id : '' ?>_to" type="hidden">
+          <?php if($filter !== 'filter-collections') { ?>
+          <input filter="<?= $filter ?>" data-attribute="<?= $field ?> name="<?= $field.'_'.$type ?><?= $field == 'filter' ? '_'.$filter_id : '' ?>_from"  type="hidden">
+          <input filter="<?= $filter ?>" data-attribute="<?= $field ?> name="<?= $field.'_'.$type ?><?= $field == 'filter' ? '_'.$filter_id : '' ?>_to"  type="hidden">
+          <? } else { ?>
+
+            <?php
+
+            $fieldsScope = "collection_".$attribute_id."_from|collection_".$attribute_id."_to";
+
+            ?>
+            <input class="<?= $filter ?> " data-filter-scope="<?= $fieldsScope?>"
+                   data-collection="<?= $attribute_id ?>" name="collection_<?= $attribute_id ?>_from" type="hidden">
+            <input class="<?= $filter ?> " data-filter-scope="<?= $fieldsScope?>"
+                   data-collection="<?= $attribute_id ?>" name="collection_<?= $attribute_id ?>_to" type="hidden">
+          <? }?>
           <div class="filter-price__slider"></div>
           <div class="filter-price__title-button">
             <div class="filter-price__title">

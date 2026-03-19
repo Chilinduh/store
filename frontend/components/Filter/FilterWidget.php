@@ -29,7 +29,9 @@ class FilterWidget extends Widget
                 'filter_id' => $filter['filter_id']??false,
                 'title' => $filter['title'],
                 'items' => $filter['items'],
+                'filter' => $filter['filter'],
                 'value' => $filter['value'],
+                'attribute_id' => $filter['attribute_id'],
                 'type' => $filter['type'],
                 'field' => $filter['field']
               ]);
@@ -43,6 +45,8 @@ class FilterWidget extends Widget
                 'title' => $filter['title']??'',
                 'field' => $filter['field']??'',
                 'type' => $filter['type'],
+                'filter' => $filter['filter'],
+                'attribute_id' => $filter['attribute_id'],
                 'items' => $filter['items']??[],
                 'value' => $filter['value']??'',
                 'min' => $filter['min']??0,

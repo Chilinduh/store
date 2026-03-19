@@ -298,7 +298,7 @@ class CatalogController extends Controller
           $to = max(ArrayHelper::map($prices, 'id', 'price'));
         }
 
-        $filterService = $this->filterService->getFilters($category['id'], $params);
+        $filters = $this->filterService->getFilters($category['id'], $params);
 
         $brands = ArrayHelper::toArray(Products::getProductsBrands($params['category_id']??''));
         if($brands) {
@@ -308,6 +308,7 @@ class CatalogController extends Controller
             'value' => $params['brands'] ?? 0,
             'type' => 'checkbox',
             'field' => 'brands',
+            'filter' => 'main',
             'title' => 'Бренд'
           ];
         }
@@ -320,6 +321,7 @@ class CatalogController extends Controller
             'value' => $params['manufacturers'] ?? 0,
             'type' => 'checkbox',
             'field' => 'manufacturer',
+            'filter' => 'main',
             'title' => 'Производитель'
           ];
         }
@@ -328,6 +330,7 @@ class CatalogController extends Controller
           'id' => uniqid(),
           'type' => 'slider',
           'field' => 'price',
+          'filter' => 'main',
           'max' => $to, //max(ArrayHelper::map($products, 'id', 'price')),
           'min' => 0, //min(ArrayHelper::map($products, 'id', 'price')),
           'from' => $params['price_from'] ?? $from,
