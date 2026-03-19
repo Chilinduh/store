@@ -33,7 +33,7 @@ class FilterWidget extends Widget
                 'value' => $filter['value'],
                 'attribute_id' => $filter['attribute_id']??'',
                 'type' => $filter['type'],
-                'field' => $filter['field']
+                'field' => $filter['field']??''
               ]);
             break;
 
