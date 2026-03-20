@@ -30,7 +30,7 @@ class FilterWidget extends Widget
                 'title' => $filter['title'],
                 'items' => $filter['items'],
                 'filter' => $filter['filter'],
-                'value' => $filter['value'],
+                'value' => $filter['value']??'',
                 'main' => $filter['main'],
                 'attribute_id' => $filter['attribute_id']??'',
                 'type' => $filter['type'],
