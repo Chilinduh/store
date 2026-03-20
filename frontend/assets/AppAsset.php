@@ -49,6 +49,7 @@ class AppAsset extends AssetBundle
       'css/order.css',
       'css/register.css',
       'css/restore.css',
+      'css/blocks_slider.css',
       'css/breadcrumbs.css',
       'vendor/fontawesome/css/all.min.css',
     ];

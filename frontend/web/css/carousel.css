@@ -20,5 +20,11 @@
   bottom: 20px;
 }
 
+.block-banners__list .block-banners__item-button {
+  padding: 10px 15px;
+  border-radius: 10px;
+
+}
+
 
 
