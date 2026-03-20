@@ -291,52 +291,7 @@ class CatalogController extends Controller
         $dataProvider = $searchModel->search($params ?? []);
         $products = $dataProvider->getModels();
 
-        $from = 0;
-        $to = 0;
-        if($prices = Products::getProductsPrices($params['category_id'])) {
-          $from = min(ArrayHelper::map($prices, 'id', 'price'));
-          $to = max(ArrayHelper::map($prices, 'id', 'price'));
-        }
-
         $filters = $this->filterService->getFilters($category['id'], $params);
-
-        $brands = ArrayHelper::toArray(Products::getProductsBrands($params['category_id']??''));
-        if($brands) {
-          $filters[] = [
-            'id' => uniqid(),
-            'items' => $brands,
-            'value' => $params['brands'] ?? 0,
-            'type' => 'checkbox',
-            'field' => 'brands',
-            'filter' => 'main',
-            'title' => 'Бренд'
-          ];
-        }
-
-        $manufacturers = ArrayHelper::toArray(Products::getProductsManufacturers($params['category_id']??''));
-        if($manufacturers) {
-          $filters[] = [
-            'id' => uniqid(),
-            'items' => $manufacturers,
-            'value' => $params['manufacturers'] ?? 0,
-            'type' => 'checkbox',
-            'field' => 'manufacturer',
-            'filter' => 'main',
-            'title' => 'Производитель'
-          ];
-        }
-
-        $filters[] = [
-          'id' => uniqid(),
-          'type' => 'slider',
-          'field' => 'price',
-          'filter' => 'main',
-          'max' => $to, //max(ArrayHelper::map($products, 'id', 'price')),
-          'min' => 0, //min(ArrayHelper::map($products, 'id', 'price')),
-          'from' => $params['price_from'] ?? $from,
-          'to' => $params['price_to'] ?? $to,
-          'title' => 'Цена'
-        ];
 
         $cartForm = OrderFormFactory::get();
 

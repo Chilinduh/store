@@ -3,16 +3,37 @@ const state = [];
 let firstRun = false;
 let collection = [];
 
+$('.button-search').on('click', function () {
+
+  window.location.reload();
+});
+
 $('.filter-collections').each(function (index) {
+
 
   const key = $(this).data('collection');
   if ($(this).data('filter-scope') != '' && typeof $(this).data('filter-scope') != 'undefined' && collection.indexOf(key) == -1) {
 
     let fields = $(this).data('filter-scope').split("|");
+
+    console.log(fields)
+
     let from = $('[name="' + fields[0] + '"]').val();
     let to = $('[name="' + fields[1] + '"]').val();
-    state.push({'type': 'slider', 'key': $(this).data('collection'), 'from': from, 'to': to});
+    let main = $(this).data('main');
+    let field = $(this).data('field');
+
+    let type = 'slider';
+    state.push({'type': type, 'main': main, 'key': $(this).data('collection'), 'from': from, 'to': to});
     collection.push(key);
+  } else {
+    let main = $(this).data('main');
+    let attr = $(this).data('attribute');
+    const key = $(this).data('collection');
+    if ($(this).prop('checked')) {
+      let type = 'checkbox';
+      state.push({'type': type, 'main': main, 'value': attr, 'attr': key});
+    }
   }
 
   $(this).on('change', function () {
@@ -45,8 +66,10 @@ $('.filter-collections').each(function (index) {
 
           $.each(state, function (index, item) {
 
-            if (item.type == 'checkbox' && item.value == attr) {
-              state.splice(index, 1);
+            if (typeof item != 'undefined') {
+              if (item.type == 'checkbox' && item.value == attr) {
+                state.splice(index, 1);
+              }
             }
           });
         }
@@ -61,7 +84,7 @@ $('.filter-collections').each(function (index) {
       }
 
       if (item.type == 'checkbox') {
-        stateUrl = stateUrl + 'checkbox_' + item.attr + ': ' + item.value + ',';
+        stateUrl = stateUrl + 'checkbox_' + item.attr + ':' + item.value + ',';
       }
     });
 

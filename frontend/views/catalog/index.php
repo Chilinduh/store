@@ -68,7 +68,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                     //                      'category' => $category,
                     //                    ]);
 
-                    include_once(Yii::getAlias('@frontend/views/site/_filter_items.php'));
+
 
                     ?>
 

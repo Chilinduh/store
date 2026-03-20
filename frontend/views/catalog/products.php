@@ -50,7 +50,6 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                       <h4>Фильтр</h4>
                     </div>
                   <?php } ?>
-                  <form method="get" action="">
                     <div class="widget-filters__list">
                       <?php //include_once(Yii::getAlias('@frontend/views/site/_categories.php')); ?>
                       <?php //require(Yii::getAlias('@frontend/views/site/_category-filter.php')); ?>
@@ -80,10 +79,9 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                     </div>
                     <?php if ($catalogComponent->getCategoryLvl($category['id']) > 0) { ?>
                       <div class="widget-filters__actions d-flex">
-                        <button class="btn btn-primary btn-sm">Поиск</button>
+                        <button class="btn btn-primary btn-sm button-search">Поиск</button>
                       </div>
                     <?php } ?>
-                  </form>
                 </div>
 
                 <?= ProductLeftSideWidget::widget([
@@ -226,7 +224,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
 
             <?php } ?>
 
-            <?php if ($dataProvider->getTotalCount()) { ?>
+            <?php if ($dataProvider->getTotalCount() > 10) { ?>
               <div class="products-view__pagination">
                 <nav aria-label="Page navigation example">
                   <?php

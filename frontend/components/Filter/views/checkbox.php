@@ -16,16 +16,22 @@
               <?php foreach ($items as $item) { ?>
                 <label class="filter-list__item ">
                   <span class="input-check filter-list__input">
-                      <span class="input-check__body">
-                          <input class="input-check__input <?= $filter ?>" data-collection="<?= $item['id'] ?>" data-attribute="<?= $item['key']??'' ?>" name="filter_<?= $item['key']??'' ?>"
-                                 type="checkbox" <?= $value ? 'checked="checked"' : '' ?>>
-                          <span class="input-check__box"></span>
-                          <span class="input-check__icon">
-                            <svg width="9px" height="7px">
-                                <path d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z"/>
-                            </svg>
-                          </span>
+                    <span class="input-check__body">
+                        <input class="input-check__input <?= $filter ?>"
+                         data-main="<?= $main ?>"
+                         data-field="<?= $field ?>"
+                         data-collection="<?= $main ? $field : $item['id'] ?>"
+                         data-attribute="<?= $main ? $item['id'] : $item['key']??'' ?>"
+                         name="filter_<?= $main ? $id : $item['key']??'' ?>"
+                         type="checkbox" <?= $item['checked'] ? 'checked="checked"' : '' ?>>
+
+                      <span class="input-check__box"></span>
+                      <span class="input-check__icon">
+                        <svg width="9px" height="7px">
+                            <path d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z"/>
+                        </svg>
                       </span>
+                    </span>
                   </span>
                   <span class="filter-list__title"><?= $item['name'] ?></span>
                   <span class="filter-list__counter"></span>

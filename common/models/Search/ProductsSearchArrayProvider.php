@@ -21,6 +21,7 @@ use common\models\ProductAttributes;
 use common\models\Attributes;
 use common\models\ProductAttributesValues;
 use yii\db\Expression;
+use frontend\components\Services\CatalogFilterService;
 
 class ProductsSearchArrayProvider extends Model
 {
@@ -107,6 +108,32 @@ class ProductsSearchArrayProvider extends Model
 
     $query = Products::find();
     $search = $params['search'] ?? null;
+    $filter = $params['filter'] ?? null;
+
+    if($filter && $category_id = $params['category_id']??false) {
+
+      $catalogService = new CatalogFilterService();
+      $filterParams = $catalogService->getFiltersProducts($params);
+      $params['productsIds'] = $filterParams['products'];
+
+      if(is_array($filterParams['filtersMain']) && count($filterParams['filtersMain'])) {
+        foreach ($filterParams['filtersMain'] as $key=>$filterParam) {
+          switch($key) {
+            case 'brand': $params['brands'] = array_flip($filterParam); break;
+            case 'manufacturer': $params['manufacturers'] = array_flip($filterParam); break;
+            case 'price':
+
+              $price = explode('|', $filterParam[0]);
+              $params['price_from'] = intval($price[0]);
+              $params['price_to'] = intval($price[1]);
+
+              break;
+          }
+        }
+      }
+    }
+
+    //$query->andWhere(['!=', 'products.price', 0]);
 
     if ($search) {
 
@@ -182,6 +209,8 @@ class ProductsSearchArrayProvider extends Model
         'category_id' => $this->category_id,
       ]);
     }
+
+    //echo $query->createCommand()->getRawSql(); die;
 
     $products = [];
     foreach ($query->all() as $item) {

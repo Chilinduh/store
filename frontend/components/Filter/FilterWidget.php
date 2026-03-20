@@ -31,6 +31,7 @@ class FilterWidget extends Widget
                 'items' => $filter['items'],
                 'filter' => $filter['filter'],
                 'value' => $filter['value'],
+                'main' => $filter['main'],
                 'attribute_id' => $filter['attribute_id']??'',
                 'type' => $filter['type'],
                 'field' => $filter['field']??''
@@ -38,6 +39,7 @@ class FilterWidget extends Widget
             break;
 
           case 'slider':
+
             $this->html .= $this->render('slider',
               [
                 'id' => $filter['id']??'',
@@ -46,6 +48,7 @@ class FilterWidget extends Widget
                 'field' => $filter['field']??'',
                 'type' => $filter['type'],
                 'filter' => $filter['filter'],
+                'main' => $filter['main'],
                 'attribute_id' => $filter['attribute_id']??'',
                 'items' => $filter['items']??[],
                 'value' => $filter['value']??'',

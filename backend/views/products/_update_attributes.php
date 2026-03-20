@@ -52,7 +52,14 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
       ])->one();
 
       ?>
-      <?=  $form->field($model, 'attributes['.$productAttribute->id.']')->textInput(['value'=> $attributesValue->value??''])->label($attribute->name??''); ?>
+      <div class="row">
+        <div class="col-md">
+
+          <?=  $form->field($model, 'attributes['.$productAttribute->id.']')->textInput(['value'=> $attributesValue->value??''])->label($attribute->name.'<sup>'.$attribute->id.'</sup>'); ?>
+
+        </div>
+      </div>
+
     <?php } ?>
 
     <br>
@@ -67,3 +74,4 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
 </div>
 
 <?= PanelWidget::finish(false); ?>
+
