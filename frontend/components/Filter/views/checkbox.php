@@ -23,7 +23,7 @@
                          data-collection="<?= $main ? $field : $item['id'] ?>"
                          data-attribute="<?= $main ? $item['id'] : $item['key']??'' ?>"
                          name="filter_<?= $main ? $id : $item['key']??'' ?>"
-                         type="checkbox" <?= $item['checked'] ? 'checked="checked"' : '' ?>>
+                         type="checkbox" <?= isset($item['checked']) && $item['checked'] ? 'checked="checked"' : '' ?>>
 
                       <span class="input-check__box"></span>
                       <span class="input-check__icon">
