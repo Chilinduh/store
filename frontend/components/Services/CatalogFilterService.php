@@ -299,8 +299,8 @@ class CatalogFilterService
         'filter' => 'filter-collections',
         'min' => $minFrom, //min(ArrayHelper::map($products, 'id', 'price')),
         'max' => $maxTo, //max(ArrayHelper::map($products, 'id', 'price')),
-        'from' => $from??$minFrom,
-        'to' => $to??$maxTo,
+        'from' => $from ? $from: $minFrom,
+        'to' => $to ? $from : $maxTo,
         'title' => 'Цена'
       ];
 
