@@ -66,7 +66,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                       //                    ]);
 
                       $catalogComponent = new Catalog();
-                      if ($catalogComponent->getCategoryLvl($category['id']) > 0) {
+                      if ($catalogComponent->getCategoryLvl($category['id']) > 0 && count($dataProvider->getModels()) > 1) {
 
                         echo FilterWidget::widget([
                           'filters' => $filters
