@@ -2,3 +2,15 @@
   padding: 10px !important;
   border-radius: 10px;
 }
+
+.cart__table.cart-table {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.cart-table__quantity input {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}

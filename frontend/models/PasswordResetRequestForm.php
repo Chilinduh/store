@@ -30,6 +30,18 @@ class PasswordResetRequestForm extends Model
         ];
     }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function attributeLabels()
+  {
+    return [
+      'email' => 'Почта',
+      'password' => 'Пароль',
+      'repeated_password' => 'Повтор пароля',
+    ];
+  }
+
     /**
      * Sends an email with a link, for resetting the password.
      *

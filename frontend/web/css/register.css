@@ -1,0 +1,9 @@
+#form-register button {
+  border-radius: 10px;
+  height: 40px;
+}
+#form-register input {
+  background-color: #fff;
+  border-radius: 10px;
+  height: 40px;
+}

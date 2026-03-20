@@ -44,7 +44,28 @@ Yii::$app->metaTags->register('main');
 
 <?php $this->beginBody() ?>
 
-<?= lavrentiev\widgets\toastr\NotificationFlash::widget(); ?>
+<?= lavrentiev\widgets\toastr\NotificationFlash::widget([
+  'type' => Notification::TYPE_ERROR,
+  'title' => 'Toast Notifications',
+  'message' => 'Simple javascript toast notifications',
+  'options' => [
+    "closeButton" => false,
+    "debug" => false,
+    "newestOnTop" => false,
+    "progressBar" => false,
+    "positionClass" => Notification::POSITION_TOP_RIGHT,
+    "preventDuplicates" => false,
+    "onclick" => null,
+    "showDuration" => "300",
+    "hideDuration" => "1000",
+    "timeOut" => "335000",
+    "extendedTimeOut" => "11000",
+    "showEasing" => "swing",
+    "hideEasing" => "linear",
+    "showMethod" => "fadeIn",
+    "hideMethod" => "fadeOut"
+  ]
+]); ?>
 <!-- site -->
 <div class="site">
   <? //= $this->render('@frontend/views/site/_header.php', ['categories' => $this->context->categories]) ?>
