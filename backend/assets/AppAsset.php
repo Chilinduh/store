@@ -45,6 +45,7 @@ class AppAsset extends AssetBundle
         'css/fontawesome/css/fontawesome.css',
         'css/fontawesome/css/brands.css',
         'css/fontawesome/css/solid.css',
+        '/css/forms.css',
         'js/plugins/custom/datatables/datatables.bundle.css'
     ];
 

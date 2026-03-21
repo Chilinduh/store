@@ -43,12 +43,13 @@ class FormsAsset extends AssetBundle {
         '/js/vendor/clockpicker/clockpicker.css',
         '/js/vendor/ascolorpicker/asColorPicker.css',
 
+
         //<link rel="stylesheet" href="../../assets/examples/css/forms/advanced.css',
 
     ];
 
     public $js = [
-        
+
         '/js/vendor/select2/select2.full.min.js',
         '/js/vendor/bootstrap-tokenfield/bootstrap-tokenfield.min.js',
         '/js/vendor/bootstrap-tagsinput/bootstrap-tagsinput.min.js',
@@ -76,7 +77,7 @@ class FormsAsset extends AssetBundle {
         '/js/vendor/typeahead-js/bloodhound.min.js',
         '/js/vendor/typeahead-js/typeahead.jquery.min.js',
         '/js/vendor/jquery-placeholder/jquery.placeholder.js',
-        
+
         '/js/Plugin/select2.js',
         '/js/Plugin/bootstrap-tokenfield.js',
         '/js/Plugin/bootstrap-tagsinput.js',

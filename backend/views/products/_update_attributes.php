@@ -51,14 +51,12 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
         'product_attribute_id' => $productAttribute->id
       ])->one();
 
+      $link = '<div><a href="/attributes/'.$attribute->id.'" target="_blank">Редактировать аттрибут</a>'.(!$attribute->attribute_filter_id ? ' (Фильтер не указан)' : '').'</div>';
+
       ?>
-      <div class="row">
-        <div class="col-md">
 
-          <?=  $form->field($model, 'attributes['.$productAttribute->id.']')->textInput(['value'=> $attributesValue->value??''])->label($attribute->name.'<sup>'.$attribute->id.'</sup>'); ?>
-
-        </div>
-      </div>
+      <?=  $form->field($model, 'attributes['.$productAttribute->id.']')
+        ->label($attribute->name.$link).'<br>'; ?>
 
     <?php } ?>
 

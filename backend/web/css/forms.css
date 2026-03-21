@@ -1,0 +1,4 @@
+.form-group .control-label {
+  display: flex;
+  justify-content: space-between;
+}

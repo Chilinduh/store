@@ -22,7 +22,7 @@ use common\models\Materials;
 $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
 //$parent = Menu::findOne(['id' => $menu->parent_id]);
 ?>
-s
+
 <?= BreadcrumbWidget::widget([
   'title' => 'Товары',
   'createUrl' => '/products/create',
@@ -45,25 +45,24 @@ s
   <div class="card-body pb-0">
 
     <?php $form = ActiveForm::begin(); ?>
+    <?php foreach ($productAttributes as $productAttribute) {
 
-    <?php
+      $attributes = new Attributes();
+      $attribute = $attributes->findOne($productAttribute->attribute_id);
 
-    echo $form->field($productMaterials, 'product_id')->hiddenInput()->label(false);
+      $attributesValues = new ProductAttributesValues();
+      $attributesValue = $attributesValues->find()->where([
+        'product_id' => $model->id,
+        'product_attribute_id' => $productAttribute->id
+      ])->one();
 
-    echo $form->field($productMaterials, 'material_id')->widget(Select2::classname(), [
-      'data' => ArrayHelper::map(Materials::find()->all(), 'id', 'name'),
-      'options' => ['placeholder' => 'Выбрать материал'],
-    ]);
+      ?>
 
-    echo $form->field($productMaterials, 'unit_id')->widget(Select2::classname(), [
-      'data' => ArrayHelper::map(Units::find()->all(), 'id', 'name'),
-      'options' => ['placeholder' => 'Выбрать ед. измерения'],
-    ]);
+      <?php echo $form->field($model, 'attributes['.$productAttribute->id.']')->label($attribute->name.'<sup>'.$attribute->id.'</sup>'); ?>
 
-    echo $form->field($productMaterials, 'value');
+    <?php } ?>
 
-    ?>
-
+    <br>
     <div class="form-group">
       <?= Html::submitButton('Добавить', ['class' => 'btn btn-primary']) ?>
     </div>
