@@ -12,10 +12,18 @@
               <?php if (isset($cat['items']) && count($cat['items'])) { ?>
                 <ul class="widget-categories-list__child">
                   <?php foreach ($cat['items'] as $item) { ?>
+                    <?php
+                      $count = 0;
+                      if(count($item['items']) > 0) {
+                        foreach ($item['items'] as $sub) {
+                          $count += $sub['count'];
+                        }
+                      }
+                    ?>
                     <?php if ($item['count']) { ?>
                       <li class="widget-categories-list__child-item">
                         <a href="/catalog/<?= $item['id'] ?>" class="widget-categories-list__child-link">
-                          <?= $item['name'] ?>   <sup class="category-sup"><?= $item['count']??0 ?></sup>
+                          <?= $item['name'] ?>   <sup class="category-sup"><?= $count ?></sup>
                         </a>
                       </li>
                     <?php } ?>

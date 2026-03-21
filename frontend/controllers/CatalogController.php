@@ -264,7 +264,6 @@ class CatalogController extends Controller
     switch ($lvl) {
 
       case Tree::LVL_ZERO:
-
         if($children = $catalog['sub']??false) {
           $params['categoryIds'] = $children;
         }
