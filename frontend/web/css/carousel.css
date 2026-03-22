@@ -25,5 +25,9 @@
   border-radius: 10px;
 }
 
+.block-posts-carousel__item .post-card {
+  border-radius: 16px;
+}
+
 
 
