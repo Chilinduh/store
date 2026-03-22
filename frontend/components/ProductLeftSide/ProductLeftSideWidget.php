@@ -40,7 +40,7 @@ class ProductLeftSideWidget extends Widget
       $dataProvider = $searchModel->search(['property_id' => $this->property]);
     }
 
-    $this->products = $dataProvider->getModels();
+    $this->products = array_slice($dataProvider->getModels(), 0, 5);
     parent::init();
   }
 
