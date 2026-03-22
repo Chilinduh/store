@@ -1,0 +1,7 @@
+#toast-container {
+  border-radius: 10px;
+}
+#toast-container .toast.toast-success {
+  border-radius: 10px;
+  font-size: 12px;
+}

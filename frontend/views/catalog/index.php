@@ -69,7 +69,6 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                     //                    ]);
 
 
-
                     ?>
 
                     <?php //} ?>
@@ -417,19 +416,25 @@ C6,14.8,5.8,15,5.5,15h-2C3.2,15,3,14.8,3,14.5v-3C3,11.2,3.2,11,3.5,11z"/>
                       <label for="view-option-sort">Сортировка:</label>
                       <select onchange="this.form.submit()" class="form-control form-control-sm" name="sort">
                         <option <?= isset($getParams['sort']) && $getParams['sort'] == '-price' ? 'selected' : '' ?>
-                          value="-price">Цена (по убыванию)
+                                value="-price">Цена (по убыванию)
                         </option>
                         <option <?= isset($getParams['sort']) && $getParams['sort'] == 'price' ? 'selected' : '' ?>
-                          value="price">Цена (по возрастанию)
+                                value="price">Цена (по возрастанию)
                         </option>
                       </select>
                     </div>
                     <div class="view-options__select">
                       <label for="view-option-limit">Показать:</label>
                       <select onchange="this.form.submit()" class="form-control form-control-sm" name="per-page">
-                        <option <?= isset($getParams['per-page']) && $getParams['per-page'] == 10 ? 'selected' : '' ?> value="10">10</option>
-                        <option <?= isset($getParams['per-page']) && $getParams['per-page'] == 20 ? 'selected' : '' ?> value="20">20</option>
-                        <option <?= isset($getParams['per-page']) && $getParams['per-page'] == 50 ? 'selected' : '' ?> value="50">50</option>
+                        <option <?= isset($getParams['per-page']) && $getParams['per-page'] == 10 ? 'selected' : '' ?>
+                                value="10">10
+                        </option>
+                        <option <?= isset($getParams['per-page']) && $getParams['per-page'] == 20 ? 'selected' : '' ?>
+                                value="20">20
+                        </option>
+                        <option <?= isset($getParams['per-page']) && $getParams['per-page'] == 50 ? 'selected' : '' ?>
+                                value="50">50
+                        </option>
                       </select>
                   </form>
                 </div>

@@ -103,19 +103,23 @@ use yii\web\View;
       <div class="product-card__features">
         <ul>
           <?php if (isset($product['brand']['name'])) { ?>
-            <li> Бренд: <?= $product['brand']['name'] ?> </li>
+            <li class="product_attribute"> <div class="product_attribute--name">Бренд</div>: <div class="product_attribute--value"><?= $product['brand']['name'] ?> </div></li>
           <?php } ?>
           <?php if (isset($product['manufacturer']['name'])) { ?>
-            <li> Производитель: <?= $product['manufacturer']['name'] ?> </li>
+            <li class="product_attribute"><div class="product_attribute--name">Производитель</div>: <div class="product_attribute--value"><?= $product['manufacturer']['name'] ?> </div></li>
           <?php } ?>
           <?php if ($product['color_id']) { ?>
-            <li> Цвет: <?= $product['color']??'' ?> </li>
+            <li class="product_attribute"> <div class="product_attribute--name">Цвет</div>: <div class="product_attribute--value"><?= $product['color']??'' ?> </div></li>
           <?php } ?>
           <?php if ($product['weight']) { ?>
-            <li> Вес: <?= $product['weight']??'' ?> кг</li>
+            <li class="product_attribute"> <div class="product_attribute--name">Вес</div>: <div class="product_attribute--value"><?= $product['weight']??'' ?> кг</div></li>
           <?php } ?>
           <?php if ($product['size_id']) { ?>
-            <li> Размер: <?= $product['size']['eu_size'] . ' (' . $product['size']['ru_size'] . ')' ?> </li>
+            <li class="product_attribute"> <div class="product_attribute--name">Размер</div>: <div class="product_attribute--value"> <?= $product['size']['eu_size'] .' (' . $product['size']['ru_size'] . ')' ?> </div></li>
+          <?php } ?>
+
+          <?php foreach (array_slice($product['attributes'], 0, 4) as $attribute) { ?>
+            <li class="product_attribute"><div class="product_attribute--name"> <?= $attribute['name'] ?></div>: <div class="product_attribute--value"><?= $attribute['value'] ?></div>  </li>
           <?php } ?>
         </ul>
       </div>
