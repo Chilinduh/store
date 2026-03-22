@@ -4,8 +4,7 @@
       <div class="widget-categories-list__body" data-collapse
            data-collapse-opened-class="widget-categories-list--open">
         <ul class="widget-categories-list__root">
-          <?php
-          foreach ($catalog as $cat) { ?>
+          <?php foreach ($catalog as $cat) { ?>
             <li class="widget-categories-list__root-item widget-categories-list__root-item--has-children"
                 data-collapse-item>
               <a href="/catalog/<?= $cat['id'] ?>" class="widget-categories-list__root-link"><?= $cat['name'] ?></a>
@@ -23,7 +22,7 @@
                     <?php if ($item['count']) { ?>
                       <li class="widget-categories-list__child-item">
                         <a href="/catalog/<?= $item['id'] ?>" class="widget-categories-list__child-link">
-                          <?= $item['name'] ?>   <sup class="category-sup"><?= $count ?></sup>
+                          <?= $item['name'] ?>   <sup class="category-sup"><?= $item['lvl'] == 1 ? $count : $item['count'] ?></sup>
                         </a>
                       </li>
                     <?php } ?>
