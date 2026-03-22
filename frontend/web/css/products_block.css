@@ -1,0 +1,23 @@
+.widget-products__image .image__tag {
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.widget-products__image {
+  width: 70px;
+}
+
+.widget-products__name {
+  font-size: 13px;
+  line-height: 15px;
+  height: 30px;
+  overflow: hidden;
+}
+
+.widget-products__image:before {
+  border-radius: 10px
+}
+
+.categories-list__body {
+  border-radius: 10px
+}

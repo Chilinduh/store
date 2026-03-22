@@ -57,6 +57,7 @@ class ProductsSearchArrayProvider extends Model
   public $attribute_group_id = null;
   public $availability = null;
   public $availability_color = null;
+  public $views = null;
 
   public function rules()
   {
@@ -65,7 +66,7 @@ class ProductsSearchArrayProvider extends Model
       [['name', 'description'], 'string'],
       [['show', 'main'], 'boolean'],
       [['id', 'attribute_group_id', 'price', 'color_id', 'weight', 'packaging_type_id', 'weight', 'category_id', 'city_id', 'stock_id', 'color_id', 'size_id', 'manufacturer_id'], 'integer'],
-      [['brands', 'property_id', 'color', 'size', 'previous_price'], 'safe'],
+      [['brands', 'property_id', 'color', 'size', 'previous_price', 'views'], 'safe'],
 
     ];
   }
@@ -202,12 +203,19 @@ class ProductsSearchArrayProvider extends Model
     ]);
 
     if (isset($params['categoryIds'])) {
-
       $query->andWhere(['in', 'products.category_id', array_keys($params['categoryIds'])]);
     } else {
       $query->andFilterWhere([
         'category_id' => $this->category_id,
       ]);
+    }
+
+    $orderBy = [];
+    if (isset($params['orders'])) {
+      foreach ($params['orders'] as $key=>$order) {
+        $orderBy[$key] = $order;
+      }
+      $query->orderBy($orderBy);
     }
 
     //echo $query->createCommand()->getRawSql(); die;
@@ -331,6 +339,7 @@ class ProductsSearchArrayProvider extends Model
         'inFavorite' => $inFavorite,
         'property' => $property,
         'colors' => $colors ?? [],
+        'views' => $item->views ?? [],
         'availability' => $item->availability->name??'',
         'availability_color' => $item->availability->color??''
       ];
@@ -341,6 +350,7 @@ class ProductsSearchArrayProvider extends Model
       return $products[0];
     }
 
+
     $dataProvider = new ArrayDataProvider(
       [
         'allModels' => $products,
@@ -348,10 +358,9 @@ class ProductsSearchArrayProvider extends Model
           'pageSize' => $params['per-page'] ?? 10,
         ],
         'sort' => [
-          'defaultOrder' => [
-            'name' => SORT_ASC,
-          ],
+          'defaultOrder' => count($orderBy) ? $orderBy : ['name' => SORT_ASC],
           'attributes' => [
+            'views',
             'name',
           ],
         ],

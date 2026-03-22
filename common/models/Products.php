@@ -58,7 +58,7 @@ class Products extends ActiveRecord
       [['show', 'main', 'show_previous_price'], 'boolean'],
       [['id', 'attribute_group_id','availability_id',  'price', 'property_id', 'color_id', 'size_id', 'brand_id', 'packaging_type_id', 'category_id', 'city_id', 'stock_id', 'manufacturer_id'], 'integer'],
       [['name', 'category_id'], 'required'],
-      [['attributes', 'manufacturer', 'file', 'color_id', 'size_id', 'color', 'size', 'weight', 'previous_price', 'availability_color', 'availability'], 'safe'],
+      [['attributes', 'manufacturer', 'file', 'color_id', 'size_id', 'color', 'size', 'weight', 'previous_price', 'availability_color', 'availability', 'views'], 'safe'],
     ];
   }
 
@@ -66,6 +66,7 @@ class Products extends ActiveRecord
   {
     return [
       'id' => 'ID',
+      'views' => 'Просмотры',
       'name' => 'Название',
       'category_id' => 'Категория',
       'attribute_group_id' => 'Группа атрибутов',
@@ -302,6 +303,12 @@ class Products extends ActiveRecord
       ->andWhere(['>', 'pb.quantity', 0])
       ->andWhere(['pb.city_id' => $settiongs ? $settiongs->city_id : 1])
       ->andWhere(['pb.show' => self::STATUS_ACTIVE]);
+  }
+
+  public function updateViews() {
+
+    $this->views += 1;
+    $this->save();
   }
 
   public static function products()

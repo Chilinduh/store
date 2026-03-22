@@ -11,7 +11,7 @@
       <div class="widget-products__item">
         <div class="widget-products__image image image--type--product">
           <a href="/catalog/<?= $product['category_id'] ?>/<?= $product['id'] ?>" class="image__body">
-            <img class="image__tag" src="<?= $product['images'][0]['original']??'/images/no-photo.jpg' ?>" alt="">
+            <img class="image__tag" src="<?= $product['images'][0]['thumbnail']??'/images/no-photo.jpg' ?>" alt="">
           </a>
         </div>
         <div class="widget-products__info">

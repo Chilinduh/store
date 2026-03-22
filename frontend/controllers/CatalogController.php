@@ -189,6 +189,10 @@ class CatalogController extends Controller
     $searchModel = new ProductsSearchArrayProvider();
     $model = $searchModel->search($params ?? [], 'model');
 
+    if($product = Products::findone($id)) {
+      $product->updateViews();
+    }
+
     if(Yii::$app->request->isAjax) {
 
       return json_encode($model);
@@ -197,7 +201,6 @@ class CatalogController extends Controller
     $breadCrumbs = [];
     $catalogComponent = new Catalog();
     $parent = null;
-
 
     if ($category_id) {
       $category = Tree::findOne($category_id);

@@ -85,8 +85,9 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                 </div>
 
                 <?= ProductLeftSideWidget::widget([
-                  'title' => 'Новые поступления',
-                  'property' => Property::CODE_NEW
+                  'title' => 'Популярные товары',
+                  'mode' => 'by-views',
+                  'category_id' => $category['id']
                 ]); ?>
               </div>
             </div>
