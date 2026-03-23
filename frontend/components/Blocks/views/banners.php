@@ -24,7 +24,7 @@
         <span class="block-banners__item-image"><img src="<?= $right->files->original??''?>" alt=""></span>
         <span class="block-banners__item-image block-banners__item-image--blur"><img src="<?= $right->files->original??''?>" alt=""></span>
         <?php if(!empty($right->banners->title)) { ?>
-        <span class="block-banners__item-title" style="<?= !empty($right->banners->title_color) ? 'color:'.$right->banners->title_color : '' ?>"><?= $right->banners->title ?>dsf</span>
+        <span class="block-banners__item-title" style="<?= !empty($right->banners->title_color) ? 'color:'.$right->banners->title_color : '' ?>"><?= $right->banners->title ?></span>
         <span class="block-banners__item-details" style="<?= !empty($right->banners->announce_color) ? 'color:'.$right->banners->announce_color : '' ?>">
           <?= $right->banners->announce ?>
         </span>
