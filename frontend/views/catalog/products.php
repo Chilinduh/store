@@ -99,23 +99,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
 
           $sub = array_values($sub);
 
-          echo "<pre>";
-          print_r($dataProvider);
-          print_r(count($dataProvider->getModels()));
-          echo '---';
-          print_r($sub[0]['lvl']);
-          echo '---';
-          print_r(Yii::$app->params['maxLevel']);
-          echo '---';
-          print_r(count($sub));
-          echo '---';
-          print_r(array_sum(array_column($sub, 'count')));
-          echo '---';
-          echo "</pre>";
-          die;
-
-
-          if (count($dataProvider->getModels()) && $sub[0]['lvl'] <= Yii::$app->params['maxLevel'] && count($sub) && array_sum(array_column($sub, 'count')) > 0) { ?>
+          if ($sub[0]['lvl'] <= Yii::$app->params['maxLevel'] && count($sub) && array_sum(array_column($sub, 'count')) > 0) { ?>
             <div class="block">
               <div class="categories-list categories-list--layout--columns-5-sidebar">
                 <ul class="categories-list__body">
