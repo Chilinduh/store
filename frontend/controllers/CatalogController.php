@@ -259,6 +259,13 @@ class CatalogController extends Controller
     $lvl = $catalogComponent->getCategoryLvl($category_id);
     $category = $catalogComponent->getCatalogCategory();
 
+    echo "<pre>";
+    print_r($category);
+    print_r($catalog['sub']);
+    echo "</pre>";
+    die;
+
+
     if($catalog && !count($catalog['sub'])) {
 
       $catalog = $catalogComponent->getCatalog($parents['parent']['id']) ?? [];
@@ -267,6 +274,7 @@ class CatalogController extends Controller
     switch ($lvl) {
 
       case Tree::LVL_ZERO:
+
         if($children = $catalog['sub']??false) {
           $params['categoryIds'] = $children;
         }
