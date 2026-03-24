@@ -19,7 +19,7 @@
                         }
                       }
                     ?>
-                    <?php if ($item['count']) { ?>
+                    <?php if (1 || $item['count']) { ?>
                       <li class="widget-categories-list__child-item">
                         <a href="/catalog/<?= $item['id'] ?>" class="widget-categories-list__child-link">
                           <?= $item['name'] ?>   <sup class="category-sup"><?= $item['lvl'] == 1 ? $count : $item['count'] ?></sup>

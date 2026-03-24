@@ -264,13 +264,18 @@ class CatalogController extends Controller
       $catalog = $catalogComponent->getCatalog($parents['parent']['id']) ?? [];
     }
 
+    if($children = $catalog['sub']??false) {
+      $params['categoryIds'] = $children;
+      foreach ($children as $child) {
+        foreach ($child['items'] as $key=>$item) {
+          $params['categoryIds'][$key] = $item;
+        }
+      }
+    }
+
     switch ($lvl) {
 
       case Tree::LVL_ZERO:
-
-        if($children = $catalog['sub']??false) {
-          $params['categoryIds'] = $children;
-        }
 
         $searchModel = new ProductsSearchArrayProvider();
         $dataProvider = $searchModel->search($params ?? []);
@@ -288,9 +293,6 @@ class CatalogController extends Controller
         ]);
 
       case Tree::LVL_ONE:
-        if($children = $catalog['sub']??false) {
-          $params['categoryIds'] = $children;
-        }
       case Tree::LVL_TWO:
 
         $searchModel = new ProductsSearchArrayProvider();
