@@ -101,16 +101,17 @@ class CatalogFilterService
         }
       }
 
+      $products = [];
       if(isset($query)) {
         $query->andWhere(['products.category_id' => $category_id]);
-      }
 
-      //echo $query->createCommand()->getRawSql(); die;
+        //echo $query->createCommand()->getRawSql(); die;
 
-      $productIds = $query->asArray()->all();
+        $productIds = $query->asArray()->all();
 
-      foreach ($productIds as $productId) {
-        $products[] = $productId['id'];
+        foreach ($productIds as $productId) {
+          $products[] = $productId['id'];
+        }
       }
     }
 
