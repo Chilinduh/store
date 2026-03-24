@@ -100,6 +100,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
           $sub = array_values($sub);
 
           echo "<pre>";
+          print_r($dataProvider);
           print_r(count($dataProvider->getModels()));
           echo '---';
           print_r($sub[0]['lvl']);
