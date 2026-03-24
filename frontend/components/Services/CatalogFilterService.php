@@ -281,30 +281,30 @@ class CatalogFilterService
       if($prices = Products::getProductsPrices($params['category_id'])) {
         $minFrom = min(ArrayHelper::map($prices, 'id', 'price'));
         $maxTo = max(ArrayHelper::map($prices, 'id', 'price'));
-      }
 
-      if(isset($sets['main'])) {
-        foreach ($sets['main'] as $key=>$set) {
-          if($key == 'price') {
-            $price = explode('|', $set[0]);
-            $from = intval($price[0]);
-            $to = intval($price[1]);
+        if(isset($sets['main'])) {
+          foreach ($sets['main'] as $key=>$set) {
+            if($key == 'price') {
+              $price = explode('|', $set[0]);
+              $from = intval($price[0]);
+              $to = intval($price[1]);
+            }
           }
         }
-      }
 
-      $filters[] = [
-        'id' => uniqid(),
-        'type' => 'slider',
-        'field' => 'price',
-        'main' => 1,
-        'filter' => 'filter-collections',
-        'min' => $minFrom, //min(ArrayHelper::map($products, 'id', 'price')),
-        'max' => $maxTo, //max(ArrayHelper::map($products, 'id', 'price')),
-        'from' => $from ? $from : $minFrom,
-        'to' => $to ? $from : $maxTo,
-        'title' => 'Цена'
-      ];
+        $filters[] = [
+          'id' => uniqid(),
+          'type' => 'slider',
+          'field' => 'price',
+          'main' => 1,
+          'filter' => 'filter-collections',
+          'min' => $minFrom, //min(ArrayHelper::map($products, 'id', 'price')),
+          'max' => $maxTo, //max(ArrayHelper::map($products, 'id', 'price')),
+          'from' => $from ? $from : $minFrom,
+          'to' => $to ? $from : $maxTo,
+          'title' => 'Цена'
+        ];
+      }
 
       return $filters;
     }
