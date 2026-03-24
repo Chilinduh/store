@@ -289,6 +289,9 @@ class CatalogController extends Controller
       case Tree::LVL_ONE:
       case Tree::LVL_TWO:
 
+      if($children = $catalog['sub']??false) {
+        $params['categoryIds'] = $children;
+      }
         $searchModel = new ProductsSearchArrayProvider();
         $dataProvider = $searchModel->search($params ?? []);
         $products = $dataProvider->getModels();
