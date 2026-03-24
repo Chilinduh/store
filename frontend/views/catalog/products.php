@@ -96,10 +96,6 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
 
         <div class="block-split__item block-split__item-content col-auto">
           <?php
-echo "<pre>";
-print_r($sub);
-echo "</pre>";
-die;
 
           $sub = array_values($sub);
 
