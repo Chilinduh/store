@@ -100,7 +100,10 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
           $sub = array_values($sub);
 
 //          if ($sub[0]['lvl'] <= Yii::$app->params['maxLevel'] && count($sub) && array_sum(array_column($sub, 'count')) > 0) {
-          if ($sub[0]['lvl'] <= Yii::$app->params['maxLevel'] && count($sub)) { ?>
+          if ($sub[0]['lvl'] <= Yii::$app->params['maxLevel'] && count($sub)) {
+
+
+            echo "sddsF"; die;?>
             <div class="block">
               <div class="categories-list categories-list--layout--columns-5-sidebar">
                 <ul class="categories-list__body">
