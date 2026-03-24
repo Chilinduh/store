@@ -218,7 +218,7 @@ class ProductsSearchArrayProvider extends Model
       $query->orderBy($orderBy);
     }
 
-    echo $query->createCommand()->getRawSql(); die;
+    //echo $query->createCommand()->getRawSql(); die;
 
     $products = [];
     foreach ($query->all() as $item) {
