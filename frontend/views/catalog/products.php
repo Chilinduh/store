@@ -101,10 +101,15 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
 
           echo "<pre>";
           print_r(count($dataProvider->getModels()));
+          echo '---';
           print_r($sub[0]['lvl']);
+          echo '---';
           print_r(Yii::$app->params['maxLevel']);
+          echo '---';
           print_r(count($sub));
+          echo '---';
           print_r(array_sum(array_column($sub, 'count')));
+          echo '---';
           echo "</pre>";
           die;
 
