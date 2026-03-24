@@ -275,7 +275,9 @@ class CatalogFilterService
       }
 
       $from = false;
+      $minFrom = false;
       $to = false;
+      $maxTo = false;
       if($prices = Products::getProductsPrices($params['category_id'])) {
         $minFrom = min(ArrayHelper::map($prices, 'id', 'price'));
         $maxTo = max(ArrayHelper::map($prices, 'id', 'price'));
@@ -299,7 +301,7 @@ class CatalogFilterService
         'filter' => 'filter-collections',
         'min' => $minFrom, //min(ArrayHelper::map($products, 'id', 'price')),
         'max' => $maxTo, //max(ArrayHelper::map($products, 'id', 'price')),
-        'from' => $from ? $from: $minFrom,
+        'from' => $from ? $from : $minFrom,
         'to' => $to ? $from : $maxTo,
         'title' => 'Цена'
       ];
