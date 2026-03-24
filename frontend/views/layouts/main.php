@@ -18,7 +18,7 @@ AppAsset::register($this);
 use yii\helpers\Html;
 
 $this->beginPage();
-Yii::$app->metaTags->register('main');
+
 
 ?>
 <!DOCTYPE html>

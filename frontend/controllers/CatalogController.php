@@ -52,6 +52,7 @@ class CatalogController extends Controller
     $this->request = Yii::$app->request;
     $this->filterService = new CatalogFilterService();
     parent::__construct($id, $module, $config);
+    Yii::$app->metaTags->register('catalog');
   }
 
   /**

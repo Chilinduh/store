@@ -22,6 +22,7 @@ class NewsController extends Controller {
   public function init() {
     parent::init();
     $this->bodyClass = 'template-collection';
+    Yii::$app->metaTags->register('news');
   }
 
   /**

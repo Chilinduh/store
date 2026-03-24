@@ -15,6 +15,7 @@ use kartik\form\ActiveForm;
 
 <?= BreadcrumbWidget::widget([
   'title' => 'Ключевые слова',
+  'createUrl' => '/keywords/create',
 ]);
 ?>
 

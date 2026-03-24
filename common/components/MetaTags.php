@@ -19,13 +19,15 @@ class MetaTags extends \yii\base\Component {
   public function register($page = 'main')
   {
 
-//      if($meta = Keywords::findOne(['page' => $page??''])) {
-//
-//        Yii::$app->view->registerMetaTag(['name' => 'title', 'content' => $meta->meta_tag_title??''], 'title');
-//        Yii::$app->view->registerMetaTag(['name' => 'keywords', 'content' => $meta->meta_tag_keywords??''], 'keywords');
-//        Yii::$app->view->registerMetaTag(['name' => 'description', 'content' => $meta->meta_tag_description??''], 'description');
-//
-//        Yii::$app->view->title = $meta->title;
-//      }
+      if($meta = Keywords::findOne(['page' => $page??''])) {
+
+        Yii::$app->view->registerMetaTag(['name' => 'title', 'content' => $meta->meta_tag_title??''], 'title');
+        Yii::$app->view->registerMetaTag(['name' => 'keywords', 'content' => $meta->meta_tag_keywords??''], 'keywords');
+        Yii::$app->view->registerMetaTag(['name' => 'description', 'content' => $meta->meta_tag_description??''], 'description');
+        Yii::$app->view->registerMetaTag(['property' => 'og:title', 'content' => $meta->meta_tag_title??'']);
+        Yii::$app->view->registerMetaTag(['property' => 'og:description', 'content' => $meta->meta_tag_description??'']);
+        //Yii::$app->view->registerMetaTag(['property' => 'og:url', 'content' => '']); //canonical URL
+        Yii::$app->view->title = $meta->title;
+      }
   }
 }

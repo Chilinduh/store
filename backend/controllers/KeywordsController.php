@@ -36,7 +36,7 @@ class KeywordsController extends Controller
             'allow' => true,
           ],
           [
-            'actions' => ['index', 'update', 'update'],
+            'actions' => ['index', 'update', 'create'],
             'allow' => true,
             'roles' => ['@'],
           ],

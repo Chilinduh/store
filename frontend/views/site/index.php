@@ -7,6 +7,8 @@ use common\models\Pages;
 use common\models\Property;
 use frontend\components\Blocks\BlocksWidget;
 
+Yii::$app->metaTags->register('main');
+
 ?>
 <?php if ($block = Blocks::findOne(['block_type_id' => BlocksTypes::BLOCK_BANNERS_CAROUSEL])) { ?>
   <?= BlocksWidget::widget(['model' => $block]) ?>

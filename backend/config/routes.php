@@ -34,6 +34,10 @@ return [
   'settings/index' => 'settings',
   'materials/index' => 'materials',
 
+  'keywords/create' => 'keywords/create',
+  'keywords/<id:\d+>/update' => 'keywords/update',
+  'keywords/<id:\d+>/delete' => 'keywords/delete',
+
   'orders/<id:\d+>/update' => 'orders/update',
   'orders/<id:\d+>/delete' => 'orders/delete',
   'GET, POST orders/<id:\d+>/update' => 'orders/update',
