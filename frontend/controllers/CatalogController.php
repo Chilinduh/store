@@ -276,21 +276,6 @@ class CatalogController extends Controller
         $dataProvider = $searchModel->search($params ?? []);
         $cartForm = OrderFormFactory::get();
 
-        echo "<pre>";
-        print_r([
-          'dataProvider' => $dataProvider,
-          'catalog' => $catalog['parent'],
-          'filters' => $filters??[],
-          'sub' => $catalog['sub'],
-          'category' => $category,
-          'lvl' => $catalogComponent->getCategoryLvl($category['id']),
-          'breadCrumbs' => $breadCrumbs,
-          'cartForm' => $cartForm
-        ]);
-        echo "</pre>";
-        die;
-
-
         return $this->render('products', [
           'dataProvider' => $dataProvider,
           'catalog' => $catalog['parent'],
