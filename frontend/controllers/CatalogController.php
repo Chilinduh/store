@@ -287,11 +287,12 @@ class CatalogController extends Controller
         ]);
 
       case Tree::LVL_ONE:
+        if($children = $catalog['sub']??false) {
+          $params['categoryIds'] = $children;
+        }
       case Tree::LVL_TWO:
 
-      if($children = $catalog['sub']??false) {
-        $params['categoryIds'] = $children;
-      }
+
         $searchModel = new ProductsSearchArrayProvider();
         $dataProvider = $searchModel->search($params ?? []);
         $products = $dataProvider->getModels();
