@@ -54,6 +54,7 @@ class AppAsset extends AssetBundle
       'css/pagination.css',
       'css/products_block.css',
       'css/toast.css',
+      'css/search.css',
       'vendor/fontawesome/css/all.min.css',
     ];
 

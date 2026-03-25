@@ -113,7 +113,6 @@ class CatalogHeaderWidget extends Widget
           }
         }
       }
-
       $categories[$key] = array_merge($categories[$key], ['count' => $counts[$key]]);
     }
 

@@ -119,7 +119,9 @@ use yii\web\View;
           <?php } ?>
 
           <?php foreach (array_slice($product['attributes'], 0, 4) as $attribute) { ?>
+          <?php if(!empty($attribute['value'])) { ?>
             <li class="product_attribute"><div class="product_attribute--name"> <?= $attribute['name'] ?></div>: <div class="product_attribute--value"><?= $attribute['value'] ?></div>  </li>
+          <?php } ?>
           <?php } ?>
         </ul>
       </div>

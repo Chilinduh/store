@@ -30,15 +30,14 @@ use app\components\PanelWidget;
 <?php
 
 echo TreeView::widget([
-  // single query fetch to render the tree
   'query' => Tree::find()->addOrderBy('root, lft'),
   'headingOptions' => ['label' => 'Categories'],
   'isAdmin' => true,                       // optional (toggle to enable admin mode)
   'displayValue' => 1,                           // initial display value
-  //'softDelete'      => true,                        // normally not needed to change
+  'showInactive' => true,
+  'softDelete'      => false,                        // normally not needed to change
   'cacheSettings' => ['enableCache' => false],      // normally not needed to change
   'nodeAddlViews' => [
-
     \kartik\tree\Module::VIEW_PART_3 => '@backend/views/category/_image'
   ]
 ]);

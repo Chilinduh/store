@@ -21,6 +21,7 @@ class CatalogFilterService
     $filter = $params['filter'] ?? null;
     $products = [];
     $filtersMain = [];
+
     if($filter && $category_id = $params['category_id']??false) {
 
       //[filter] => slider_134:10|33,slider_133:150|160,checkbox_213: 4915,checkbox_213: 4934,
@@ -71,11 +72,12 @@ class CatalogFilterService
         ];
       }
 
-      foreach ($attributes as $attribute) {
 
-        $query = Products::find()->select(['products.id'])
-          ->leftJoin(ProductAttributesValues::tableName(), 'product_attributes_values.product_id = products.id')
-          ->leftJoin(ProductAttributes::tableName(), 'product_attributes.id = product_attributes_values.product_attribute_id');
+      $query = Products::find()->select(['products.id'])
+        ->leftJoin(ProductAttributesValues::tableName(), 'product_attributes_values.product_id = products.id')
+        ->leftJoin(ProductAttributes::tableName(), 'product_attributes.id = product_attributes_values.product_attribute_id');
+
+      foreach ($attributes as $attribute) {
 
         if ($attribute['type'] == 'slider') {
           $query->andWhere([
@@ -114,7 +116,6 @@ class CatalogFilterService
         }
       }
     }
-
     return [
       'products' => $products,
       'filtersMain' => $filtersMain
@@ -282,7 +283,9 @@ class CatalogFilterService
       $minFrom = false;
       $to = false;
       $maxTo = false;
+
       if($prices = Products::getProductsPrices($params['category_id'])) {
+
         $minFrom = min(ArrayHelper::map($prices, 'id', 'price'));
         $maxTo = max(ArrayHelper::map($prices, 'id', 'price'));
 
@@ -305,7 +308,7 @@ class CatalogFilterService
           'min' => $minFrom, //min(ArrayHelper::map($products, 'id', 'price')),
           'max' => $maxTo, //max(ArrayHelper::map($products, 'id', 'price')),
           'from' => $from ? $from : $minFrom,
-          'to' => $to ? $from : $maxTo,
+          'to' => $to ? $to : $maxTo,
           'title' => 'Цена'
         ];
       }

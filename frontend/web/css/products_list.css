@@ -1,3 +1,8 @@
+.widget-categories-list__child-item.active a {
+  color: #0064f0;
+  font-weight: 500;
+}
+
 .products-list__item, .products-view__options.view-options {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -8,6 +13,11 @@
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
+}
+
+
+.image--type--category .image__body {
+  padding-bottom: 60%;
 }
 
 /*.filter-collections.hidden {*/

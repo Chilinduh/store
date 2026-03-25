@@ -1126,11 +1126,13 @@
         const vehiclePicker = $('.search__dropdown--vehicle-picker');
         const vehiclePickerButton = $('.search__button--start');
 
-        input.on('focus', function() {
+        input.on('keydown', function() {
+
+          console.log($(this).val())
             suggestions.addClass('search__dropdown--open');
         });
         input.on('blur', function() {
-            suggestions.removeClass('search__dropdown--open');
+            //suggestions.removeClass('search__dropdown--open');
         });
 
         vehiclePickerButton.on('click', function() {

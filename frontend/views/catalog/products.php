@@ -12,9 +12,7 @@ use common\models\Property;
 use yii\widgets\LinkPager;
 use yii\data\Pagination;
 
-
 /* @var $this yii\web\View */
-//$this->title = 'My Yii Application';
 
 $get = \Yii::$app->getRequest()->get();
 $getParams = [];
@@ -66,12 +64,11 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                       //                    ]);
 
                       $catalogComponent = new Catalog();
-                      if ($catalogComponent->getCategoryLvl($category['id']) > 0 && count($dataProvider->getModels()) > 1) {
+                      if ($catalogComponent->getCategoryLvl($category['id']) > 0 && count($dataProvider->getModels()) >= 1) {
 
                         echo FilterWidget::widget([
                           'filters' => $filters
                         ]);
-
                       }
                       ?>
 
@@ -99,7 +96,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
 
           $sub = array_values($sub);
 
-          if ($sub[0]['lvl'] <= Yii::$app->params['maxLevel']) { ?>
+          if ($showSubGroupImages && $sub[0]['lvl'] <= Yii::$app->params['maxLevel']) { ?>
             <div class="block">
               <div class="categories-list categories-list--layout--columns-5-sidebar">
                 <ul class="categories-list__body">

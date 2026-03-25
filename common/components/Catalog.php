@@ -194,8 +194,7 @@ class Catalog extends Component
       $result = [];
       $lvl = $this->getCategoryLvl($category_id);
 
-      $category = Tree::find()
-        ->where(['id' => $category_id])->andWhere(['visible' => 1])->one();
+      $category = Tree::find()->where(['id' => $category_id])->andWhere(['visible' => 1])->one();
 
       if ($category->lvl === 2) {
 

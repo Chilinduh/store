@@ -401,7 +401,6 @@ a .logo {
   background-color: #fff;
 }
 
-
-
-
-
+.block-space--layout--divider-nl {
+  height: 30px;
+}

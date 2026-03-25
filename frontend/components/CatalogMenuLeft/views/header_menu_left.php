@@ -20,9 +20,9 @@
                       }
                     ?>
                     <?php if (1 || $item['count']) { ?>
-                      <li class="widget-categories-list__child-item">
+                      <li class="widget-categories-list__child-item <?= $category['id'] == $item['id'] ? 'active' : '' ?>">
                         <a href="/catalog/<?= $item['id'] ?>" class="widget-categories-list__child-link">
-                          <?= $item['name'] ?>   <sup class="category-sup"><?= $item['lvl'] == 1 ? $count : $item['count'] ?></sup>
+                          <?= $item['name'] ?>   <sup class="category-sup"><?= $item['lvl'] == 1 && count($item['items']) ? $count : $item['count'] ?></sup>
                         </a>
                       </li>
                     <?php } ?>

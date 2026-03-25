@@ -265,7 +265,13 @@ class CatalogController extends Controller
       $catalog = $catalogComponent->getCatalog($parents['parent']['id']) ?? [];
     }
 
-    if($children = $catalog['sub']??false) {
+    $showSubGroupImages = true;
+    if($productsCount = Products::find()->where(['category_id' => $category_id])->count()) {
+      $showSubGroupImages = false;
+    }
+
+    if(!$productsCount && $children = $catalog['sub']??false) {
+
       $params['categoryIds'] = $children;
       foreach ($children as $child) {
         foreach ($child['items'] as $key=>$item) {
@@ -290,7 +296,8 @@ class CatalogController extends Controller
           'category' => $category,
           'lvl' => $catalogComponent->getCategoryLvl($category['id']),
           'breadCrumbs' => $breadCrumbs,
-          'cartForm' => $cartForm
+          'cartForm' => $cartForm,
+          'showSubGroupImages' => $showSubGroupImages
         ]);
 
       case Tree::LVL_ONE:
@@ -298,7 +305,7 @@ class CatalogController extends Controller
 
         $searchModel = new ProductsSearchArrayProvider();
         $dataProvider = $searchModel->search($params ?? []);
-        $products = $dataProvider->getModels();
+        //$products = $dataProvider->getModels();
 
         $filters = $this->filterService->getFilters($category['id'], $params);
 
@@ -312,7 +319,8 @@ class CatalogController extends Controller
           'category' => $category,
           'lvl' => $catalogComponent->getCategoryLvl($category['id']),
           'breadCrumbs' => $breadCrumbs,
-          'cartForm' => $cartForm
+          'cartForm' => $cartForm,
+          'showSubGroupImages' => $showSubGroupImages
         ]);
 
     }

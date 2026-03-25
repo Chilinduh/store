@@ -115,6 +115,7 @@ class ProductsSearchArrayProvider extends Model
 
       $catalogService = new CatalogFilterService();
       $filterParams = $catalogService->getFiltersProducts($params);
+
       $params['productsIds'] = $filterParams['products'];
 
       if(is_array($filterParams['filtersMain']) && count($filterParams['filtersMain'])) {
@@ -127,7 +128,6 @@ class ProductsSearchArrayProvider extends Model
               $price = explode('|', $filterParam[0]);
               $params['price_from'] = intval($price[0]);
               $params['price_to'] = intval($price[1]);
-
               break;
           }
         }
