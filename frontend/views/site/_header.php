@@ -219,7 +219,7 @@ c-1.5,0-2.9,0.6-4,1.5C8.9,1.6,7.5,1,6,1C2.7,1,0,3.7,0,7c0,5,6,12,10,12s10-7,10-1
             <div class="search__decor-start"></div>
             <div class="search__decor-end"></div>
           </div>
-          <?php if (1) { ?>
+          <?php if (0) { ?>
             <div class="search__dropdown search__dropdown--suggestions suggestions">
               <div class="suggestions__group">
                 <div class="suggestions__group-title">Товар</div>
