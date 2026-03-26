@@ -196,6 +196,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                   $pagination = new Pagination();
                   $pagination->defaultPageSize = 10;
                   $pagination->totalCount = $dataProvider->getTotalCount();
+                  $pagination->params = array_merge([], Yii::$app->request->get());
 
                   echo LinkPager::widget([
                     'pagination' => $pagination,

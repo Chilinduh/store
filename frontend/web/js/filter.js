@@ -5,6 +5,9 @@ let collection = [];
 
 $('.button-search').on('click', function () {
 
+  const url = new URL(window.location.href);
+  url.searchParams.delete('page');
+  history.pushState({}, '', url);
   window.location.reload();
 });
 
@@ -87,7 +90,8 @@ $('.filter-collections').each(function (index) {
         stateUrl = stateUrl + 'checkbox_' + item.attr + ':' + item.value + ',';
       }
     });
-
-    history.replaceState({}, 'dsfsf', '?filter=' + stateUrl);
+    const url = new URL(window.location.href);
+    url.searchParams.set('filter', stateUrl);
+    history.pushState({}, '', url);
   });
 });
