@@ -219,7 +219,7 @@ class OrderController extends Controller
       $api = Yii::$app->cdek;
       $token = $api->token();
     }
-    
+
 
     $searchModel = new ProductsSearchArrayProvider();
 
@@ -280,7 +280,7 @@ class OrderController extends Controller
             'order' => $order
           ];
 
-          $orderForm->sendOrderToEmail($order, Yii::$app->user->identity??false);
+          $orderForm->sendOrderToEmail($order, $orderForm, Yii::$app->user->identity??false);
           return $this->render('success', $orderInfo);
         }
       }

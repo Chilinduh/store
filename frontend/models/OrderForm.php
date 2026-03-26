@@ -102,10 +102,40 @@ class OrderForm extends Model
       ->send();
   }
 
-  public function sendOrderToEmail(object $order, $user = false)
+  public function sendOrderToEmail(object $order, $orderForm, $user = false)
   {
 
-    return Yii::$app
+    if(!$user) {
+
+      if(!empty($orderForm->first_name)) $contacts[] = $orderForm->first_name;
+      if(!empty($orderForm->last_name)) $contacts[] = $orderForm->last_name;
+      if(!empty($orderForm->city)) $contacts[] = $orderForm->city;
+      if(!empty($orderForm->address)) $contacts[] = $orderForm->address;
+      if(!empty($orderForm->phone)) $contacts[] = $orderForm->phone;
+      if(!empty($orderForm->comment)) $contacts[] = $orderForm->comment;
+
+      $contacts = 'Контакты: '.implode('<br', $contacts);
+    }
+
+//     Yii::$app
+//      ->mailer
+//      ->compose(
+//        ['html' => 'layouts/order'],
+//        [
+//          'user' => $user,
+//          'order' => $order,
+//          'phone' => Yii::$app->params['phone']??'',
+//          'adminEmail' => Yii::$app->params['adminEmail']??'',
+//          'site' => Yii::$app->params['site']??''
+//        ]
+//      )
+//      ->setFrom([Yii::$app->params['adminEmail'] => 'Интернет магазин santehgrup.ru'])
+//      ->setTo($user->email??Yii::$app->params['order_copy_emails'])
+//      ->setTo(Yii::$app->params['order_copy_emails'])
+//      ->setSubject('Ваш заказ №' . $order->id)
+//      ->send();
+
+      Yii::$app
       ->mailer
       ->compose(
         ['html' => 'layouts/order'],
@@ -114,7 +144,8 @@ class OrderForm extends Model
           'order' => $order,
           'phone' => Yii::$app->params['phone']??'',
           'adminEmail' => Yii::$app->params['adminEmail']??'',
-          'site' => Yii::$app->params['site']??''
+          'site' => Yii::$app->params['site']??'',
+          'contacts' => $contacts
         ]
       )
       ->setFrom([Yii::$app->params['adminEmail'] => 'Интернет магазин santehgrup.ru'])
@@ -122,7 +153,6 @@ class OrderForm extends Model
       ->setTo(Yii::$app->params['order_copy_emails'])
       ->setSubject('Ваш заказ №' . $order->id)
       ->send();
-
   }
 
   public function actionUpdate($id)

@@ -57,6 +57,11 @@ use yii\helpers\Html;
 <br><br>
 Наш менеджер свяжется с Вами.
 <br><br>
+<?php if(isset($contacts)) { ?>
+  <?= $contacts ?>
+<br><br>
+<?php } ?>
+
 С Уважением, <?= $site??'' ?><br>
 Email: <?= $adminEmail??'' ?><br>
 Тел.: <?= $phone??'' ?>
