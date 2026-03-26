@@ -117,7 +117,7 @@ class OrderForm extends Model
           'site' => Yii::$app->params['site']??''
         ]
       )
-      ->setFrom([Yii::$app->params['adminEmail'] => 'Интернет магазин remontsnami.ru'])
+      ->setFrom([Yii::$app->params['adminEmail'] => 'Интернет магазин santehgrup.ru'])
       //->setTo($user->email??Yii::$app->params['order_copy_emails'])
       ->setTo(Yii::$app->params['order_copy_emails'])
       ->setSubject('Ваш заказ №' . $order->id)
