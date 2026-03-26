@@ -23,9 +23,11 @@
     <!--begin::Title-->
     <div class="d-flex flex-column">
       <h2 class="mb-1">#<?= $order->id ?></h2>
-      <?= ($order->userProfile->name??'').' '.$order->userProfile->first_name.' '.$order->userProfile->last_name; ?>
+      <?php if($order->userProfile) { ?>
+      <?= ($order->userProfile->name??'').' '.($order->userProfile->first_name??'').' '.($order->userProfile->last_name??''); ?>
       <?= '<br>Тел.: '.\common\Helper\PhoneHelper::phone_format($order->userProfile->phone)
           .'<br>Адрес: '.$order->userProfile->country.', '.$order->userProfile->city.', '.$order->userProfile->address; ?>
+      <?php } ?>
       <?php if(0) { ?>
         <div class="text-muted fw-bold">
           <a href="#">Keenthemes</a>
