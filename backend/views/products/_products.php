@@ -107,6 +107,20 @@ use common\models\Products;
       }
     ],
     [
+      'hAlign' => 'left',
+      'vAlign' => 'left',
+      'attribute' => 'availability_id',
+      'filter' => false,
+      'format' => 'raw',
+      'value' => static function ($model) {
+
+        if($availability = $model->getAvailability()) {
+          return '<div style="color:'.$availability->color.'">'.$availability->name.'</div>';
+        }
+        return '';
+      }
+    ],
+    [
       'hAlign' => 'center',
       'vAlign' => 'middle',
       'attribute' => 'category_id',

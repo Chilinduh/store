@@ -210,7 +210,7 @@ class ProductsSearchArrayProvider extends Model
       $query->andFilterWhere([
         'category_id' => $this->category_id,
       ]);
-      $totalCount  = Products::find()->where(['category_id' => $params['category_id']])->count();
+      $totalCount  = Products::find()->where(['category_id' => $this->category_id])->count();
     }
 
     $orderBy = [];
@@ -343,8 +343,8 @@ class ProductsSearchArrayProvider extends Model
         'property' => $property,
         'colors' => $colors ?? [],
         'views' => $item->views ?? [],
-        'availability' => $item->availability->name??'',
-        'availability_color' => $item->availability->color??''
+        'availability' => $item->getAvailability()->name??'',
+        'availability_color' => $item->getAvailability()->color??''
       ];
     }
 

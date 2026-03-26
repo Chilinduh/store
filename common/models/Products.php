@@ -258,13 +258,11 @@ class Products extends ActiveRecord
     return $this->hasOne(ProductsAvailability::className(), ['id' => 'availability_id'])->one();
   }
 
-
   public function getStock()
   {
 
     return $this->hasOne(Stocks::className(), ['id' => 'stock_id'])->one();
   }
-
 
   public function weight()
   {
