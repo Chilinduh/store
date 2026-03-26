@@ -118,7 +118,8 @@ class OrderForm extends Model
         ]
       )
       ->setFrom([Yii::$app->params['adminEmail'] => 'Интернет магазин remontsnami.ru'])
-      ->setTo($user->email??$this->email)
+      //->setTo($user->email??Yii::$app->params['order_copy_emails'])
+      ->setTo(Yii::$app->params['order_copy_emails'])
       ->setSubject('Ваш заказ №' . $order->id)
       ->send();
 
