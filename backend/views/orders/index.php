@@ -85,9 +85,11 @@ $this->params['breadcrumbs'][] = $this->title;
       'value' => static function ($model) {
 
         $user = $model->getUser();
-        $userProfile = $model->getUserProfile();
-
-        return $user->username;
+        if($user) {
+          $userProfile = $model->getUserProfile();
+          return $user->username;
+        }
+        return '';
       }
     ],
     [
