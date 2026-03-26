@@ -166,9 +166,9 @@ class ProductsSearchArrayProvider extends Model
 
     //$query->andWhere(['!=', 'products.price', 0]);
 
-    if (isset($params['productsIds'])) {
-
+    if (isset($params['productsIds']) && is_array($params['productsIds']) && count($params['productsIds'])) {
       $query->andWhere(['in', 'products.id', $params['productsIds']]);
+
     }
 
     if (isset($params['price_from'])) {
@@ -202,12 +202,15 @@ class ProductsSearchArrayProvider extends Model
       'name' => $this->name,
     ]);
 
-    if (isset($params['categoryIds'])) {
+    if (isset($params['categoryIds']) && is_array($params['categoryIds']) && count($params['categoryIds'])) {
       $query->andWhere(['in', 'products.category_id', array_keys($params['categoryIds'])]);
+
+      $totalCount  = Products::find()->where(['in', 'category_id', $params['categoryIds']])->count();
     } else {
       $query->andFilterWhere([
         'category_id' => $this->category_id,
       ]);
+      $totalCount  = Products::find()->where(['category_id' => $params['category_id']])->count();
     }
 
     $orderBy = [];
@@ -354,6 +357,7 @@ class ProductsSearchArrayProvider extends Model
     $dataProvider = new ArrayDataProvider(
       [
         'allModels' => $products,
+        //'totalCount' => $totalCount,
         'pagination' => [
           'pageSize' => $params['per-page'] ?? 10,
         ],

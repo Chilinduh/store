@@ -64,7 +64,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                       //                    ]);
 
                       $catalogComponent = new Catalog();
-                      if ($catalogComponent->getCategoryLvl($category['id']) > 0 && count($dataProvider->getModels()) >= 1) {
+                      if ($catalogComponent->getCategoryLvl($category['id']) > 0 ) {
 
                         echo FilterWidget::widget([
                           'filters' => $filters
@@ -74,7 +74,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
 
                       <?php //} ?>
                     </div>
-                    <?php if (count($filters) > 0 && $catalogComponent->getCategoryLvl($category['id']) > 0 && count($dataProvider->getModels()) > 1) { ?>
+                    <?php if (count($filters) > 0 && $catalogComponent->getCategoryLvl($category['id']) > 0) { ?>
                       <div class="widget-filters__actions d-flex">
                         <button class="btn btn-primary btn-sm button-search">Поиск</button>
                       </div>
