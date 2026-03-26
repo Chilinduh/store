@@ -105,46 +105,47 @@ class OrderForm extends Model
   public function sendOrderToEmail(object $order, $orderForm, $user = false)
   {
 
-    if(!$user) {
-
-      if(!empty($orderForm->first_name)) $contacts[] = $orderForm->first_name;
-      if(!empty($orderForm->last_name)) $contacts[] = $orderForm->last_name;
-      if(!empty($orderForm->city)) $contacts[] = $orderForm->city;
-      if(!empty($orderForm->address)) $contacts[] = $orderForm->address;
-      if(!empty($orderForm->phone)) $contacts[] = $orderForm->phone;
-      if(!empty($orderForm->comment)) $contacts[] = $orderForm->comment;
-
-      $contacts = 'Контакты: '.implode('<br', $contacts);
-    }
-
-//     Yii::$app
-//      ->mailer
-//      ->compose(
-//        ['html' => 'layouts/order'],
-//        [
-//          'user' => $user,
-//          'order' => $order,
-//          'phone' => Yii::$app->params['phone']??'',
-//          'adminEmail' => Yii::$app->params['adminEmail']??'',
-//          'site' => Yii::$app->params['site']??''
-//        ]
-//      )
-//      ->setFrom([Yii::$app->params['adminEmail'] => 'Интернет магазин santehgrup.ru'])
-//      ->setTo($user->email??Yii::$app->params['order_copy_emails'])
-//      ->setTo(Yii::$app->params['order_copy_emails'])
-//      ->setSubject('Ваш заказ №' . $order->id)
-//      ->send();
+    $contacts = [];
+    if ($user) {
 
       Yii::$app
+        ->mailer
+        ->compose(
+          ['html' => 'layouts/order'],
+          [
+            'user' => $user,
+            'order' => $order,
+            'phone' => Yii::$app->params['phone'] ?? '',
+            'adminEmail' => Yii::$app->params['adminEmail'] ?? '',
+            'site' => Yii::$app->params['site'] ?? ''
+          ]
+        )
+        ->setFrom([Yii::$app->params['adminEmail'] => 'Интернет магазин santehgrup.ru'])
+        ->setTo($user->email)
+        ->setTo(Yii::$app->params['order_copy_emails'])
+        ->setSubject('Ваш заказ №' . $order->id)
+        ->send();
+    }
+
+    if (!empty($orderForm->first_name)) $contacts[] = 'Имя: ' . $orderForm->first_name;
+    if (!empty($orderForm->last_name)) $contacts[] = 'Фамилия: ' . $orderForm->last_name;
+    if (!empty($orderForm->city)) $contacts[] = 'Город: ' . $orderForm->city;
+    if (!empty($orderForm->address)) $contacts[] = 'Адрес: ' . $orderForm->address;
+    if (!empty($orderForm->phone)) $contacts[] = 'Телефон: ' . $orderForm->phone;
+    if (!empty($orderForm->comment)) $contacts[] = 'Комментарий: ' . $orderForm->comment;
+
+    $contacts = 'Контакты пользователя: <br> ' . implode('<br>', $contacts);
+
+    return Yii::$app
       ->mailer
       ->compose(
         ['html' => 'layouts/order'],
         [
           'user' => $user,
           'order' => $order,
-          'phone' => Yii::$app->params['phone']??'',
-          'adminEmail' => Yii::$app->params['adminEmail']??'',
-          'site' => Yii::$app->params['site']??'',
+          'phone' => Yii::$app->params['phone'] ?? '',
+          'adminEmail' => Yii::$app->params['adminEmail'] ?? '',
+          'site' => Yii::$app->params['site'] ?? '',
           'contacts' => $contacts
         ]
       )
@@ -153,6 +154,8 @@ class OrderForm extends Model
       ->setTo(Yii::$app->params['order_copy_emails'])
       ->setSubject('Ваш заказ №' . $order->id)
       ->send();
+
+
   }
 
   public function actionUpdate($id)
