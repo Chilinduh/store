@@ -59,8 +59,8 @@ class ContactForm extends Model
       'subject' => $this->subject,
       'body' => $this->body
     ])
-      ->setTo($this->email)
       ->setFrom([ Yii::$app->params['adminEmail'] => $this->name])
+      ->setTo(Yii::$app->params['order_copy_emails'])
       ->setSubject($this->subject)
       ->setTextBody($this->body)
       ->send();
