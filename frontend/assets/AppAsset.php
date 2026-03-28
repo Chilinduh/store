@@ -56,6 +56,7 @@ class AppAsset extends AssetBundle
       'css/toast.css',
       'css/search.css',
       'css/contacts.css',
+      'css/favorites.css',
       'vendor/fontawesome/css/all.min.css',
     ];
 

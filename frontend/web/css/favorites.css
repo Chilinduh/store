@@ -1,0 +1,14 @@
+.wishlist .cart-add {
+  padding: 10px 15px 10px 15px;
+  border-radius: 10px;
+}
+.wishlist .status-badge__text {
+  color: #fff;
+  border-radius: 5px;
+}
+.wishlist .wishlist__column--stock, .wishlist .wishlist__column--price {
+  text-align: center;
+}
+.wishlist {
+  border-radius: 10px;
+}

@@ -158,9 +158,11 @@ class FavoritesController extends Controller
 
     if(Yii::$app->user->isGuest) {
 
-      $favorites = $this->favorites->getItemIds();
-      $products = new ProductsSearchArrayProvider();
-      $products = $products->search(['productsIds' => $favorites]);
+      $products = [];
+      if($favorites = $this->favorites->getItemIds()) {
+        $products = new ProductsSearchArrayProvider();
+        $products = $products->search(['productsIds' => $favorites]);
+      }
 
     } else {
 

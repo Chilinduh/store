@@ -71,17 +71,18 @@ use yii\web\View;
                       </div>
                     </div>
                   </div>
-
-                    <div class="wishlist__product-rating-title">3 reviews</div>
+                  <div class="wishlist__product-rating-title">3 reviews</div>
                   <?php } ?>
                 </div>
               </td>
               <td class="wishlist__column wishlist__column--body wishlist__column--stock">
+                <?php if($favorite['availability']) { ?>
                 <div class="status-badge status-badge--style--success status-badge--has-text">
                   <div class="status-badge__body">
-                    <div class="status-badge__text">В наличие</div>
+                    <div class="status-badge__text" style="background-color:<?= $favorite['availability_color'] ?>"><?= $favorite['availability'] ?></div>
                   </div>
                 </div>
+                <?php } ?>
               </td>
               <td class="wishlist__column wishlist__column--body wishlist__column--price">
                 <?= $favorite['price']; ?> руб.
