@@ -53,15 +53,16 @@ class ContactForm extends Model
   public function sendEmail()
   {
 
+
     return Yii::$app->mailer->compose('layouts/contacts', [
       'name' => $this->name,
       'email' => $this->email,
       'subject' => $this->subject,
       'body' => $this->body
     ])
-      ->setFrom([ Yii::$app->params['adminEmail'] => $this->name])
+      ->setFrom([Yii::$app->params['adminEmail'] => 'Интернет магазин santehgrup.ru'])
       ->setTo(Yii::$app->params['order_copy_emails'])
-      ->setSubject($this->subject)
+      ->setSubject('Вопрос от пользователя')
       ->setTextBody($this->body)
       ->send();
   }
