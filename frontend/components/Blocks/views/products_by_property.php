@@ -80,19 +80,17 @@ use kartik\form\ActiveForm;
                            src="<?= $item['images'][0]['original'] ?? '/images/no-photo.jpg' ?>" alt="">
                     </a>
                   </div>
-                  <div
-                    class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
+                  <?php if($item['availability'] == 'В наличии') { ?>
+                  <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text" title="<?= $item['availability'] ?>">
                     <div class="status-badge__body">
                       <div class="status-badge__icon">
                         <svg width="13" height="13">
                           <path d="M12,4.4L5.5,11L1,6.5l1.4-1.4l3.1,3.1L10.6,3L12,4.4z"/>
                         </svg>
                       </div>
-                      <div class="status-badge__text">Part Fit for 2011 Ford Focus S</div>
-                      <div class="status-badge__tooltip" tabindex="0" data-toggle="tooltip"
-                           title="Part&#x20;Fit&#x20;for&#x20;2011&#x20;Ford&#x20;Focus&#x20;S"></div>
                     </div>
                   </div>
+                  <?php } ?>
                 </div>
                 <div class="product-card__info">
                   <div class="product-card__meta">

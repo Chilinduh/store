@@ -96,7 +96,7 @@ use common\models\Pages;
         <div class="site-footer__bottom-row">
           <div class="site-footer__copyright">
             <!-- copyright -->
-            Разработано - <a href="https://smezentsev.ru" target="_blank">SMezentsev DA</a>
+            Разработано - <a href="https://msdigit.ru" target="_blank">MSDigit</a>
             <!-- copyright / end -->
           </div>
           <?php if(0) { ?>
