@@ -53,7 +53,7 @@ class ContactForm extends Model
   public function sendEmail()
   {
 
-    return Yii::$app->mailer->compose('layouts\contacts', [
+    return Yii::$app->mailer->compose('layouts/contacts', [
       'name' => $this->name,
       'email' => $this->email,
       'subject' => $this->subject,

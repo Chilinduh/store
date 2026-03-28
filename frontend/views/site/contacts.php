@@ -35,7 +35,7 @@ $this->title = 'Контакты';
               <?= $content; ?>
             </div>
           </div>
-          <div class="col-12 col-lg-6">
+          <div class="col-12 col-lg-6 hidden">
             <div class="ml-1">
               <h4 class="contact-us__header card-title">Оставьте нам сообщение</h4>
 
