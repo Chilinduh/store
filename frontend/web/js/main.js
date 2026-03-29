@@ -1157,7 +1157,7 @@
         });
 
         input.on('blur', function() {
-            //suggestions.removeClass('search__dropdown--open');
+            suggestions.removeClass('search__dropdown--open');
         });
 
         vehiclePickerButton.on('click', function() {
