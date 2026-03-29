@@ -351,13 +351,13 @@ $this->registerJs($js, \yii\web\View::POS_READY);
 <div class="toast toast-success" style="">
   <div class="toast-message">Сохранено!</div>
 </div>
-
+<?php if(0) { ?>
 <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-header"></div>
   <div class="modal-body"></div>
   <div class="modal-footer"></div>
 </div>
-
+<?php } ?>
 </body>
 </html>
 <?php $this->endPage() ?>

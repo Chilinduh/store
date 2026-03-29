@@ -219,98 +219,12 @@ c-1.5,0-2.9,0.6-4,1.5C8.9,1.6,7.5,1,6,1C2.7,1,0,3.7,0,7c0,5,6,12,10,12s10-7,10-1
             <div class="search__decor-start"></div>
             <div class="search__decor-end"></div>
           </div>
-          <?php if (0) { ?>
-            <div class="search__dropdown search__dropdown--suggestions suggestions">
-              <div class="suggestions__group">
-                <div class="suggestions__group-title">Товар</div>
-                <div class="suggestions__group-content">
-                  <a class="suggestions__item suggestions__product" href="">
-                    <div class="suggestions__product-image image image--type--product">
-                      <div class="image__body">
-                        <img class="image__tag" src="/images/products/product-2-40x40.jpg" alt="">
-                      </div>
-                    </div>
-                    <div class="suggestions__product-info">
-                      <div class="suggestions__product-name">Тормозной комплект Brandix BDX-750Z370-S</div>
-                      <div class="suggestions__product-rating">
-                        <div class="suggestions__product-rating-stars">
-                          <div class="rating">
-                            <div class="rating__body">
-                              <div class="rating__star rating__star--active"></div>
-                              <div class="rating__star rating__star--active"></div>
-                              <div class="rating__star rating__star--active"></div>
-                              <div class="rating__star rating__star--active"></div>
-                              <div class="rating__star rating__star--active"></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="suggestions__product-rating-label">5 из 22 отзывов</div>
-                      </div>
-                    </div>
-                    <div class="suggestions__product-price">$224.00</div>
-                  </a>
-                  <a class="suggestions__item suggestions__product" href="/products/view">
-                    <div class="suggestions__product-image image image--type--product">
-                      <div class="image__body">
-                        <img class="image__tag" src="/images/products/product-3-40x40.jpg" alt="">
-                      </div>
-                    </div>
-                    <div class="suggestions__product-info">
-                      <div class="suggestions__product-name">Левая фара Brandix Z54</div>
-                      <div class="suggestions__product-rating">
-                        <div class="suggestions__product-rating-stars">
-                          <div class="rating">
-                            <div class="rating__body">
-                              <div class="rating__star rating__star--active"></div>
-                              <div class="rating__star rating__star--active"></div>
-                              <div class="rating__star rating__star--active"></div>
-                              <div class="rating__star"></div>
-                              <div class="rating__star"></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="suggestions__product-rating-label">3 из 14 отзывов</div>
-                      </div>
-                    </div>
-                    <div class="suggestions__product-price">$349.00</div>
-                  </a>
-                  <a class="suggestions__item suggestions__product" href="/products/view">
-                    <div class="suggestions__product-image image image--type--product">
-                      <div class="image__body">
-                        <img class="image__tag" src="/images/products/product-4-40x40.jpg" alt="">
-                      </div>
-                    </div>
-                    <div class="suggestions__product-info">
-                      <div class="suggestions__product-name">Глянцево-серый 19-дюймовый алюминиевый диск AR-19</div>
-                      <div class="suggestions__product-rating">
-                        <div class="suggestions__product-rating-stars">
-                          <div class="rating">
-                            <div class="rating__body">
-                              <div class="rating__star rating__star--active"></div>
-                              <div class="rating__star rating__star--active"></div>
-                              <div class="rating__star rating__star--active"></div>
-                              <div class="rating__star rating__star--active"></div>
-                              <div class="rating__star"></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="suggestions__product-rating-label">4 on 26 отзывов</div>
-                      </div>
-                    </div>
-                    <div class="suggestions__product-price">$589.00</div>
-                  </a>
-                </div>
-              </div>
-              <div class="suggestions__group">
-                <div class="suggestions__group-title">Категории</div>
-                <div class="suggestions__group-content">
-                  <a class="suggestions__item suggestions__category" href="/list">Фары и освещение</a>
-                  <a class="suggestions__item suggestions__category" href="/list">Топливная система и фильтры</a>
-                  <a class="suggestions__item suggestions__category" href="/list">Аксессуары для интерьера</a>
-                </div>
+          <div class="search__dropdown search__dropdown--suggestions suggestions">
+            <div class="suggestions__group">
+              <div class="suggestions__group-content">
               </div>
             </div>
-          <?php } ?>
+          </div>
           <?php if (0) { ?>
             <div class="search__dropdown search__dropdown--vehicle-picker vehicle-picker">
               <div class="search__dropdown-arrow"></div>

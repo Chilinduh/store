@@ -113,7 +113,6 @@ use kartik\form\ActiveForm;
                             case 'best':
                               echo '<div class="tag-badge tag-badge--hot">Лучший товар</div>';
                               break;
-
                           } ?>
                         </div>
                       <?php } ?>

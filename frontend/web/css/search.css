@@ -4,3 +4,8 @@
   border-radius: 10px;
   width: 600px;
 }
+
+.search__dropdown .suggestions__group {
+  height: 400px;
+  overflow-y: auto;
+}

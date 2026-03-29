@@ -1126,11 +1126,36 @@
         const vehiclePicker = $('.search__dropdown--vehicle-picker');
         const vehiclePickerButton = $('.search__button--start');
 
-        input.on('keydown', function() {
+        input.on('input', function() {
 
-          console.log($(this).val())
-            suggestions.addClass('search__dropdown--open');
+          console.log(input.val())
+
+          if(input.val().length >= 3) {
+            $.ajax({
+              url: "/search/?search=" + input.val(),
+              method: 'get',
+              dataType: 'json',
+              success: function (data) {
+                console.log(data)
+              },
+              error: function (response) {
+
+                if(response.responseText != '') {
+                  suggestions.addClass('search__dropdown--open');
+                  $('.suggestions__group-content').html(response.responseText)
+                } else {
+                  suggestions.removeClass('search__dropdown--open');
+                  $('.suggestions__group-content').html('')
+                }
+
+                console.log(response)
+                dialog.open(response);
+              }
+            });
+
+          }
         });
+
         input.on('blur', function() {
             //suggestions.removeClass('search__dropdown--open');
         });

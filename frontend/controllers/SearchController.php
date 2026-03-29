@@ -82,6 +82,8 @@ class SearchController extends Controller
     $breadCrumbs = $catalogComponent->getCatalogBreadCrumbs();
     $products = [];
 
+    $cartForm = OrderFormFactory::get();
+
     if(isset($params['search']) && !empty($params['search'])) {
 
       $searchWords = new SearchWords([
@@ -96,9 +98,13 @@ class SearchController extends Controller
       $dataProvider = $searchModel->search($params ?? []);
       $products = $dataProvider->getModels();
 
-    }
+      if (Yii::$app->request->isAjax) {
 
-    $cartForm = OrderFormFactory::get();
+        return $this->renderAjax('_search', [
+          'products' => $products,
+        ]);
+      }
+    }
 
     return $this->render('index', [
       'products' => $products,
