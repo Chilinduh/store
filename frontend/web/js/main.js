@@ -1148,7 +1148,7 @@
                   $('.suggestions__group-content').html('')
                 }
 
-                console.log(response)
+                console.log(response);
                 dialog.open(response);
               }
             });
@@ -1157,7 +1157,8 @@
         });
 
         input.on('blur', function() {
-            suggestions.removeClass('search__dropdown--open');
+          suggestions.removeClass('search__dropdown--open');
+          $('.suggestions__group-content').html('')
         });
 
         vehiclePickerButton.on('click', function() {
