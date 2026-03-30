@@ -29,6 +29,7 @@ $this->beginPage();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="format-detection" content="telephone=no">
+  <?= Yii::$app->params['yandex_webmaster_tag']??''?>
   <title><?= Yii::$app->metaTags->title(); ?></title>
   <link rel="icon" type="image/png" href="images/favicon.png">
   <!-- fonts -->
