@@ -8,10 +8,14 @@ use app\components\DropDownLoginFormWidget;
 use app\components\HeaderMenuWidget;
 use frontend\assets\AppAsset;
 use frontend\assets\CustomAsset;
+use frontend\assets\DesignAsset;
 use yii\helpers\ArrayHelper;
 use lavrentiev\widgets\toastr\Notification;
 
 AppAsset::register($this);
+if(isset(Yii::$app->params['assets'])) {
+  DesignAsset::register($this);
+}
 
 //CustomAsset::register($this);
 
@@ -29,7 +33,6 @@ $this->beginPage();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="format-detection" content="telephone=no">
-  <?= Yii::$app->params['yandex_webmaster_tag']??''?>
   <title><?= Yii::$app->metaTags->title(); ?></title>
   <link rel="icon" type="image/png" href="images/favicon.png">
   <!-- fonts -->
