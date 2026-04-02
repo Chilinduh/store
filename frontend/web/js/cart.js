@@ -45,10 +45,8 @@ jQuery(document).ready(function(){
           $(this).on('click', function (e) {
 
             let productId = this.getAttribute('data-id');
-            let icon = this.getAttribute('data-icon');
+            let icon = $(this).data('icon');
             let elem = $(this);
-
-            console.log(elem)
 
             $.ajax({
               url: "/cart/" + productId,

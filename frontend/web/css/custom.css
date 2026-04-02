@@ -63,7 +63,7 @@ a .logo {
   background-color: #262626 !important;
 }
 
-.product-card__addtocart-icon.cart-open {
+.block-products-carousel__cell .product-card__addtocart-icon.cart-open {
 
   top: -2px;
   left: -2px;
@@ -165,7 +165,7 @@ a .logo {
   padding: 2px 12px 0px !important;
 }
 
-.cart-open {
+.block-products-carousel__cell .cart-open {
 
   margin-top: 0px !important;
   background-color: #262626 !important;
