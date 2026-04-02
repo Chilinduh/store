@@ -179,7 +179,6 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                         </div>
                       </div>
                     <div class="view-options__spring"></div>
-                    <?php if(0) { ?>
                     <form style="display:flex" action="<?= Yii::$app->request->url ?>" on-change="submit()">
                       <div class="view-options__select">
                         <label for="view-option-sort">Сортировка:</label>
@@ -206,9 +205,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                                   value="50">50
                           </option>
                         </select>
-                      </div>
                     </form>
-                    <?php } ?>
                   </div>
                 </div>
 
