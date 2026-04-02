@@ -122,6 +122,7 @@ class SiteController extends Controller
   public function actionIndex()
   {
 
+    Yii::$app->metaTags->register('main');
     $model = new LoginForm();
     $cartForm = new OrderForm();
 
@@ -136,6 +137,8 @@ class SiteController extends Controller
 
   public function actionAbout()
   {
+
+    Yii::$app->metaTags->register('abount');
 //
 //
 //    $data =
@@ -189,6 +192,8 @@ class SiteController extends Controller
   public function actionDelivery()
   {
 
+    Yii::$app->metaTags->register('delivery');
+
     $page = Yii::$app->pages->get(Pages::PAGE_DELIVERY);
 
     return $this->render('_blank', [
@@ -200,6 +205,7 @@ class SiteController extends Controller
   public function actionTerms()
   {
 
+    Yii::$app->metaTags->register('terms');
     $page = Yii::$app->pages->get(Pages::PAGE_TERMS);
 
     return $this->render('_blank', [

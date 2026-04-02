@@ -18,6 +18,7 @@ class CatalogHeaderWidget extends Widget
 {
   public $categories;
   public $category;
+  public $type;
 
   public static function getTree($categories, $left = 0, $right = null, $lvl = 1)
   {

@@ -52,7 +52,6 @@ class CatalogController extends Controller
     $this->request = Yii::$app->request;
     $this->filterService = new CatalogFilterService();
     parent::__construct($id, $module, $config);
-    Yii::$app->metaTags->register('catalog');
   }
 
   /**
@@ -185,7 +184,6 @@ class CatalogController extends Controller
 
   public function actionView(int $category_id = null, int $id = null)
   {
-
     $params = $this->request->queryParams;
     $searchModel = new ProductsSearchArrayProvider();
     $model = $searchModel->search($params ?? [], 'model');
@@ -227,6 +225,13 @@ class CatalogController extends Controller
         $cartForm->size_id = $model['colors'][0]['sizes'][0]['id']??0;
       }
     }
+
+    Yii::$app->metaTags->register('catalog', [
+      'title' => $model['name']??'',
+      'meta_tag_title' => $model['name']??'',
+      'meta_tag_keywords' => $model['name']??'',
+      'meta_tag_description' => $model['name']??''
+    ]);
 
     return $this->render('view-full', [
       'product' => $model,

@@ -23,7 +23,6 @@ use yii\helpers\Html;
 
 $this->beginPage();
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -33,11 +32,21 @@ $this->beginPage();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="format-detection" content="telephone=no">
-  <title><?= Yii::$app->metaTags->title(); ?></title>
+  <title><?= Yii::$app->params['mainKeywords']??'' ?> - <?= Yii::$app->params['meta']['title']??'' ?></title>
   <link rel="icon" type="image/png" href="images/favicon.png">
   <!-- fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i">
   <!-- css -->
+
+  <?php
+  $this->registerMetaTag(['name' => 'title', 'content' => Yii::$app->params['meta']['title']??'']);
+  $this->registerMetaTag(['name' => 'keywords', 'content' => Yii::$app->params['meta']['keywords']??'']);
+  $this->registerMetaTag(['name' => 'description', 'content' => Yii::$app->params['meta']['description']??'']);
+  $this->registerMetaTag(['property' => 'og:title', 'content' => Yii::$app->params['meta']['title']??'']);
+  $this->registerMetaTag(['property' => 'og:description', 'content' => Yii::$app->params['meta']['title']??'']);
+  //Yii::$app->view->registerMetaTag(['property' => 'og:url', 'content' => '']); //canonical URL
+  $this->title = Yii::$app->params['meta']['title'].'sdf'??'ыва';
+  ?>
 
   <?php $this->head() ?>
 

@@ -29,5 +29,25 @@
   border-radius: 16px;
 }
 
+@media (max-width: 1023px) {
+  .block-slideshow__item {
+    height: 115px;
+  }
+
+  .block-banners__item {
+    height: 200px;
+  }
+}
+
+  .block-slideshow__item .block-slideshow__item-image--mobile {
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+}
+
+
+
+
+
 
 

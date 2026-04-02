@@ -16,18 +16,35 @@ class MetaTags extends \yii\base\Component {
   }
 
 
-  public function register($page = 'main')
+  public function register($page = 'main', $data = [])
   {
 
-      if($meta = Keywords::findOne(['page' => $page??''])) {
+        switch($page) {
 
-        Yii::$app->view->registerMetaTag(['name' => 'title', 'content' => $meta->meta_tag_title??''], 'title');
-        Yii::$app->view->registerMetaTag(['name' => 'keywords', 'content' => $meta->meta_tag_keywords??''], 'keywords');
-        Yii::$app->view->registerMetaTag(['name' => 'description', 'content' => $meta->meta_tag_description??''], 'description');
-        Yii::$app->view->registerMetaTag(['property' => 'og:title', 'content' => $meta->meta_tag_title??'']);
-        Yii::$app->view->registerMetaTag(['property' => 'og:description', 'content' => $meta->meta_tag_description??'']);
-        //Yii::$app->view->registerMetaTag(['property' => 'og:url', 'content' => '']); //canonical URL
-        Yii::$app->view->title = $meta->title;
+        case 'catalog':
+          $main_meta = Keywords::findOne(['page' => 'main']);
+          $meta_tag_title = $title = $main_meta->meta_tag_title.' - '.$data['meta_tag_title']??'';
+          $meta_tag_keywords = $main_meta->meta_tag_keywords.' - '.$data['meta_tag_keywords']??'';
+          $meta_tag_description = $main_meta->meta_tag_description.' - '.$data['meta_tag_description']??'';
+          break;
+
+        default:
+
+          if(!empty($page)) {
+            $meta = Keywords::find()->where(['page' => $page??''])->one();
+
+            $meta_tag_title = $title = $meta->meta_tag_title??'';
+            $meta_tag_keywords = $meta->meta_tag_keywords??'';
+            $meta_tag_description = $meta->meta_tag_description??'';
+            Yii::$app->view->title = $meta->meta_tag_title;
+          }
+          break;
       }
+
+      Yii::$app->params['meta'] = [
+        'title'=> $meta_tag_title,
+        'keywords' => $meta_tag_keywords,
+        'description' => $meta_tag_description
+      ];
   }
 }
