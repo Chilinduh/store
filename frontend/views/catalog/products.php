@@ -241,11 +241,14 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
               <div class="products-view__pagination">
                 <nav aria-label="Page navigation example">
                   <?php
+                  $params = Yii::$app->request->get();
+                  unset($params['category_id']);
 
                   $pagination = new Pagination();
                   $pagination->defaultPageSize = 10;
                   $pagination->totalCount = $dataProvider->getTotalCount();
-                  $pagination->params = array_merge([], Yii::$app->request->get());
+                  $pagination->params = array_merge([], $params);
+                  $pagination->route = 'catalog/'.$category['id'];
 
                   echo LinkPager::widget([
                     'pagination' => $pagination,

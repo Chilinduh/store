@@ -366,6 +366,12 @@ class ProductsSearchArrayProvider extends Model
           'attributes' => [
             'views',
             'name',
+            'price' => [
+              'asc' => ['price' => SORT_ASC],
+              'desc' => ['price' => SORT_DESC],
+              'label' => 'Цена',
+              'default' => SORT_DESC // Поведение по умолчанию при нажатии
+            ],
           ],
         ],
       ]
