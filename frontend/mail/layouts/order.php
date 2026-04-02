@@ -64,7 +64,7 @@ use yii\helpers\Html;
 
 С Уважением, <?= $site??'' ?><br>
 Email: <?= $adminEmail??'' ?><br>
-Тел.: <?= $phone??'' ?>
+Тел.: <?= $phone??'' ?><br>
 Телеграмм: <a href="https://t.me/Gar_Hov" class="telegramm" target="_blank" style="color:#29b6f6">Gar_Hov</a>
 <?php $this->endBody() ?>
 </body>
