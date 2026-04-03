@@ -107,8 +107,8 @@ use common\models\Products;
       }
     ],
     [
-      'hAlign' => 'left',
-      'vAlign' => 'left',
+      'hAlign' => 'center',
+      'vAlign' => 'middle',
       'attribute' => 'availability_id',
       'filter' => false,
       'format' => 'raw',

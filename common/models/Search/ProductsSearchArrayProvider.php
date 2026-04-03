@@ -353,13 +353,12 @@ class ProductsSearchArrayProvider extends Model
       return $products[0];
     }
 
-
     $dataProvider = new ArrayDataProvider(
       [
         'allModels' => $products,
         //'totalCount' => $totalCount,
         'pagination' => [
-          'pageSize' => $params['per-page'] ?? 10,
+          'pageSize' => $params['per-page'] ?? 20,
         ],
         'sort' => [
           'defaultOrder' => count($orderBy) ? $orderBy : ['name' => SORT_ASC],

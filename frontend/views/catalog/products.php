@@ -32,6 +32,11 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
   </div>
   <div class="block-split block-split--has-sidebar">
 
+    <?= $this->render('_left_filter', [
+      'catalog' => $catalog,
+      'category' => $category,
+      'filters' => $filters
+    ]) ?>
     <div class="container">
       <div class="block-split__row row no-gutters">
 
@@ -129,7 +134,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
               <div class="products-view">
                 <div class="products-view__options view-options">
                   <div class="view-options__body">
-                    <?php if (0) { ?>
+                    <?php if (1) { ?>
                       <button type="button" class="view-options__filters-button filters-button">
                         <span class="filters-button__icon"><svg width="16" height="16">
                                 <path d="M7,14v-2h9v2H7z M14,7h2v2h-2V7z M12.5,6C12.8,6,13,6.2,13,6.5v3c0,0.3-0.2,0.5-0.5,0.5h-2
@@ -195,14 +200,14 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                       <div class="view-options__select">
                         <label for="view-option-limit">Показать:</label>
                         <select onchange="this.form.submit()" class="form-control form-control-sm" name="per-page">
-                          <option <?= isset($getParams['per-page']) && $getParams['per-page'] == 10 ? 'selected' : '' ?>
-                                  value="10">10
-                          </option>
                           <option <?= isset($getParams['per-page']) && $getParams['per-page'] == 20 ? 'selected' : '' ?>
                                   value="20">20
                           </option>
                           <option <?= isset($getParams['per-page']) && $getParams['per-page'] == 50 ? 'selected' : '' ?>
                                   value="50">50
+                          </option>
+                          <option <?= isset($getParams['per-page']) && $getParams['per-page'] == 100 ? 'selected' : '' ?>
+                                  value="100">100
                           </option>
                         </select>
                     </form>
@@ -237,15 +242,15 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
 
             <?php } ?>
 
-            <?php if ($dataProvider->getTotalCount() > 10) { ?>
+            <?php if ($dataProvider->getTotalCount() > 20) { ?>
               <div class="products-view__pagination">
-                <nav aria-label="Page navigation example">
+                <nav>
                   <?php
                   $params = Yii::$app->request->get();
                   unset($params['category_id']);
 
                   $pagination = new Pagination();
-                  $pagination->defaultPageSize = 10;
+                  $pagination->defaultPageSize = 20;
                   $pagination->totalCount = $dataProvider->getTotalCount();
                   $pagination->params = array_merge([], $params);
                   $pagination->route = 'catalog/'.$category['id'];
@@ -254,8 +259,6 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                     'pagination' => $pagination,
                     'prevPageLabel' => false,
                     'nextPageLabel' => false,
-                    //'defaultPageSize' => 10,
-                    //'maxButtonCount' => 2,
                     'linkOptions' => [
                       'class' => 'page-link'
                     ],
