@@ -134,7 +134,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
               <div class="products-view">
                 <div class="products-view__options view-options">
                   <div class="view-options__body">
-                    <?php if (1) { ?>
+                    <?php if (0) { ?>
                       <button type="button" class="view-options__filters-button filters-button">
                         <span class="filters-button__icon"><svg width="16" height="16">
                                 <path d="M7,14v-2h9v2H7z M14,7h2v2h-2V7z M12.5,6C12.8,6,13,6.2,13,6.5v3c0,0.3-0.2,0.5-0.5,0.5h-2
