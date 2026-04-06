@@ -285,6 +285,14 @@ class CatalogController extends Controller
       }
     }
 
+
+    Yii::$app->metaTags->register('catalog', [
+      'title' => $category['name']??'',
+      'meta_tag_title' => $category['name']??'',
+      'meta_tag_keywords' => $category['name']??'',
+      'meta_tag_description' => $category['name']??''
+    ]);
+
     switch ($lvl) {
 
       case Tree::LVL_ZERO:
