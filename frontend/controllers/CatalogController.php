@@ -94,7 +94,6 @@ class CatalogController extends Controller
     return parent::beforeAction($action);
   }
 
-
   public function init()
   {
 

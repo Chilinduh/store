@@ -23,9 +23,9 @@ class MetaTags extends \yii\base\Component {
 
         case 'catalog':
           $main_meta = Keywords::findOne(['page' => 'main']);
-          $meta_tag_title = Yii::$app->params['meta']['title'].' - '.$data['meta_tag_title']??'';
-          $meta_tag_keywords = $main_meta->meta_tag_keywords.' - '.$data['meta_tag_keywords']??'';
-          $meta_tag_description = $main_meta->meta_tag_description.' - '.$data['meta_tag_description']??'';
+          $meta_tag_title = Yii::$app->params['mainKeywords'].' - '.$data['meta_tag_title']??'';
+          $meta_tag_keywords = Yii::$app->params['mainKeywords'].' - '.$data['meta_tag_keywords']??'';
+          $meta_tag_description = Yii::$app->params['mainKeywords'].' - '.$data['meta_tag_description']??'';
           break;
 
         default:
