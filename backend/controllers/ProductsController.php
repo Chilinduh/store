@@ -268,17 +268,19 @@ class ProductsController extends Controller
 
       if ($model && $productAttributesModel->load(Yii::$app->request->post('Products'))) {
 
-
         foreach ($productAttributesModel->attributes as $key => $attribute) {
 
-          $productAttributesValues = new ProductAttributesValues();
           $params = [
             'product_id' => $id,
             'product_attribute_id' => $key
           ];
 
-          $productAttributesValue = $productAttributesValues->find()->where($params)->one();
-          $productAttributesValue = $productAttributesValue ?? new ProductAttributesValues($params);
+          $productAttributesValue = ProductAttributesValues::find()->where($params)->one();
+
+          if(!$productAttributesValue) {
+            $productAttributesValue = new ProductAttributesValues($params);
+          }
+
           $productAttributesValue->value = $attribute;
 
           $productAttributesValue->save(false);

@@ -56,7 +56,7 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
       ?>
 
       <?=  $form->field($model, 'attributes['.$productAttribute->id.']')
-        ->label($attribute->name.$link).'<br>'; ?>
+        ->textInput(['value' => $attributesValue->value])->label($attribute->name.$link).'<br>'; ?>
 
     <?php } ?>
 
