@@ -62,7 +62,7 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
 
     <br>
     <div class="form-group">
-      <?= Html::submitButton('Добавить', ['class' => 'btn btn-primary']) ?>
+      <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
