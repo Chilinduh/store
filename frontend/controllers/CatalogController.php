@@ -276,14 +276,15 @@ class CatalogController extends Controller
 
     if(!$productsCount && $children = $catalog['sub']??false) {
 
-      $params['categoryIds'] = $children;
-      foreach ($children as $child) {
-        foreach ($child['items'] as $key=>$item) {
-          $params['categoryIds'][$key] = $item;
+      if($lvl != 2) {
+        $params['categoryIds'] = $children;
+        foreach ($children as $child) {
+          foreach ($child['items'] as $key=>$item) {
+            $params['categoryIds'][$key] = $item;
+          }
         }
       }
     }
-
 
     Yii::$app->metaTags->register('catalog', [
       'title' => $category['name']??'',
