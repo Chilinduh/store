@@ -175,6 +175,8 @@
             image.data('owl.carousel').to($(this).index(), 300, true);
         });
 
+
+
         gallery.find('.product-gallery__zoom').on('click', function() {
             openPhotoSwipe(image.find('.owl-item.active').index());
         });
@@ -240,6 +242,11 @@
                 bgOpacity: .9,
                 history: false
             };
+
+          console.log($('.pswp')[0])
+          console.log(PhotoSwipeUI_Default)
+          console.log(photoSwipeImages)
+          console.log(photoSwipeOptions)
 
             const photoSwipeGallery = new PhotoSwipe($('.pswp')[0], PhotoSwipeUI_Default, photoSwipeImages, photoSwipeOptions);
 
