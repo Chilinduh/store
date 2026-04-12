@@ -142,6 +142,7 @@ class ProductsSearchArrayProvider extends Model
         ->leftJoin(Category::tableName(), 'category.id = products.category_id')
         ->leftJoin(Manufacturers::tableName(), 'manufacturers.id = products.manufacturer_id')
         ->leftJoin(ProductsAvailability::tableName(), 'products_availability.id = products.availability_id')
+        ->orWhere(new Expression('products.name LIKE \'%' . $search . '%\''))
         ->orWhere(new Expression('lower(products.name) LIKE LOWER(\'%' . mb_convert_case($search, MB_CASE_LOWER, "UTF-8") . '%\')'))
         ->orWhere(new Expression('products.name LIKE \'%' . mb_convert_case($search, MB_CASE_TITLE, "UTF-8") . '%\''))
 
