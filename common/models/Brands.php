@@ -28,7 +28,7 @@ class Brands extends ActiveRecord
             [['show'], 'integer'],
             [['name'], 'required'],
             [['show_in_blocks', 'url'], 'safe'],
-            [['file'], 'file', 'extensions' => 'jpg, jpeg'],
+            [['file'], 'file', 'extensions' => 'jpg, jpeg, png'],
             ['name', 'unique', 'targetAttribute' => ['name', 'external']]
         ];
     }
