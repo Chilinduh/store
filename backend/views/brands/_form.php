@@ -33,7 +33,7 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
 ?>
 
 <?= PanelWidget::start(); ?>
-<?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 <div class="row">
   <div class="col-md-6">
         <?= $form->field($model, 'name'); ?>
@@ -55,7 +55,7 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
 <div class="row">
   <div class="col-md-6">
     <?php echo $form->field($model, 'file')->widget(FileInput::classname(), [
-      'options' => ['overwriteInitial ' => false, 'multiple' => false, 'accept' => 'image/*'],
+      'options' => ['multiple' => false, 'accept' => 'image/*'],
       'pluginOptions' => [
         'showPreview' => false,
         'showCaption' => true,
