@@ -3,11 +3,12 @@
     <div class="container">
       <ul class="block-brands__list">
         <?php foreach ($brands as $brand) { ?>
-        <?php if(isset($brand['image']['thumbnail'])) { ?>
+        <?php $images = $brand->files ?>
+        <?php if(isset($images[0]['thumbnail'])) { ?>
         <li class="block-brands__item">
           <a href="#" class="block-brands__item-link">
-            <img src="<?= $brand['image']['thumbnail'] ?>" alt="">
-            <span class="block-brands__item-name hidden">AimParts</span>
+            <img src="<?= $images[0]['thumbnail'] ?>" alt="">
+            <span class="block-brands__item-name "><?= $brand->name ?></span>
           </a>
         </li>
         <li class="block-brands__divider" role="presentation"></li>

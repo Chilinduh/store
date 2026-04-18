@@ -16,8 +16,10 @@ use app\components\PanelWidget;
 use kartik\form\ActiveForm;
 use kartik\checkbox\CheckboxX;
 use backend\models\Menu;
+use kartik\file\FileInput;
 
 $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
+
 ?>
 
 <?= BreadcrumbWidget::widget([
@@ -31,27 +33,67 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
 ?>
 
 <?= PanelWidget::start(); ?>
+<?php $form = ActiveForm::begin(); ?>
+<div class="row">
+  <div class="col-md-6">
+        <?= $form->field($model, 'name'); ?>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <?= $form->field($model, 'url'); ?>
+  </div>
+</div>
+<?php if(isset($model->files[0])) { ?>
 
+<div class="row">
+  <div class="col-md-6">
+    <img src="<?= Yii::$app->params['imageUrl'].$model->files[0]['thumbnail'] ?>">
+  </div>
+</div>
+<?php } ?>
+<div class="row">
+  <div class="col-md-6">
+    <?php echo $form->field($model, 'file')->widget(FileInput::classname(), [
+      'options' => ['overwriteInitial ' => false, 'multiple' => false, 'accept' => 'image/*'],
+      'pluginOptions' => [
+        'showPreview' => false,
+        'showCaption' => true,
+        'showRemove' => true,
+        'showUpload' => false,
+        'msgPlaceholder' => 'Выберите файл ...',
+        'browseLabel' => 'Загрузить'
+      ]
+    ]);
+    ?>
+  </div>
+</div>
 <div class="row ">
   <div class="col-md-12">
-        <?php
-
-        $form = ActiveForm::begin(); ?>
-
-        <?= $form->field($model, 'name'); ?>
-        <?= $form->field($model, 'show')->widget(CheckboxX::classname(), [
-          'autoLabel' => true,
-          'pluginOptions' => [
-            'threeState' => false,
-            'size' => 'md'
-          ]
-        ])->label(false); ?>
-
-        <?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-
-        <?php ActiveForm::end(); ?>
-      </div>
-    </div>
+    <?= $form->field($model, 'show')->widget(CheckboxX::classname(), [
+      'autoLabel' => true,
+      'pluginOptions' => [
+        'threeState' => false,
+        'size' => 'md'
+      ]
+    ])->label(false); ?>
+  </div>
+</div>
+<div class="row ">
+  <div class="col-md-12">
+    <?= $form->field($model, 'show_in_blocks')->widget(CheckboxX::classname(), [
+      'autoLabel' => true,
+      'pluginOptions' => [
+        'threeState' => false,
+        'size' => 'md'
+      ]
+    ])->label(false); ?>
+  </div>
+</div>
+<div class="row ">
+  <div class="col-md-12"><?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?></div>
+</div>
+<?php ActiveForm::end(); ?>
 <?php PanelWidget::finish() ?>
 
 

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Files;
 use Yii;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
@@ -27,10 +28,28 @@ class BrandsController extends Controller
   {
 
     $model = new Brands();
+    $files = new Files();
     $model = $model->find()->where(['id' => $id])->one();
 
     if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
-//            $model = new Products(); //reset model
+
+      if ($_FILES['tmp_name']['file']??false) {
+
+        $path = \Yii::getAlias('@brandsImages') . '/' . $model->id;
+        $path_to_save = '/images/' . Yii::$app->controller->id . '/' . $model->id;
+        $file_path = $_FILES[ucfirst(Yii::$app->controller->id)]['tmp_name']['file'];
+
+        $files->saveFiles([
+          'table_name' => Yii::$app->controller->id,
+          'table_id' => $model->id,
+          'file_path' => $file_path,
+          'file_name' => ucfirst(Yii::$app->controller->id) . '[file]',
+          'path' => $path,
+          'path_to_save' => $path_to_save,
+          'replace' => true
+        ], ['width' => 100, 'height' => 100]);
+
+      }
     }
 
     return $this->render('_form', [
@@ -42,9 +61,27 @@ class BrandsController extends Controller
   {
 
     $model = new Brands();
+    $files = new Files();
 
     if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
-//            $model = new Products(); //reset model
+
+        if ($_FILES['tmp_name']['file']??false) {
+
+          $path = \Yii::getAlias('@brandsImages') . '/' . $model->id;
+          $path_to_save = '/images/' . Yii::$app->controller->id . '/' . $model->id;
+          $file_path = $_FILES[ucfirst(Yii::$app->controller->id)]['tmp_name']['file'];
+
+          $files->saveFiles([
+            'table_name' => Yii::$app->controller->id,
+            'table_id' => $model->id,
+            'file_path' => $file_path,
+            'file_name' => ucfirst(Yii::$app->controller->id) . '[file]',
+            'path' => $path,
+            'path_to_save' => $path_to_save,
+            'replace' => true
+          ], ['width' => 100, 'height' => 100]);
+
+        }
     }
 
     return $this->render('_form', [
