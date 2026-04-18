@@ -6,7 +6,7 @@
         <?php $images = $brand->files ?>
         <?php if(isset($images[0]['thumbnail'])) { ?>
         <li class="block-brands__item">
-          <a href="#" class="block-brands__item-link">
+          <a href="<?= $brand->url ?>" class="block-brands__item-link">
             <img src="<?= $images[0]['thumbnail'] ?>" alt="">
             <span class="block-brands__item-name "><?= $brand->name ?></span>
           </a>
