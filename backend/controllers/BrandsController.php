@@ -33,7 +33,7 @@ class BrandsController extends Controller
 
     if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
 
-      if ($_FILES[ucfirst(Yii::$app->controller->id)]['tmp_name']??false) {
+      if ($_FILES[ucfirst(Yii::$app->controller->id)]['tmp_name']??false && !empty($_FILES[ucfirst(Yii::$app->controller->id)]['tmp_name']) ) {
         $path = \Yii::getAlias('@brandsImages') . '/' . $model->id;
         $path_to_save = '/images/' . Yii::$app->controller->id . '/' . $model->id;
         $file_path = $_FILES[ucfirst(Yii::$app->controller->id)]['tmp_name']['file'];
@@ -64,7 +64,7 @@ class BrandsController extends Controller
 
     if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
 
-        if ($_FILES[ucfirst(Yii::$app->controller->id)]['tmp_name']??false) {
+        if ($_FILES[ucfirst(Yii::$app->controller->id)]['tmp_name']??false  && !empty($_FILES[ucfirst(Yii::$app->controller->id)]['tmp_name'])) {
 
           $path = \Yii::getAlias('@brandsImages') . '/' . $model->id;
           $path_to_save = '/images/' . Yii::$app->controller->id . '/' . $model->id;
