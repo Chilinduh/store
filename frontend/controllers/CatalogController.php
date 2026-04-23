@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use api\modules\regular\components\Order;
+use common\components\Services\CatalogImportService;
 use common\models\Forms\OrderForm\OrderFormExtended;
 use common\models\Forms\OrderForm\OrderFormFactory;
 use common\models\Search\ProductsSearchArrayProvider;
@@ -86,6 +87,14 @@ class CatalogController extends Controller
         ],
       ],
     ];
+  }
+
+  public function actionImport() {
+
+    $catalogService = new CatalogImportService();
+    $catalogService->parseData();
+    $catalogService->insertData();
+
   }
 
   public function beforeAction($action)

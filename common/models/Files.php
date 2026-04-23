@@ -127,6 +127,54 @@ class Files extends ActiveRecord
     return $model->save(false);
   }
 
+
+  public function saveFilesDirectly($file = [], $resize = ['width' => 50, 'height' => 50])
+  {
+
+    if (isset($file['replace'])) {
+      $model = static::find()->where(['table_name' => $file['table_name'], 'table_id' => $file['table_id']])->one();
+      if (!$model) {
+        $model = new $this;
+      }
+    } else {
+      $model = new $this;
+    }
+
+    $fileInfo = pathinfo($file['file_path']);
+
+    $model->size = $file['size'] ?? self::MAIN;
+    $model->main = 0;
+    $model->show = 1;
+    $model->table_name = $file['table_name'];
+    $model->table_id = $file['table_id'];
+    $model->file_type_id = 1;
+
+    $size = getimagesize($file['file_path']);
+
+    $width = $file['width'] ?? $size[0];
+    $height = $file['height'] ?? $size[1];
+
+    $path = $file['path'];
+    $path_to_save = $file['path_to_save'];
+
+    if (!is_dir($path)) {
+      mkdir($path);
+    }
+
+    $fileName = uniqid() . '.' . $fileInfo['extension'];
+    $model->original = strtolower($path_to_save . '/' . $fileName);
+
+    Image::resize($file['file_path'], $width, $height)->save($path . '/' . $fileName, ['jpeg_quality' => 50]);
+    if ($resize) {
+
+      $fileName = uniqid() . '.' . $fileInfo['extension'];
+      Image::resize($file['file_path'], $resize['width'], $resize['height'])->save($path . '/' . $fileName, ['jpeg_quality' => 50]);
+      $model->thumbnail = strtolower($path_to_save . '/' . $fileName);
+    }
+
+    return $model->save(false);
+  }
+
   /**
    * {@inheritdoc}
    */
