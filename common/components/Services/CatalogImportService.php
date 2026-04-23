@@ -9,6 +9,8 @@ use common\models\Files;
 use common\models\Manufacturers;
 use common\models\Products;
 use common\models\ProductsAvailability;
+use common\models\ProductsImports;
+use common\models\ProductsImportsData;
 use DOMDocument;
 use DOMXPath;
 use GuzzleHttp\Client;
@@ -65,11 +67,11 @@ class CatalogImportService
           $this->insertData[$key]['category'][] = trim($item->getAttribute('content'));
         }
 
-//        $patternDescription = '#<div\sitemprop="description">(.*?)<\/div>#is';
-//        if (preg_match_all($patternDescription, $html->save(), $matches)) {
-//          // $matches[1] содержит массив совпадений внутри скобок (.*?)
-//          $this->insertData[$key]['description'] = $matches[1];
-//        }
+        $patternDescription = '#<div\sitemprop="description">(.*?)<\/div>#is';
+        if (preg_match_all($patternDescription, $html->save(), $matches)) {
+
+          $this->insertData[$key]['description'] = $matches[1][0];
+        }
 
         $patternImages = [
           '#<img\sclass="product-gallery-main__el-photo">(.*?)<\/div>#is',
@@ -139,9 +141,20 @@ class CatalogImportService
 
     if (count($this->insertData)) {
 
+      if(!$import = ProductsImports::find()->where(['name' => 'Grocenberg'])->one()) {
+
+        $import = new ProductsImports([
+          'name' => 'Grocenberg',
+          'url' => 'https://grocenberg.ru/',
+          'links' => json_encode($this->insertData),
+          'site_map' => 'https://grocenberg.ru/sitemap.xml'
+        ]);
+        $import->save();
+      }
+
       foreach ($this->insertData as $item) {
 
-        $this->saveFiles(34567, $item['images']);
+        if(empty($item['color'])) continue;
 
         //Город
         if(!$city_id = $this->getCity('Россия')) {
@@ -150,11 +163,15 @@ class CatalogImportService
 
         //Бренд
         if(!$brand_id = $this->getBrand('Grocenberg')) {
+
           echo 'Бренд не найден '; die;
         }
 
         //Цена
         if(!$color_id = $this->getColor($item['color'])) {
+          echo '<pre>';
+          print_r($item);
+          echo '</pre>';
           echo 'Цвет не найден - '.$item['color']; die;
         }
 
@@ -164,21 +181,44 @@ class CatalogImportService
         }
 
         //Наличие
-        if(!$availability_id = $this->getManufacturer('В наличии')) {
-          echo 'Производитель не найден'; die;
+        if(!$availability_id = $this->getAvailability('В наличии')) {
+          echo 'В наличии товар не найден'; die;
         }
 
-        $product = new Products([
-          'city_id' => $city_id,
-          'brand_id' => $brand_id,
-          'color_id' => $color_id,
-          'availability_id' => $availability_id,
-          'manufacturer_id' => $manufacturer_id,
-          'name' => $item['name'],
-          'description' => $item['description'],
-        ]);
+        if(!$product = Products::find()->where(['name' => trim($item['name'])])->one()) {
 
-        //$product->save();
+          $product = new Products([
+            'code' => '',
+            'weight' => '',
+            'brand_id' => $brand_id,
+            'color_id' => $color_id,
+            'category_id' => $this->getCategoryID($item['category'][0]),
+            'availability_id' => $availability_id,
+            'manufacturer_id' => $manufacturer_id,
+            'name' => trim($item['name']),
+            'description' => trim($item['description']),
+          ]);
+
+          if($product->save()) {
+
+            $importData = new ProductsImportsData([
+              'product_import_id' => $import->id,
+              'product_id' => $product->id,
+              'data' => json_encode($item),
+              'source' => $item['source']
+            ]);
+            $importData->save();
+
+            $this->saveFiles($product->id, $item['images']);
+
+          } else {
+            echo '<pre>';
+            print_r($product->errors);
+            echo '</pre>';
+            die;
+          }
+        }
+
 
       }
     }
@@ -248,10 +288,7 @@ class CatalogImportService
     $name = trim($name);
     if (!empty($name)) {
 
-      if (!$availability = ProductsAvailability::find()->where(['name' => $name])->one()) {
-//        $availability = new ProductsAvailability(['name' => $name]);
-//        $availability->save();
-      }
+      $availability = ProductsAvailability::find()->where(['name' => $name])->one();
       return $availability->id;
     }
     return false;
@@ -280,6 +317,7 @@ class CatalogImportService
       if (!$color = Colors::find()->where(['name' => $name])->one()) {
         $color = new Colors([
           'name' => $name,
+          'color' => '',
           'show' => 1
         ]);
         $color->save(false);
@@ -301,7 +339,6 @@ https://grocenberg.ru/smesitel-vstraivaemyy-dlya-rakoviny-grocenberg-gb599-hrom-
 https://grocenberg.ru/smesitel-vstraivaemyy-dlya-rakoviny-grosenberg-gb511-hrom-gb511cr/##80%##monthly##2026-03-17 14:03:03+03:00
 https://grocenberg.ru/smesitel-vstraivaemyy-dlya-rakoviny-grosenberg-gb588-hrom-gb588cr/##80%##monthly##2026-03-17 14:03:44+03:00
 https://grocenberg.ru/smesitel-dlya-kuhni-grocenberg-gb4008-chernyy-matovyy-gb4008bl/##80%##monthly##2026-03-17 12:34:15+03:00
-https://grocenberg.ru/smesitel-dlya-kuhni-grocenberg-gb4008-chernyy-matovyy-gb4008bl/katalog-produktsii/##40%##monthly##2022-03-18 13:09:56+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb3007-belyy-hrom-gb3007wc/##80%##monthly##2026-03-17 14:01:12+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb3008-hrom-gb3008cr/##80%##monthly##2026-03-17 14:01:54+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb3007-hrom-gb3007cr/##80%##monthly##2026-03-17 14:01:12+03:00
@@ -311,20 +348,14 @@ https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb3001-chernyy-matovyy-g
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb3001-hrom-gb3001cr/##80%##monthly##2026-03-17 14:00:41+03:00
 https://grocenberg.ru/smesitel-vstraivaemyy-s-gigienicheskim-dushem-grocenberg-gb001-belyy-gb001w/##80%##monthly##2026-03-18 11:16:34+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2001-hrom-gb2001cr/##80%##monthly##2026-03-17 13:48:56+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2001-hrom-gb2001cr/katalog-produktsii/##40%##monthly##2022-03-30 11:21:28+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2001-chernyy-hrom-gb2001bc/##80%##monthly##2026-03-17 13:48:56+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2001-chernyy-hrom-gb2001bc/katalog-produktsii/##40%##monthly##2022-03-30 11:21:38+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2088-belyy-hrom-gb2088wc/##80%##monthly##2026-03-17 13:59:47+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2088-chernyy-matovyy-gb2088bl/##80%##monthly##2026-03-17 13:59:47+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2009-belyy-hrom-gb2009wc/##80%##monthly##2026-03-17 13:57:21+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2009-belyy-hrom-gb2009wc/katalog-produktsii/##40%##monthly##2022-03-30 11:22:12+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2009-chernyy-matovyy-gb2009bl/##80%##monthly##2026-03-17 13:57:21+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2008-chernyy-matovyy-gb2008bl/##80%##monthly##2026-03-17 13:56:45+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2008-chernyy-matovyy-gb2008bl/katalog-produktsii/##40%##monthly##2022-03-30 11:22:08+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2007-bronza-gb2007br/##80%##monthly##2026-03-17 13:56:03+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2007-bronza-gb2007br/katalog-produktsii/##40%##monthly##2022-03-30 11:21:47+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2007-belyy-hrom-gb2007wc/##80%##monthly##2026-03-17 13:56:03+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2007-belyy-hrom-gb2007wc/katalog-produktsii/##40%##monthly##2022-03-30 11:21:42+03:00
 https://grocenberg.ru/smesitel-dlya-dusha-s-ruchnym-dushem-grosenberg-gb9001-belyy-hrom-gb9001wc/##80%##monthly##2026-03-18 12:30:11+03:00
 https://grocenberg.ru/smesitel-dlya-dusha-s-ruchnym-dushem-grosenberg-gb9001-zoloto-gb9001go/##80%##monthly##2026-03-18 12:30:11+03:00
 https://grocenberg.ru/smesitel-dlya-dusha-s-ruchnym-dushem-grosenberg-gb9001-hrom-gb9001cr/##80%##monthly##2026-03-18 12:30:11+03:00
@@ -354,24 +385,17 @@ https://grocenberg.ru/smesitel-vstraivaemyy-dlya-rakoviny-grosenberg-gb511-chern
 https://grocenberg.ru/smesitel-vstraivaemyy-dlya-rakoviny-grosenberg-gb588-chernyy-matovyy-gb588bl/##80%##monthly##2026-03-17 14:03:44+03:00
 https://grocenberg.ru/smesitel-vstraivaemyy-s-gigienicheskim-dushem-grocenberg-gb001-hrom-gb001cr/##80%##monthly##2026-03-18 11:16:34+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2001-belyy-hrom-gb2001wc/##80%##monthly##2026-03-17 13:48:56+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2001-belyy-hrom-gb2001wc/katalog-produktsii/##40%##monthly##2022-03-30 11:21:20+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2001-chernyy-matovyy-gb2001bl/##80%##monthly##2026-03-17 13:48:56+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2001-chernyy-matovyy-gb2001bl/katalog-produktsii/##40%##monthly##2022-03-30 11:21:33+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb3008-chernyy-matovyy-gb3008bl/##80%##monthly##2026-03-17 14:01:54+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb3009-chernyy-matovyy-gb3009bl/##80%##monthly##2026-03-17 14:02:31+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb1011-hrom-gb1011cr/##80%##monthly##2026-03-17 13:55:00+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb1011-hrom-gb1011cr/katalog-produktsii/##40%##monthly##2022-03-30 11:21:15+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2010-belyy-hrom-gb2010wc/##80%##monthly##2026-03-17 13:57:51+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2010-hrom-gb2010cr/##80%##monthly##2026-03-17 13:57:51+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2009-hrom-gb2009cr/##80%##monthly##2026-03-17 13:57:21+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2009-hrom-gb2009cr/katalog-produktsii/##40%##monthly##2022-03-30 11:20:52+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2088-hrom-gb2088cr/##80%##monthly##2026-03-17 13:59:47+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2007-zoloto-gb2007go/##80%##monthly##2026-03-17 13:56:03+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2007-zoloto-gb2007go/katalog-produktsii/##40%##monthly##2022-03-30 11:21:51+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2007-chernyy-matovyy-gb2007bl/##80%##monthly##2026-03-17 13:56:03+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2007-chernyy-matovyy-gb2007bl/katalog-produktsii/##40%##monthly##2022-03-30 11:22:00+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2007-hrom-gb2007cr/##80%##monthly##2026-03-17 13:56:03+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2007-hrom-gb2007cr/katalog-produktsii/##40%##monthly##2022-03-30 11:21:55+03:00
 https://grocenberg.ru/smesitel-dlya-rakoviny-grosenberg-gb3010-belyy-hrom-gb3010wc/##80%##monthly##2026-03-17 14:05:07+03:00
 https://grocenberg.ru/smesitel-dlya-rakoviny-grosenberg-gb3010-hrom-gb3010cr/##80%##monthly##2026-03-17 14:05:07+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb3009-belyy-hrom-gb3009wc/##80%##monthly##2026-03-17 14:02:31+03:00
@@ -385,16 +409,12 @@ https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb3001-chernyy-hrom-gb30
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2033-hrom-gb2033cr/##80%##monthly##2026-03-17 13:59:10+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2022-hrom-gb2022cr/##80%##monthly##2026-03-17 13:58:34+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2009-zoloto-gb2009go/##80%##monthly##2026-03-17 13:57:21+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2009-zoloto-gb2009go/katalog-produktsii/##40%##monthly##2022-03-30 11:21:00+03:00
 https://grocenberg.ru/dushevaya-sistema-grocenberg-gb7001-chernyy-matovyy-gb7001bl/##80%##monthly##2026-03-17 10:33:27+03:00
 https://grocenberg.ru/dushevaya-sistema-grocenberg-gb5008-hrom-gb5008cr/##80%##monthly##2026-03-17 11:11:00+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb1001n-hrom-gb1001n-cr/##80%##monthly##2026-04-15 10:35:47+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb1001n-hrom-gb1001n-cr/katalog-produktsii/##40%##monthly##2022-03-30 11:21:11+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb1001n-belyy-hrom-gb1001n-wc/##80%##monthly##2026-03-17 13:53:54+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2001-zoloto-gb2001go/##80%##monthly##2026-03-17 13:48:56+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2001-zoloto-gb2001go/katalog-produktsii/##40%##monthly##2022-03-30 11:21:24+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2008-hrom-gb2008cr/##80%##monthly##2026-03-17 13:56:45+03:00
-https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2008-hrom-gb2008cr/katalog-produktsii/##40%##monthly##2022-03-30 11:22:04+03:00
 https://grocenberg.ru/smesitel-dlya-vanny-s-ruchnym-dushem-grosenberg-gb8001-chernyy-matovyy-gb8001bl/##80%##monthly##2026-03-18 12:30:11+03:00
 https://grocenberg.ru/smesitel-dlya-vanny-s-ruchnym-dushem-grocenberg-gb8007-hrom-gb8007cr/##80%##monthly##2026-03-18 12:30:10+03:00
 https://grocenberg.ru/smesitel-dlya-vanny-s-ruchnym-dushem-grocenberg-gb8007-chernyy-matovyy-gb8007bl/##80%##monthly##2026-03-18 12:30:10+03:00
@@ -451,14 +471,11 @@ https://grocenberg.ru/dushevaya-sistema-grocenberg-gb7007-1-hrom-gb7007-1cr/##80
 https://grocenberg.ru/dushevaya-sistema-grocenberg-gb7008-hrom-gb7008cr/##80%##monthly##2026-03-17 10:32:47+03:00
 https://grocenberg.ru/dushevaya-sistema-grocenberg-gb7008-chernyy-matovyy-gb7008bl/##80%##monthly##2026-03-17 10:33:27+03:00
 https://grocenberg.ru/smesitel-dlya-kuhni-grocenberg-gb4008-hrom-gb4008cr/##80%##monthly##2026-03-17 12:34:15+03:00
-https://grocenberg.ru/smesitel-dlya-kuhni-grocenberg-gb4008-hrom-gb4008cr/katalog-produktsii/##40%##monthly##2022-03-18 13:10:59+03:00
 https://grocenberg.ru/smesitel-dlya-rakoviny-standartnyy-grocenberg-gb2091bl-chyornyy-matovyy/##80%##monthly##2026-03-17 14:09:08+03:00
 https://grocenberg.ru/429/##80%##monthly##2026-03-17 12:43:23+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb2009-bronza/##80%##monthly##2026-03-17 13:57:21+03:00
 https://grocenberg.ru/smesitel-dlya-kuhni-grocenberg-gb40551-gold-gb40551go/##80%##monthly##2026-03-17 12:34:15+03:00
-https://grocenberg.ru/smesitel-dlya-kuhni-grocenberg-gb40551-gold-gb40551go/katalog-produktsii/##40%##monthly##2022-03-18 13:10:52+03:00
 https://grocenberg.ru/smesitel-dlya-kuhni-grocenberg-gb40551-hrom-gb40551cr/##80%##monthly##2026-03-17 12:34:15+03:00
-https://grocenberg.ru/smesitel-dlya-kuhni-grocenberg-gb40551-hrom-gb40551cr/katalog-produktsii/##40%##monthly##2022-03-18 13:10:55+03:00
 https://grocenberg.ru/donnyy-klapan-grocenber-2/##80%##monthly##2026-03-18 11:42:41+03:00
 https://grocenberg.ru/donnyy-klapan-grocenber-1-1/##80%##monthly##2026-03-18 11:42:41+03:00
 https://grocenberg.ru/donnyy-klapan-grocenber-1/##80%##monthly##2026-03-18 11:42:41+03:00
@@ -491,7 +508,6 @@ https://grocenberg.ru/dushevoy-garnitur-grocenberg-1/##80%##monthly##2026-03-18 
 https://grocenberg.ru/dushevoy-garnitur-grocenberg-1-1/##80%##monthly##2026-03-18 11:44:37+03:00
 https://grocenberg.ru/dushevaya-sistema-grocenberg-gb5001-zoloto-gb5001go-1/##80%##monthly##2026-03-17 11:11:00+03:00
 https://grocenberg.ru/smesitel-vstraivaemyy-dlya-rakoviny-grocenberg-gb588-zoloto/##80%##monthly##2026-03-17 14:03:44+03:00
-https://grocenberg.ru/smesitel-vstraivaemyy-dlya-rakoviny-grocenberg-gb588-zoloto/katalog-produktsii/##40%##monthly##2022-03-16 11:50:49+03:00
 https://grocenberg.ru/smesitel-napolnyy-grosenberg-gb800-zoloto/##80%##monthly##2026-03-18 10:58:09+03:00
 https://grocenberg.ru/smesitel-vstraivaemyy-s-gigienicheskim-dushem-grocenberg-gb101n-zoloto/##80%##monthly##2026-03-18 11:16:34+03:00
 https://grocenberg.ru/smesitel-vstraivaemyy-s-gigienicheskim-dushem-grocenberg-gb103n-zoloto/##80%##monthly##2026-03-18 11:16:34+03:00
@@ -568,7 +584,6 @@ https://grocenberg.ru/dushevaya-sistema-grocenberg-gb5008-hrom-gb5008cr-1/##80%#
 https://grocenberg.ru/dushevaya-sistema-grocenberg-gb5007-bronza-gb5007br-1/##80%##monthly##2026-03-17 11:48:31+03:00
 https://grocenberg.ru/dushevaya-sistema-grocenberg-gb5001-zoloto-gb5001go-1-1/##80%##monthly##2026-03-17 11:48:31+03:00
 https://grocenberg.ru/smesitel-dlya-kuhni-grocenberg-gb40551-hrom-gb40551cr-1/##80%##monthly##2026-03-17 12:34:15+03:00
-https://grocenberg.ru/smesitel-dlya-kuhni-grocenberg-gb40551-hrom-gb40551cr-1/katalog-produktsii/##40%##monthly##2022-04-12 09:17:37+03:00
 https://grocenberg.ru/leyka-dushevaya-3-rezhima-grocenberg_1-1-1-2-1/##80%##monthly##2026-03-18 11:44:37+03:00
 https://grocenberg.ru/cmesitel-dlya-rakoviny-grocenberg-gb3007-bronza-gb3007br-1/##80%##monthly##2026-03-17 14:01:12+03:00
 https://grocenberg.ru/sifon-dlya-rakoviny-grocenberg-2-1-1/##80%##monthly##2026-03-18 11:44:10+03:00

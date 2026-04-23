@@ -48,4 +48,10 @@ echo TreeView::widget([
   .modal {
     opacity: 1;
   }
+  .card-body .col-sm-3 {
+    width: 40% !important;
+  }
+  .card-body .col-sm-9 {
+    width: 60% !important;
+  }
 </style>

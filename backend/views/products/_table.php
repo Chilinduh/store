@@ -15,7 +15,7 @@ use backend\assets\FormsAsset;
 ?>
 
 <?= TableDataWidget::widget([
-    'order' => ['id'=>SORT_ASC],
+    'order' => ['id'=>SORT_DESC],
     'pagination' => false,
     'model' => $model,
     'filter' => $filter,
@@ -24,6 +24,7 @@ use backend\assets\FormsAsset;
     'data' => $data,
     'title' => 'Каталог товаров',
     'labels' => [
+        'id',
         'name',
         'category_id',
         'group_id',
@@ -42,6 +43,7 @@ use backend\assets\FormsAsset;
         '<i class="icon wb-edit"></i>',  '<i class="icon wb-close"></i>'
     ],
     'columns' => [
+        'id',
         'name',
         'category_id' => function($model) {
 

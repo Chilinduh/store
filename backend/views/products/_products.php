@@ -34,12 +34,12 @@ use common\models\Products;
   ],
   'columns' => [
     //['class' => 'yii\grid\SerialColumn'],
-//    [
-//      'hAlign' => 'center',
-//      'vAlign' => 'middle',
-//      'attribute' => 'id',
-//      'filter' => false,
-//    ],
+    [
+      'hAlign' => 'center',
+      'vAlign' => 'middle',
+      'attribute' => 'id',
+      'filter' => false,
+    ],
 
     [
       'hAlign' => 'center',

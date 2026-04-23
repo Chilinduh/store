@@ -45,7 +45,7 @@ class ColorsController extends Controller
     $model = new Colors();
 
     if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
-//            $model = new Products(); //reset model
+      return $this->redirect('/colors/' . $model->id);
     }
 
     return $this->render('_form', [
