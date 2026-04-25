@@ -277,6 +277,8 @@ class CatalogImportService
           }
         } else {
 
+          $product->price = $item['price'];
+          $product->save();
           //echo ($i++) . ' Товар уже добавлен ' . $item['name'] . '<br>';
         }
       }
