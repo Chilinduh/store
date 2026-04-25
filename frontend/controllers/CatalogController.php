@@ -89,10 +89,16 @@ class CatalogController extends Controller
     ];
   }
 
+  public function actionImportData() {
+
+
+    $catalogService = new CatalogImportService();
+    $catalogService->parseHtmlData();
+  }
+  
   public function actionImport() {
 
     $catalogService = new CatalogImportService();
-    //$catalogService->parseHtmlData();
     $catalogService->parseData();
     $catalogService->insertData();
 
