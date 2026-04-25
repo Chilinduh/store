@@ -363,14 +363,14 @@ foreach (Yii::$app->cart->getItems() as $item) {
 
 $cartItems = \yii\helpers\Json::encode($cartItems);
 
-$js = <<<JS
-jQuery(document).ready(function(){
-
-
-
-});
-JS;
-$this->registerJs($js, \yii\web\View::POS_READY);
+//$js = <<<JS
+//jQuery(document).ready(function(){
+//
+//
+//
+//});
+//JS;
+//$this->registerJs($js, \yii\web\View::POS_READY);
 
 ?>
 

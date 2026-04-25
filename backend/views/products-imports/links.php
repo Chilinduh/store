@@ -16,7 +16,7 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
 ?>
 
 <?= BreadcrumbWidget::widget([
-  'title' => 'Импорт',
+  'title' => 'Страницы',
 ]);
 ?>
 
@@ -57,37 +57,27 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
   ],
   'columns' => [
     //['class' => 'yii\grid\SerialColumn'],
+    'id',
     [
-      'hAlign' => 'center',
+      'hAlign' => 'left',
       'vAlign' => 'middle',
-      'attribute' => 'name',
+      'attribute' => 'url',
+      'format' => 'html',
       'filter' => false,
-    ],
-    'url',
-    'site-map',
-    [
-      'hAlign' => 'center',
-      'vAlign' => 'middle',
-      'label' => 'Кол-во страниц',
-      'filter' => false,
-      'value' => function ($model) {
-          return count($model->productsImportsPages);
+      'value' => static function ($model) {
+
+        return '<a href="'.$model->url.'" target="_blank">'.$model->url.'</a>';
       }
     ],
     [
       'class' => 'yii\grid\ActionColumn',
       'headerOptions' => ['width' => '150'],
       'contentOptions' => ['class' => 'actions'],
-      'template' => '{links}    {update}   {delete}',
+      'template' => '{update}   {delete}',
       'buttons' => [
-        'links' => function ($url, $model) {
-          return Html::a('<span class="glyphicon glyphicon-th-list"></span>',
-            ['/products-imports/' . $model->id.'/links'],
-              );
-        },
         'update' => function ($url, $model) {
 
-          return '<a href="/products-imports/' . $model->id . '" class="menu-link px-3">
+          return '<a href="/colors/' . $model->id . '" class="menu-link px-3">
                       <span class="svg-icon svg-icon-primary svg-icon-2x">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -102,7 +92,7 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
         },
         'delete' => function ($url, $model) {
           return Html::a('<span class="glyphicon glyphicon-trash"></span>',
-            ['/products-imports/' . $model->id.'/delete'],
+            ['/colors/' . $model->id.'/delete'],
               );
 
         },

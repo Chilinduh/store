@@ -3,11 +3,11 @@
 use yii\db\Migration;
 
 /**
- * Class m260423_141327_create_products_imports_data
+ * Class m260424_140434_create_products_imports_pages
  */
-class m260423_141327_create_products_imports_data extends Migration
+class m260424_140434_create_products_imports_pages extends Migration
 {
-  public const TABLE_NAME = '{{%products_imports_data}}';
+  public const TABLE_NAME = '{{%products_imports_pages}}';
 
   /**
    * {@inheritdoc}
@@ -26,10 +26,8 @@ class m260423_141327_create_products_imports_data extends Migration
       [
         'id' => $this->primaryKey(),
         'product_import_id' => $this->integer()->null()->comment('Импорт'),
-        'product_import_page_id' => $this->integer()->null()->comment('Страница импорта'),
-        'product_id' => $this->integer()->null()->comment('Товар'),
-        'source' => $this->text()->null()->comment('Источник'),
-        'data' => $this->text()->null()->comment('данные'),
+        'url' => $this->text()->null()->comment('Урл страницы'),
+        'html' => $this->text()->notNull()->comment('Содержимое страницы'),
         'created_at' => $this->dateTime()->defaultExpression('current_timestamp')->comment('Дата создания'),
       ],
       $tableOptions

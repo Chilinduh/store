@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use common\models\Products;
+use common\models\ProductsImportsPages;
 use Yii;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
@@ -23,20 +25,48 @@ class ProductsImportsController extends Controller
     ];
   }
 
-  public function actionUpdate($id)
+  public function actionLinks($id)
   {
 
-    $model = new ProductsImports();
+    $model = new ProductsImportsPages();
+    $searchModel = new ProductsImportsPages();
     $model = $model->find()->where(['id' => $id])->one();
 
+    $query = ProductsImportsPages::find();
+
     $dataProvider = new ActiveDataProvider([
-      'query' => $model->productsImportsData,
+      'query' => $query,
       'pagination' => [
         'pageSize' => 15
       ]
     ]);
 
-    return $this->render('_form', [
+    return $this->render('links', [
+      'model' => $model,
+      'dataProvider' => $dataProvider,
+      'searchModel' => $searchModel,
+    ]);
+  }
+
+  public function actionUpdate($id)
+  {
+
+    $model = new ProductsImports();
+    $searchModel = new ProductsImports();
+    $model = $model->find()->where(['id' => $id])->one();
+
+    $query = Products::find()
+      ->leftJoin('products_imports_data pi', 'pi.product_id = products.id')
+      ->andWhere(['pi.product_import_id' => $model->id]);
+
+    $dataProvider = new ActiveDataProvider([
+      'query' => $query,
+      'pagination' => [
+        'pageSize' => 15
+      ]
+    ]);
+
+    return $this->render('update', [
       'model' => $model,
       'dataProvider' => $dataProvider,
       'searchModel' => $searchModel,

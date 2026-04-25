@@ -1,21 +1,46 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Sergey
+ * Date: 21.06.19
+ * Time: 15:00
+ */
 
+use app\components\PanelWidget;
 use yii\helpers\Html;
+use backend\models\Menu;
+use kartik\select2\Select2;
+use yii\widgets\ActiveForm;
+use app\components\BreadcrumbWidget;
+use yii\widgets\Breadcrumbs;
+use kartik\file\FileInput;
+use kartik\checkbox\CheckboxX;
+use common\models\Products;
+use yii\helpers\ArrayHelper;
+use common\models\Materials;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\ProductsImports */
-
-$this->title = 'Update Products Imports: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Products Imports', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$menu = Menu::findOne(['url' => Yii::$app->controller->id]);
+//$parent = Menu::findOne(['id' => $menu->parent_id]);
 ?>
-<div class="products-imports-update">
+<?= BreadcrumbWidget::widget([
+  'title' => 'Импорт'
+]);
+?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<?= PanelWidget::start(false); ?>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+<div class="card card-flush">
+  <!--begin::Card header-->
+  <div class="card-body pb-0">
+
+    <?php echo $this->context->renderPartial('/products/_products', [
+      'dataProvider' => $dataProvider,
+      'filterModel' => $searchModel,
+      'searchModel' => $searchModel,
+    ]); ?>
+
+  </div>
 
 </div>
+
+<?= PanelWidget::finish(false); ?>

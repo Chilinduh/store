@@ -47,4 +47,18 @@ class ProductsImports extends \yii\db\ActiveRecord
             'links' => 'Link',
         ];
     }
+
+  public function getProductsImportsData()
+  {
+
+    return $this->hasMany(ProductsImportsData::class, ['product_import_id' => 'id']);
+  }
+
+  public function getProductsImportsPages()
+  {
+
+    return $this->hasMany(ProductsImportsPages::class, ['product_import_id' => 'id']);
+  }
+
+
 }

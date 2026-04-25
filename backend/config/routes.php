@@ -189,6 +189,9 @@ return [
   'GET, POST categoryType/update/<id:\d+>' => 'categoryType/update',
   'categoryType/create' => 'user/create',
 
+  'products-imports/<id:\d+>' => 'products-imports/update',
+  'products-imports/<id:\d+>/links' => 'products-imports/links',
+
   'products/<id:\d+>' => 'products/update',
   'products/<id:\d+>/update-files' => 'products/update-files',
   'products/<id:\d+>/prices' => 'products/prices',

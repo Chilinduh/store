@@ -11,6 +11,7 @@ use common\models\Products;
 use common\models\ProductsAvailability;
 use common\models\ProductsImports;
 use common\models\ProductsImportsData;
+use common\models\ProductsImportsPages;
 use DOMDocument;
 use DOMXPath;
 use GuzzleHttp\Client;
@@ -21,17 +22,57 @@ class CatalogImportService
 
   public $insertData = [];
 
-  public function parseData()
+  public function parseHtmlData()
   {
-
-    include('simple_html_dom.php');
 
     $catalog = $this->getGrocenberg();
     $catalog = explode("\n", $catalog);
 
+    if (!$import = ProductsImports::find()->where(['name' => 'Grocenberg'])->one()) {
+
+      $import = new ProductsImports([
+        'name' => 'Grocenberg',
+        'url' => 'https://grocenberg.ru/',
+        'links' => json_encode($catalog),
+        'site_map' => 'https://grocenberg.ru/sitemap.xml'
+      ]);
+      $import->save();
+    }
+
+    foreach (array_slice($catalog, 500, 900) as $key => $cat) {
+
+      $temp = explode("##", $cat);
+
+      if (!empty($temp[0])) {
+
+        $productsImportsPages = ProductsImportsPages::find()
+          ->where(['url' => $temp[0]])
+          ->andWhere(['!=', 'html', ''])
+          ->andWhere(['product_import_id' => $import->id])
+          ->one();
+
+        if (!$productsImportsPages) {
+
+          $content = file_get_contents($temp[0]);
+          $productsImportsPages = new ProductsImportsPages([
+            'product_import_id' => $import->id,
+            'url' => $temp[0],
+            'html' => $content
+          ]);
+          $productsImportsPages->save();
+        }
+      }
+    }
+
+  }
+
+  public function parseData()
+  {
+
+    $imports = ProductsImportsPages::find()->where(['product_import_id' => 1])->all();
     $this->insertData = [];
 
-    foreach (array_slice($catalog, 0, 2) as $key => $cat) {
+    foreach (array_slice($imports, 0, 1112) as $key => $import) {
 
       $this->insertData[$key] = [
         'source' => '',
@@ -43,51 +84,63 @@ class CatalogImportService
         'images' => []
       ];
 
-      $temp = explode("##", $cat);
+      if (!empty($import['html'])) {
 
-      if (!empty($temp[0])) {
+        $content = $import['html'];
 
-        $html = file_get_html($temp[0]);
+        $this->insertData[$key]['source'] = $import['url'];
 
-        $this->insertData[$key]['source'] = $temp[0];
+        $pattern = '#<span\sclass="price">(.*?)<\/span>#is';
+        if (preg_match_all($pattern, $content, $matches)) {
 
-        $patternDescription = '#<span\s class="price">(.*?)<\/span>#is';
-        if (preg_match_all($patternDescription, $html->save(), $matches)) {
+          $price = intval(str_replace(' ', '', $matches[1][0]));
           // $matches[1] содержит массив совпадений внутри скобок (.*?)
-          $this->insertData[$key]['price'] = trim($matches[1][0]);
+          $this->insertData[$key]['price'] = intval($price - (25 * $price) / 100);
         }
 
         $patternDescription = '#<h1\s itemprop="name">(.*?)<\/h1>#is';
-        if (preg_match_all($patternDescription, $html->save(), $matches)) {
+        if (preg_match_all($patternDescription, $content, $matches)) {
           // $matches[1] содержит массив совпадений внутри скобок (.*?)
           $this->insertData[$key]['name'] = trim($matches[1][0]);
         }
 
-        foreach ($html->find('meta[itemprop=name]') as $item) {
-          $this->insertData[$key]['category'][] = trim($item->getAttribute('content'));
-        }
-
         $patternDescription = '#<div\sitemprop="description">(.*?)<\/div>#is';
-        if (preg_match_all($patternDescription, $html->save(), $matches)) {
+        if (preg_match_all($patternDescription, $content, $matches)) {
 
           $this->insertData[$key]['description'] = $matches[1][0];
         }
 
         $patternImages = [
-          '#<img\sclass="product-gallery-main__el-photo">(.*?)<\/div>#is',
-          '#<div\sclass="owl-lazy product-gallery-main__el-photo">(.*?)<\/div>#is'
+          '/<img[^>]+class=["\']' . preg_quote('product-gallery-main__el-photo') . '["\'][^>]*>/i',
+          '/<img[^>]+class=["\']' . preg_quote('owl-lazy product-gallery-main__el-photo') . '["\'][^>]*>/i'
         ];
 
-        $this->insertData[$key]['color'] = $html->find('.product_features-value', 0)->plaintext;
+        foreach ($patternImages as $item) {
 
-        foreach ($html->find('img') as $element) {
-          if ($element->getAttribute('class') == 'product-gallery-main__el-photo') {
-            $this->insertData[$key]['images'][] = 'https://grocenberg.ru' . $element->getAttribute('src');
-          }
-          if ($element->getAttribute('class') == 'owl-lazy product-gallery-main__el-photo') {
-            $this->insertData[$key]['images'][] = 'https://grocenberg.ru' . $element->getAttribute('data-src');
+          if (preg_match_all($item, $content, $matches)) {
+
+            foreach ($matches[0] as $match) {
+
+              preg_match('@src="([^"]+)"@', $match, $src);
+              $this->insertData[$key]['images'][] = 'https://grocenberg.ru' . $src[1];
+            }
           }
         }
+
+        $pattern = '#<span\sstyle="white-space: nowrap;">(.*?)<\/span>#is';
+        if (preg_match_all($pattern, $content, $matches)) {
+
+          $color = preg_replace('|<span[^>]*?>(.*?)</span>|', '\1', $matches[0][1]);
+          // $matches[1] содержит массив совпадений внутри скобок (.*?)
+          $this->insertData[$key]['color'] = strip_tags($color);
+        }
+
+        $pattern = '/<meta\sitemprop="name" content="([^"]+)"/i';
+        if (preg_match_all($pattern, $content, $matches)) {
+
+          $this->insertData[$key]['category'] = trim($matches[1][0]);
+        }
+
       }
     }
 
@@ -111,6 +164,7 @@ class CatalogImportService
       'Сифон для раковины' => 361, // ??
       'Аксессуары' => 309,
       'Инсталляция для унитаза' => 311,
+      'Смеситель для биде' => 305,
       'Комплектующие' => 310
     ];
 
@@ -119,6 +173,7 @@ class CatalogImportService
 
   public function insertData()
   {
+
 
     /*
       [source] => https://grocenberg.ru/smesitel-napolnyy-grosenberg-gb800-zoloto-1/
@@ -141,94 +196,99 @@ class CatalogImportService
 
     if (count($this->insertData)) {
 
-      if(!$import = ProductsImports::find()->where(['name' => 'Grocenberg'])->one()) {
-
-        $import = new ProductsImports([
-          'name' => 'Grocenberg',
-          'url' => 'https://grocenberg.ru/',
-          'links' => json_encode($this->insertData),
-          'site_map' => 'https://grocenberg.ru/sitemap.xml'
-        ]);
-        $import->save();
-      }
+      $import = ProductsImports::find()->where(['name' => 'Grocenberg'])->one();
 
       foreach ($this->insertData as $item) {
 
-        if(empty($item['color'])) continue;
+        $item['name'] = trim($item['name']);
+        if (!$product = Products::find()->where(['name' => $item['name']])->one()) {
 
-        //Город
-        if(!$city_id = $this->getCity('Россия')) {
-          echo 'Город не найден '; die;
-        }
+          if (empty($item['color'])) continue;
 
-        //Бренд
-        if(!$brand_id = $this->getBrand('Grocenberg')) {
-
-          echo 'Бренд не найден '; die;
-        }
-
-        //Цена
-        if(!$color_id = $this->getColor($item['color'])) {
-          echo '<pre>';
-          print_r($item);
-          echo '</pre>';
-          echo 'Цвет не найден - '.$item['color']; die;
-        }
-
-        //Производитель
-        if(!$manufacturer_id = $this->getManufacturer('Германия')) {
-          echo 'Производитель не найден'; die;
-        }
-
-        //Наличие
-        if(!$availability_id = $this->getAvailability('В наличии')) {
-          echo 'В наличии товар не найден'; die;
-        }
-
-        if(!$product = Products::find()->where(['name' => trim($item['name'])])->one()) {
-
-          $product = new Products([
-            'code' => '',
-            'weight' => '',
-            'brand_id' => $brand_id,
-            'color_id' => $color_id,
-            'category_id' => $this->getCategoryID($item['category'][0]),
-            'availability_id' => $availability_id,
-            'manufacturer_id' => $manufacturer_id,
-            'name' => trim($item['name']),
-            'description' => trim($item['description']),
-          ]);
-
-          if($product->save()) {
-
-            $importData = new ProductsImportsData([
-              'product_import_id' => $import->id,
-              'product_id' => $product->id,
-              'data' => json_encode($item),
-              'source' => $item['source']
-            ]);
-            $importData->save();
-
-            $this->saveFiles($product->id, $item['images']);
-
-          } else {
-            echo '<pre>';
-            print_r($product->errors);
-            echo '</pre>';
+          //Город
+          if (!$city_id = $this->getCity('Россия')) {
+            echo 'Город не найден ';
             die;
           }
+
+          //Бренд
+          if (!$brand_id = $this->getBrand('Grocenberg')) {
+
+            echo 'Бренд не найден ';
+            die;
+          }
+
+          //Цена
+          if (!$color_id = $this->getColor($item['color'])) {
+            echo '<pre>';
+            print_r($item);
+            echo '</pre>';
+            echo 'Цвет не найден - ' . $item['color'];
+            die;
+          }
+
+          //Производитель
+          if (!$manufacturer_id = $this->getManufacturer('Германия')) {
+            echo 'Производитель не найден';
+            die;
+          }
+
+          //Наличие
+          if (!$availability_id = $this->getAvailability('В наличии')) {
+            echo 'В наличии товар не найден';
+            die;
+          }
+
+          if ($this->getCategoryID($item['category'])) {
+            $product = new Products([
+              'code' => '',
+              'weight' => '',
+              'brand_id' => $brand_id,
+              'color_id' => $color_id,
+              'category_id' => intval($this->getCategoryID($item['category'])),
+              'availability_id' => $availability_id,
+              'manufacturer_id' => $manufacturer_id,
+              'name' => trim($item['name']),
+              'show' => true,
+              'main' => true,
+              'description' => trim($item['description']),
+            ]);
+
+
+            if ($product->save()) {
+
+              $importData = new ProductsImportsData([
+                'product_import_id' => $import->id,
+                'product_id' => $product->id,
+                'data' => json_encode($item),
+                'source' => $item['source']
+              ]);
+              $importData->save();
+
+              $this->saveFiles($product->id, $item['images']);
+
+            } else {
+              echo '<pre>';
+              print_r($product->errors);
+              echo '</pre>';
+              die;
+            }
+
+          }
+        } else {
+
+          //echo ($i++) . ' Товар уже добавлен ' . $item['name'] . '<br>';
         }
-
-
       }
     }
   }
 
-  public function saveFiles($product_id, $productImages = []) {
+  public function saveFiles($product_id, $productImages = [])
+  {
 
     $files = new Files();
     $path_to_save = '/images/products/' . $product_id;
-    $temp_path_to_save = \Yii::getAlias('@productImages').'/products_temp/' . $product_id;
+    $temp_path_to_save = \Yii::getAlias('@productImages') . '/products_temp/' . $product_id;
 
     foreach ($productImages as $key => $file) {
 
@@ -238,20 +298,21 @@ class CatalogImportService
       if (!is_dir($temp_path_to_save)) {
         mkdir($temp_path_to_save, 0777, true);
       }
-      file_put_contents($temp_path_to_save.'/'.$fileInfo['basename'], $fileContent);
+      file_put_contents($temp_path_to_save . '/' . $fileInfo['basename'], $fileContent);
 
       $path = \Yii::getAlias('@productImages') . '/' . $product_id;
 
       $files->saveFilesDirectly([
         'table_name' => 'products',
         'table_id' => $product_id,
-        'file_path' => $temp_path_to_save.'/'.$fileInfo['basename'],
+        'file_path' => $temp_path_to_save . '/' . $fileInfo['basename'],
         'file_name' => $fileInfo['basename'],
         'path' => $path,
         'path_to_save' => $path_to_save,
       ], ['width' => 200, 'height' => 200]);
     }
   }
+
   public function getBrand($name = 'Grocenberg')
   {
     $name = trim($name);

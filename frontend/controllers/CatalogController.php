@@ -92,6 +92,7 @@ class CatalogController extends Controller
   public function actionImport() {
 
     $catalogService = new CatalogImportService();
+    //$catalogService->parseHtmlData();
     $catalogService->parseData();
     $catalogService->insertData();
 
@@ -192,6 +193,7 @@ class CatalogController extends Controller
 
   public function actionView(int $category_id = null, int $id = null)
   {
+
     $params = $this->request->queryParams;
     $searchModel = new ProductsSearchArrayProvider();
     $model = $searchModel->search($params ?? [], 'model');
