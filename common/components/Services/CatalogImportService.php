@@ -39,7 +39,7 @@ class CatalogImportService
       $import->save();
     }
 
-    foreach (array_slice($catalog, 500, 900) as $key => $cat) {
+    foreach ($catalog as $key => $cat) {
 
       $temp = explode("##", $cat);
 
