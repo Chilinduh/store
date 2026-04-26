@@ -72,7 +72,7 @@ class CatalogImportService
     $imports = ProductsImportsPages::find()->where(['product_import_id' => 1])->all();
     $this->insertData = [];
 
-    foreach (array_slice($imports, 0, 1112) as $key => $import) {
+    foreach (array_slice($imports, 400, 1112) as $key => $import) {
 
       $this->insertData[$key] = [
         'source' => '',
