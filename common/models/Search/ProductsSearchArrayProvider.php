@@ -227,10 +227,15 @@ class ProductsSearchArrayProvider extends Model
     //echo $query->createCommand()->getRawSql(); die;
 
     $products = [];
-    //$data = $query->all();
     $totalCount = $query->count();
 
-    $data = $query->offset(($params['page']??0)*20)->limit(20)->all();
+    $page = 0;
+    if(isset($params['page'])) {
+      $page = $params['page'] - 1;
+    }
+
+
+    $data = $query->offset($page*20)->limit(20)->all();
 
     //echo $query->createCommand()->getRawSql(); die;
 
