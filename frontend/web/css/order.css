@@ -22,3 +22,7 @@ body > div.site > div > div.checkout.block > div > div > div.col-12.col-lg-6.col
   border-radius: 10px;
 }
 
+.image--type--product {
+  padding: 10px;
+}
+
