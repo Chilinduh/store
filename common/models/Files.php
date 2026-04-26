@@ -162,14 +162,14 @@ class Files extends ActiveRecord
     }
 
     $fileName = uniqid() . '.' . $fileInfo['extension'];
-    $model->original = strtolower($path_to_save . '/' . $fileName);
+    $model->original = $path_to_save . '/' . $fileName;
 
     Image::resize($file['file_path'], $width, $height)->save($path . '/' . $fileName, ['jpeg_quality' => 50]);
     if ($resize) {
 
       $fileName = uniqid() . '.' . $fileInfo['extension'];
       Image::resize($file['file_path'], $resize['width'], $resize['height'])->save($path . '/' . $fileName, ['jpeg_quality' => 50]);
-      $model->thumbnail = strtolower($path_to_save . '/' . $fileName);
+      $model->thumbnail = $path_to_save . '/' . $fileName;
     }
 
     return $model->save(false);

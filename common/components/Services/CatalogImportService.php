@@ -277,6 +277,13 @@ class CatalogImportService
           }
         } else {
 
+          $files = Files::find()->where(['table_id' => $product->id, 'table_name' => 'products'])->all();
+          foreach ($files as $file) {
+
+            $file->delete();
+          }
+
+          $this->saveFiles($product->id, $item['images']);
           $product->price = $item['price'];
           $product->save();
           //echo ($i++) . ' Товар уже добавлен ' . $item['name'] . '<br>';
@@ -294,24 +301,26 @@ class CatalogImportService
 
     foreach ($productImages as $key => $file) {
 
-      $fileContent = file_get_contents($file);
-      $fileInfo = pathinfo($file);
+      if($fileContent = @file_get_contents($file)) {
+        $fileInfo = pathinfo($file);
 
-      if (!is_dir($temp_path_to_save)) {
-        mkdir($temp_path_to_save, 0777, true);
+        if (!is_dir($temp_path_to_save)) {
+          mkdir($temp_path_to_save, 0777, true);
+        }
+        @file_put_contents($temp_path_to_save . '/' . $fileInfo['basename'], $fileContent);
+
+        $path = \Yii::getAlias('@productImages') . '/' . $product_id;
+
+        $files->saveFilesDirectly([
+          'table_name' => 'products',
+          'table_id' => $product_id,
+          'file_path' => $temp_path_to_save . '/' . $fileInfo['basename'],
+          'file_name' => $fileInfo['basename'],
+          'path' => $path,
+          'path_to_save' => $path_to_save,
+        ], ['width' => 100, 'height' => 100]);
+
       }
-      file_put_contents($temp_path_to_save . '/' . $fileInfo['basename'], $fileContent);
-
-      $path = \Yii::getAlias('@productImages') . '/' . $product_id;
-
-      $files->saveFilesDirectly([
-        'table_name' => 'products',
-        'table_id' => $product_id,
-        'file_path' => $temp_path_to_save . '/' . $fileInfo['basename'],
-        'file_name' => $fileInfo['basename'],
-        'path' => $path,
-        'path_to_save' => $path_to_save,
-      ], ['width' => 100, 'height' => 100]);
     }
   }
 
