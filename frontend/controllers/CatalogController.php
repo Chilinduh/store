@@ -335,6 +335,7 @@ class CatalogController extends Controller
 
         $searchModel = new ProductsSearchArrayProvider();
         $dataProvider = $searchModel->search($params ?? []);
+
         //$products = $dataProvider->getModels();
 
         $filters = $this->filterService->getFilters($category['id'], $params);

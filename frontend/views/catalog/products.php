@@ -21,6 +21,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
   $getParams[urldecode($key)] = $value;
 }
 
+
 ?>
 
 <? //=  $this->render('section', ['products' => $products, 'model' => $model]); ?>
@@ -130,7 +131,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
           <?php } ?>
           <div class="block">
 
-            <?php if (count($dataProvider->getModels())) { ?>
+            <?php if (count($dataProvider->allModels)) { ?>
               <div class="products-view">
                 <div class="products-view__options view-options">
                   <div class="view-options__body">
@@ -226,7 +227,7 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                 </div>
                 <div class="products-list__content">
 
-                  <?php foreach ($dataProvider->getModels() as $item) { ?>
+                  <?php foreach ($dataProvider->allModels as $item) { ?>
                     <?= ProductItemsWidget::widget(['product' => $item, 'images' => $item['images'], 'cartForm' => $cartForm]) ?>
                   <?php } ?>
 
@@ -242,10 +243,11 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
 
             <?php } ?>
 
-            <?php if ($dataProvider->getTotalCount() > 20) { ?>
+            <?php  if ($dataProvider->getTotalCount() > 20) { ?>
               <div class="products-view__pagination">
                 <nav>
                   <?php
+
                   $params = Yii::$app->request->get();
                   unset($params['category_id']);
 

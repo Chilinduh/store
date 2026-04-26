@@ -136,6 +136,8 @@ class ProductsSearchArrayProvider extends Model
 
     //$query->andWhere(['!=', 'products.price', 0]);
 
+    $timeStart = time();
+
     if ($search) {
 
       $query->leftJoin(Brands::tableName(), 'brands.id = products.brand_id')
@@ -206,12 +208,12 @@ class ProductsSearchArrayProvider extends Model
     if (isset($params['categoryIds']) && is_array($params['categoryIds']) && count($params['categoryIds'])) {
       $query->andWhere(['in', 'products.category_id', array_keys($params['categoryIds'])]);
 
-      $totalCount  = Products::find()->where(['in', 'category_id', $params['categoryIds']])->count();
+      //$totalCount  = Products::find()->where(['in', 'category_id', $params['categoryIds']])->count();
     } else {
       $query->andFilterWhere([
         'category_id' => $this->category_id,
       ]);
-      $totalCount  = Products::find()->where(['category_id' => $this->category_id])->count();
+      //$totalCount  = Products::find()->where(['category_id' => $this->category_id])->count();
     }
 
     $orderBy = [];
@@ -225,7 +227,14 @@ class ProductsSearchArrayProvider extends Model
     //echo $query->createCommand()->getRawSql(); die;
 
     $products = [];
-    foreach ($query->all() as $item) {
+    //$data = $query->all();
+    $totalCount = $query->count();
+
+    $data = $query->offset(($params['page']??0)*20)->limit(20)->all();
+
+    //echo $query->createCommand()->getRawSql(); die;
+
+    foreach ($data as $item) {
 
       $property = '';
       $productProperty = ProductProperty::findOne(['product_id' => $item->id]);
@@ -241,54 +250,52 @@ class ProductsSearchArrayProvider extends Model
       }
 
       $colors = [];
-      $stocks = ProductStockBalance::find()
-        ->where(['product_id' => $item->id])
-        ->all();
+//      $stocks = ProductStockBalance::find()->where(['product_id' => $item->id])->all();
+//
+//      $materials = [];
+//      $productMaterials = $item->getProductMaterials()->all();
+//
+//      foreach ($productMaterials as $productMaterial) {
+//
+//        $material = $productMaterial->getMaterial()->one();
+//        $unit = $productMaterial->getUnit()->one();
+//        $materials[] = [
+//          'name' => $material->name,
+//          'value' => $productMaterial->value,
+//          'unit' => $unit->name
+//        ];
+//      }
 
-      $materials = [];
-      $productMaterials = $item->getProductMaterials()->all();
-
-      foreach ($productMaterials as $productMaterial) {
-
-        $material = $productMaterial->getMaterial()->one();
-        $unit = $productMaterial->getUnit()->one();
-        $materials[] = [
-          'name' => $material->name,
-          'value' => $productMaterial->value,
-          'unit' => $unit->name
-        ];
-      }
-
-      if ($stocks) {
-
-        $default = 0;
-        foreach ($stocks as $key => $stock) {
-
-          $color = Colors::find()->where(['id' => $stock->color_id])->asArray()->one();
-          $size = Sizes::find()->where(['id' => $stock->size_id])->asArray()->one();
-          $colors[$color['id']]['id'] = $color['id'];
-          $colors[$color['id']]['default'] = $color['default'];
-          $colors[$color['id']]['color'] = $color['color'];
-          $colors[$color['id']]['name'] = $color['name'];
-          $colors[$color['id']]['sizes'][] = $size;
-        }
-
-        $colors = array_values($colors);
-
-        $defaultColor = Colors::find()->where(['default' => 1])->asArray()->one();
-        $defaultSize = Sizes::find()->where(['default' => 1])->asArray()->one();
-
-        if (!$item->color_id  && $defaultColor) {
-
-          $item->color_id = $defaultColor['id'];
-          $item->color = $defaultColor;
-        }
-
-        if ($defaultSize) {
-          $item->size_id = $defaultSize['id'];
-          $item->size = $defaultSize;
-        }
-      }
+//      if ($stocks) {
+//
+//        $default = 0;
+//        foreach ($stocks as $key => $stock) {
+//
+//          $color = Colors::find()->where(['id' => $stock->color_id])->asArray()->one();
+//          $size = Sizes::find()->where(['id' => $stock->size_id])->asArray()->one();
+//          $colors[$color['id']]['id'] = $color['id'];
+//          $colors[$color['id']]['default'] = $color['default'];
+//          $colors[$color['id']]['color'] = $color['color'];
+//          $colors[$color['id']]['name'] = $color['name'];
+//          $colors[$color['id']]['sizes'][] = $size;
+//        }
+//
+//        $colors = array_values($colors);
+//
+//        $defaultColor = Colors::find()->where(['default' => 1])->asArray()->one();
+//        $defaultSize = Sizes::find()->where(['default' => 1])->asArray()->one();
+//
+//        if (!$item->color_id  && $defaultColor) {
+//
+//          $item->color_id = $defaultColor['id'];
+//          $item->color = $defaultColor;
+//        }
+//
+//        if ($defaultSize) {
+//          $item->size_id = $defaultSize['id'];
+//          $item->size = $defaultSize;
+//        }
+//      }
 
       if ($item->color_id) {
 
@@ -357,7 +364,7 @@ class ProductsSearchArrayProvider extends Model
     $dataProvider = new ArrayDataProvider(
       [
         'allModels' => $products,
-        //'totalCount' => $totalCount,
+        'totalCount' => $totalCount,
         'pagination' => [
           'pageSize' => $params['per-page'] ?? 20,
         ],
@@ -376,6 +383,7 @@ class ProductsSearchArrayProvider extends Model
         ],
       ]
     );
+
     return $dataProvider;
   }
 
