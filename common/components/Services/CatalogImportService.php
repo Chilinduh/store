@@ -198,7 +198,7 @@ class CatalogImportService
 
       $import = ProductsImports::find()->where(['name' => 'Grocenberg'])->one();
 
-      foreach ($this->insertData as $item) {
+      foreach ($this->insertData as $index=>$item) {
 
         $item['name'] = trim($item['name']);
         if (!$product = Products::find()->where(['name' => $item['name']])->one()) {
@@ -277,6 +277,7 @@ class CatalogImportService
           }
         } else {
 
+          echo $index.'<br>';
           $files = Files::find()->where(['table_id' => $product->id, 'table_name' => 'products'])->all();
           foreach ($files as $file) {
 
