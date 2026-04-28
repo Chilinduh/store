@@ -78,7 +78,8 @@ echo $form->field($model, 'show')->widget(CheckboxX::classname(), [
 <?php } ?>
 <?php if($model->block_type_id == BlocksTypes::BLOCK_BANNERS_IMAGES && !$model->isNewRecord) { ?>
   <?= $this->render('_images_banner', ['model' => $model, 'bannersImages' => new common\models\BlocksBannersImages()]); ?>
-<?php } else { ?>
+<?php } ?>
+<?php if($model->banners) { ?>
   <?= $this->render('_short_banner', ['model' => $model->banners]); ?>
 <?php } ?>
 
