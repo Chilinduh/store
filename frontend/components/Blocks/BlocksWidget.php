@@ -132,6 +132,15 @@ class BlocksWidget extends Widget
 
         break;
 
+      case BlocksTypes::BLOCK_BANNERS_IMAGES:
+
+        return $this->render('images', [
+          'model' => $this->model->bannersImages
+        ]);
+
+        break;
+
+
       case BlocksTypes::BLOCK_BANNERS_CAROUSEL:
 
         return $this->render('carousel', [

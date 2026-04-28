@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\BlocksBannersImages;
 use Yii;
 use common\models\Files;
 use yii\web\Controller;
@@ -40,6 +41,41 @@ class BlocksController extends Controller
             'path' => $path,
             'path_to_save' => $path_to_save,
           ], ['width' => 660, 'height' => 210]);
+        }
+      }
+    }
+
+    return $this->redirect('/blocks/' . $id);
+  }
+
+
+  public function actionBannersImagesCreate($id)
+  {
+
+    $model = new BlocksBannersImages();
+    $files = new Files();
+
+    if (Yii::$app->request->isPost) {
+
+      if ($model->load(Yii::$app->request->post())) {
+        $model->block_id = $id;
+        if ($model->save()) {
+          if (isset($_FILES['BlocksBannersImages']['tmp_name']['file']) && !empty($_FILES['BlocksBannersImages']['tmp_name']['file'])) {
+
+            $path = \Yii::getAlias('@bannersImages') . '/' . $id;
+            $path_to_save = '/images/banners/' . $id;
+            $file_path = $_FILES['BlocksBannersImages']['tmp_name']['file'];
+
+            $files->saveFiles([
+              'replace' => true,
+              'table_name' => 'blocks_banners_images',
+              'table_id' => $model->id,
+              'file_path' => $file_path,
+              'file_name' => 'BlocksBannersImages[file]',
+              'path' => $path,
+              'path_to_save' => $path_to_save,
+            ], ['width' => 350, 'height' => 150]);
+          }
         }
       }
     }
@@ -177,6 +213,20 @@ class BlocksController extends Controller
 
     return $this->redirect('/blocks/'.$blockId);
   }
+
+  public function actionBannersImagesDelete($id)
+  {
+
+    $model = new BlocksBannersImages();
+    $model = $model->find()->where(['id' => $id])->one();
+    $blockId = $model->block_id;
+    if ($model) {
+      $model->delete(false);
+    }
+
+    return $this->redirect('/blocks/'.$blockId);
+  }
+
 
   public function actionDelete($id)
   {

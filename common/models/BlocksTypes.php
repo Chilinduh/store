@@ -19,8 +19,12 @@ class BlocksTypes extends ActiveRecord
   public const BLOCK_FEATURES = 10;
   public const BLOCK_NEWS_V1 = 11;
   public const BLOCK_NEWS_V2 = 12;
+
+  public const BLOCK_PRODUCTS_ACTION = 13;
   public const BLOCK_BANNERS_LEFT = 6;
   public const BLOCK_BANNERS_RIGHT = 7;
+  public const BLOCK_BANNERS_BRANDS = 14;
+  public const BLOCK_BANNERS_IMAGES = 15;
   /**
    * {@inheritdoc}
    */

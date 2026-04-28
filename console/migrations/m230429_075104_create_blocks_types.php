@@ -97,7 +97,67 @@ class m230429_075104_create_blocks_types extends Migration
       ],
     );
 
-    $this->getDb()->createCommand('ALTER SEQUENCE blocks_types_id_seq RESTART WITH 9')->execute();
+
+    $this->insert(
+      self::TABLE_NAME,
+      [
+        'id' => 9,
+        'name' => 'Блок с категориями и подкатегориями',
+      ]
+    );
+
+    $this->insert(
+      self::TABLE_NAME,
+      [
+        'id' => 10,
+        'name' => 'Блок с категориями',
+      ]
+    );
+
+    $this->insert(
+      self::TABLE_NAME,
+      [
+        'id' => 11,
+        'name' => 'Блок Новостей V1',
+      ]
+    );
+
+    $this->insert(
+      self::TABLE_NAME,
+      [
+        'id' => 12,
+        'name' => 'Блок Новостей V2',
+      ]
+    );
+
+    $this->insert(
+      self::TABLE_NAME,
+      [
+        'id' => 13,
+        'name' => 'Блок с товарами (Акции)',
+      ]
+    );
+
+    $this->insert(
+      self::TABLE_NAME,
+      [
+        'id' => 14,
+        'name' => 'Блок с брендами',
+      ]
+    );
+
+    $this->insert(
+      self::TABLE_NAME,
+      [
+        'id' => 15,
+        'name' => 'Блок с изображением товаров',
+      ],
+    );
+
+
+
+
+    $this->getDb()->createCommand('ALTER SEQUENCE blocks_types_id_seq RESTART WITH 16')->execute();
 
   }
 

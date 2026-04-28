@@ -11,11 +11,19 @@ use frontend\components\BrandsWidget;
 Yii::$app->metaTags->register('main');
 
 ?>
-<?php if ($block = Blocks::findOne(['block_type_id' => BlocksTypes::BLOCK_BANNERS_CAROUSEL])) { ?>
+
+<?php if ($block = Blocks::find()->where(['block_type_id' => BlocksTypes::BLOCK_BANNERS_IMAGES])->andWhere(['show' => 1])->one()) { ?>
   <?= BlocksWidget::widget(['model' => $block]) ?>
 <?php } ?>
 
-<?= BrandsWidget::widget() ?>
+<?php if ($block = Blocks::find()->where(['block_type_id' => BlocksTypes::BLOCK_BANNERS_CAROUSEL])->andWhere(['show' => 1])->one()) { ?>
+  <?= BlocksWidget::widget(['model' => $block]) ?>
+<?php } ?>
+
+<?php if ($block = Blocks::find()->where(['block_type_id' => BlocksTypes::BLOCK_BANNERS_BRANDS])->andWhere(['show' => 1])->one()) { ?>
+  <?= BrandsWidget::widget() ?>
+<?php } ?>
+
 
 <?php if (0) { ?>
   <div class="container">

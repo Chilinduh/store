@@ -47,6 +47,9 @@ return [
   'blocks/<id:\d+>/banners' => 'blocks/banners',
   'blocks/<id:\d+>/banners-carousel-delete' => 'blocks/banners-carousel-delete',
 
+  'blocks/<id:\d+>/banners-images-delete' => 'blocks/banners-images-delete',
+  'blocks/<id:\d+>/banners-images-create' => 'blocks/banners-images-create',
+
   'blocks-types/<id:\d+>' => 'blocks-types/update',
   'blocks-types/<id:\d+>/delete' => 'blocks-types/delete',
   'category-groups/<id:\d+>' => 'category-groups/update',

@@ -67,4 +67,9 @@ class Blocks extends ActiveRecord
   {
     return $this->hasMany(BlocksBannersCarousel::class, ['block_id' => 'id']);
   }
+
+  public function getBannersImages()
+  {
+    return $this->hasMany(BlocksBannersImages::class, ['block_id' => 'id']);
+  }
 }
