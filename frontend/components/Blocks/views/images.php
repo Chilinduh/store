@@ -31,7 +31,7 @@
 
   .block-banners-images__item img {
     width: auto; /* Изображение внутри растягивается */
-    height: 150px; /* Пропорции сохраняются */
+    height: 200px; /* Пропорции сохраняются */
     display: block;
     border-radius: 10px;
   }
