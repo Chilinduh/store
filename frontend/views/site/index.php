@@ -12,15 +12,15 @@ Yii::$app->metaTags->register('main');
 
 ?>
 
-<?php if ($block = Blocks::find()->where(['block_type_id' => BlocksTypes::BLOCK_BANNERS_IMAGES])->andWhere(['show' => 1])->one()) { ?>
+<?php if ($block = Blocks::find()->where(['block_type_id' => BlocksTypes::BLOCK_BANNERS_IMAGES])->byActive()->one()) { ?>
   <?= BlocksWidget::widget(['model' => $block]) ?>
 <?php } ?>
 
-<?php if ($block = Blocks::find()->where(['block_type_id' => BlocksTypes::BLOCK_BANNERS_CAROUSEL])->andWhere(['show' => 1])->one()) { ?>
+<?php if ($block = Blocks::find()->where(['block_type_id' => BlocksTypes::BLOCK_BANNERS_CAROUSEL])->byActive()->one()) { ?>
   <?= BlocksWidget::widget(['model' => $block]) ?>
 <?php } ?>
 
-<?php if ($block = Blocks::find()->where(['block_type_id' => BlocksTypes::BLOCK_BANNERS_BRANDS])->andWhere(['show' => 1])->one()) { ?>
+<?php if ($block = Blocks::find()->where(['block_type_id' => BlocksTypes::BLOCK_BANNERS_BRANDS])->byActive()->one()) { ?>
   <?= BrandsWidget::widget() ?>
 <?php } ?>
 
@@ -58,14 +58,14 @@ Yii::$app->metaTags->register('main');
 
 <?php
 
-  $blockLeft = Blocks::find()->where(['block_type_id' => BlocksTypes::BLOCK_BANNERS_LEFT])->one();
-  $blockRight = Blocks::find()->where(['block_type_id' => BlocksTypes::BLOCK_BANNERS_RIGHT])->one();
+  $blockLeft = Blocks::find()->byActive()->andWhere(['block_type_id' => BlocksTypes::BLOCK_BANNERS_LEFT])->one();
+  $blockRight = Blocks::find()->byActive()->andWhere(['block_type_id' => BlocksTypes::BLOCK_BANNERS_RIGHT])->one();
 
   if ($blockLeft || $blockRight) { ?>
   <?= BlocksWidget::widget([
-    'model' => $blockLeft,
-    'left' => $blockLeft,
-    'right' => $blockRight
+    'model' => $blockLeft??$blockRight,
+    'left' => $blockLeft??false,
+    'right' => $blockRight??false
   ]) ?>
 <?php } ?>
 

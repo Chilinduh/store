@@ -5,6 +5,7 @@ use Yii;
 use yii\db\ActiveRecord;
 use common\models\BlocksTypes;
 use common\models\Pages;
+use common\models\Query\BlocksQuery;
 
 
 class Blocks extends ActiveRecord
@@ -42,6 +43,17 @@ class Blocks extends ActiveRecord
       'block_group_id' => 'Группа',
     ];
   }
+
+  /**
+   * @return CartQuery
+   */
+  public static function find(): BlocksQuery
+  {
+
+    $query = new BlocksQuery(static::class);
+    return $query;
+  }
+
 
   public function getType()
   {
