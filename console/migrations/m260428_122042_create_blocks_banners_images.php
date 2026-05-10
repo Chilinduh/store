@@ -37,6 +37,7 @@ class m260428_122042_create_blocks_banners_images extends Migration
       $tableOptions
     );
 
+    $this->getDb()->createCommand('ALTER SEQUENCE blocks_banners_images_id_seq RESTART WITH 1')->execute();
   }
 
   /**
