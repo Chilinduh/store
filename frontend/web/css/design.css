@@ -7,6 +7,24 @@
 
 }
 
+.category-card--layout--classic .category-card__link {
+  color: #29b6f6;
+}
+
+.tag-badge--new:before {
+  background: #ff7143;
+}
+
+
+.category-card--layout--classic .category-card__link {
+  display: none;
+}
+
+.arrow__button:before {
+  background: #ff7143;
+  border-radius: 8px;
+}
+
 .header__navbar-phone .phone__number {
   color: #333;
 }
@@ -16,6 +34,11 @@
 }
 .header__topbar-classic .topbar__item-text {
   color: #333;
+}
+
+
+.departments__button {
+  background-color: #29b6f6 !important;
 }
 
 .departments__button {
@@ -45,6 +68,10 @@
 .search__input {
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.09);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.09);
+}
+
+.block-banners-images__item img {
+  height: 180px !important; /* Пропорции сохраняются */
 }
 
 
