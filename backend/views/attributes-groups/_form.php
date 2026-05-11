@@ -43,6 +43,13 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
 
     <?= $form->field($model, 'name'); ?>
 
+    <?= $form->field($model, 'description')->widget(\kartik\editors\Summernote::class, [
+      'useKrajeePresets' => true,
+      // other widget settings
+    ]);
+    ?>
+
+
     <?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
     <?php ActiveForm::end(); ?>
@@ -104,7 +111,7 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
             'value' => static function($model) {
 
               $attribute = $model->getAttribute($model->attribute_id);
-              
+
               return $attribute ?? '';
             }
           ],

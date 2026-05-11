@@ -349,6 +349,7 @@ class ProductsSearchArrayProvider extends Model
         'images' => $item->getFiles()->asArray()->all() ?? [],
         'materials' => $materials??[],
         'attributes' => $attributes??[],
+        'attributes_groups_description' => $item->attributesGroups->description??'',
         'manufacturer' => $item->getManufacturer()->asArray()->one() ?? '',
         'brand' => $item->getBrand()->asArray()->one() ?? '',
         'inCart' => Yii::$app->cart->getItem($item->id) ? 1 : 0,
@@ -362,7 +363,6 @@ class ProductsSearchArrayProvider extends Model
     }
 
     if ($type == 'model') {
-
       return $products[0];
     }
 

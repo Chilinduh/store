@@ -30,6 +30,7 @@ class AttributesGroups extends \yii\db\ActiveRecord
       [['show'], 'default', 'value' => null],
       [['show'], 'integer'],
       [['name'], 'string', 'max' => 255],
+      [['description'], 'string'],
     ];
   }
 
@@ -42,6 +43,7 @@ class AttributesGroups extends \yii\db\ActiveRecord
       'id' => 'ID',
       'name' => 'Название',
       'show' => 'Показать/скрыть',
+      'description' => 'Дополнение к описанию (публикуция в конце описания для всех товаров этой группы)',
     ];
   }
 }

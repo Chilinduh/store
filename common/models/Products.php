@@ -144,7 +144,7 @@ class Products extends ActiveRecord
   public function getAttributesGroups()
   {
 
-    return $this->hasMany(AttributesGroups::className(), ['id' => 'attribute_group_id']);
+    return $this->hasOne(AttributesGroups::className(), ['id' => 'attribute_group_id']);
   }
 
 
