@@ -30,7 +30,11 @@ class AttributesGroups extends \yii\db\ActiveRecord
       [['show'], 'default', 'value' => null],
       [['show'], 'integer'],
       [['name'], 'string', 'max' => 255],
-      [['description'], 'string'],
+      [['description'], 'filter', 'filter' => function($value){
+        if ($value == '<p><br></p>' || empty(trim($value))) {
+          return '';
+        }
+      }],
     ];
   }
 
