@@ -72,7 +72,7 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
           'buttons' => [
             'delete' => function ($url, $model) {
               return Html::a('<span class="glyphicon glyphicon-trash"></span>',
-                ['/colors/' . $model->id.'/delete'],
+                ['/materials/' . $model->id.'/delete'],
               );
 
             },
