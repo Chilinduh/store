@@ -17,7 +17,7 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
 
 <?= BreadcrumbWidget::widget([
   'title' => 'Цвета',
-  'createUrl' => '/colors/create',
+  'createUrl' => '/materials/create',
 ]);
 ?>
 

@@ -257,19 +257,19 @@ class ProductsSearchArrayProvider extends Model
       $colors = [];
 //      $stocks = ProductStockBalance::find()->where(['product_id' => $item->id])->all();
 //
-//      $materials = [];
-//      $productMaterials = $item->getProductMaterials()->all();
-//
-//      foreach ($productMaterials as $productMaterial) {
-//
-//        $material = $productMaterial->getMaterial()->one();
-//        $unit = $productMaterial->getUnit()->one();
-//        $materials[] = [
-//          'name' => $material->name,
-//          'value' => $productMaterial->value,
-//          'unit' => $unit->name
-//        ];
-//      }
+      $materials = [];
+      $productMaterials = $item->getProductMaterials()->all();
+
+      foreach ($productMaterials as $productMaterial) {
+
+        $material = $productMaterial->getMaterial()->one();
+        $unit = $productMaterial->getUnit()->one();
+        $materials[] = [
+          'name' => $material->name,
+          'value' => $productMaterial->value,
+          'unit' => $unit->name
+        ];
+      }
 
 //      if ($stocks) {
 //

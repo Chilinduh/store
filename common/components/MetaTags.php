@@ -36,7 +36,7 @@ class MetaTags extends \yii\base\Component {
             $meta_tag_title = $title = $meta->meta_tag_title??'';
             $meta_tag_keywords = $meta->meta_tag_keywords??'';
             $meta_tag_description = $meta->meta_tag_description??'';
-            Yii::$app->view->title = $meta->meta_tag_title;
+            Yii::$app->view->title = $meta->meta_tag_title??'';
           }
           break;
       }

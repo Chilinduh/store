@@ -29,6 +29,7 @@ use common\models\Pages;
   ]);
 
   //include_once(Yii::getAlias('@frontend/views/site/_left-filter.php'));
+
   ?>
   <div class="container">
     <div class="block-split__row row no-gutters">
