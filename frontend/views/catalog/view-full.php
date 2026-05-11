@@ -97,13 +97,10 @@ use common\models\Pages;
               <div class="product__excerpt">
                 <?= !empty($product['description']) && strlen($product['description']) > 300 ? mb_substr($product['description'], 0, 300) . ' ...': $product['description'] ?>
               </div>
-              <?php if ($product['materials'] || $product['attributes']) { ?>
+              <?php if ($product['attributes']) { ?>
                 <div class="product__features">
                   <div class="product__features-title">Характеристики:</div>
                   <ul>
-                    <?php foreach ($product['materials'] as $material) { ?>
-                      <li><?= $material['name'] ?> - <span><?= $material['value'] ?></span><?= $material['unit'] ?></li>
-                    <?php } ?>
                     <?php foreach (array_slice($product['attributes'], 0, 6) as $attributes) { ?>
                       <?php if (!empty($attributes['value'])) { ?>
                         <li><?= $attributes['name'] ?> - <span><?= $attributes['value'] ?></span></li>
@@ -448,6 +445,9 @@ use common\models\Pages;
                 <li class="product-tabs__item product-tabs__item--active"> <a href="#product-tab-description">Описание</a> </li>
                 <?php } ?>
                 <li class="product-tabs__item product-tabs__item<?= empty($product['description']) && empty($product['attributes_groups_description']) ? '--active' : '' ?>"><a href="#product-tab-specification">Характеристики</a></li>
+                <?php if(count($product['materials'])) { ?>
+                <li class="product-tabs__item product-tabs__item"><a href="#product-tab-materials">Материалы</a></li>
+                <?php } ?>
               </ul>
               <div class="product-tabs__content">
                 <?php if(!empty($product['description']) || !empty($product['attributes_groups_description'])) { ?>
@@ -464,12 +464,7 @@ use common\models\Pages;
                 <div class="product-tabs__pane<?= empty($product['description']) && empty($product['attributes_groups_description']) ? '--active' : ''   ?>" id="product-tab-specification">
                   <div class="spec">
                     <div class="spec__section">
-                      <?php foreach ($product['materials'] as $material) { ?>
-                        <div class="spec__row">
-                          <div class="spec__name"><?= $material['name'] ?></div>
-                          <div class="spec__value"><?= $material['value'] ?> <?= $material['unit'] ?></div>
-                        </div>
-                      <?php } ?>
+
                       <?php foreach ($product['attributes'] as $attributes) { ?>
                         <?php if (!empty($attributes['value'])) { ?>
                           <div class="spec__row">
@@ -488,6 +483,21 @@ use common\models\Pages;
                     </div>
                   </div>
                 </div>
+                <?php if(count($product['materials'])) { ?>
+                <div class="product-tabs__pane" id="product-tab-materials">
+                  <div class="spec">
+                    <div class="spec__section">
+                      <?php foreach ($product['materials'] as $material) { ?>
+                        <div class="spec__row">
+                          <div class="spec__name"><?= $material['name'] ?></div>
+                          <div class="spec__value"><?= $material['value'] ?>&nbsp;<?= $material['unit'] ?></div>
+                        </div>
+                      <?php } ?>
+
+                    </div>
+                  </div>
+                </div>
+                <?php } ?>
               </div>
             </div>
 

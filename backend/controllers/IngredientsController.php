@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -14,10 +14,10 @@ use yii\data\ActiveDataProvider;
 use common\models\Ingredients;
 
 class IngredientsController extends Controller {
-    
-    
+
+
     public function actions() {
-        
+
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -28,9 +28,9 @@ class IngredientsController extends Controller {
             ],
         ];
     }
-    
+
     public function actionUpdate($id) {
-        
+
         $model = new Ingredients();
         $model = $model->find()->where(['id' => $id])->one();
 
@@ -42,9 +42,9 @@ class IngredientsController extends Controller {
             'model' => $model
         ]);
     }
-    
+
     public function actionCreate() {
-        
+
         $model = new Manufacturers();
 
         if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
@@ -55,18 +55,23 @@ class IngredientsController extends Controller {
             'model' => $model
         ]);
     }
-    
-    public function actionIndex() {
-        
-        $model = new Ingredients();
-        $query = Ingredients::find();
-        $data = $query;
 
-        return $this->render('index',[
-            'data'=> $data,
-            'model'=> $model,
-            'filter' => $model
-        ]);
+    public function actionIndex() {
+
+      $searchModel = new Ingredients();
+      $query = $searchModel->find();
+
+      $dataProvider = new ActiveDataProvider([
+        'query' => $query,
+        'pagination' => [
+          'pageSize' => 15
+        ]
+      ]);
+
+      return $this->render('index', [
+        'dataProvider' => $dataProvider,
+        'searchModel' => $searchModel,
+      ]);
     }
 
     public function actionDelete($id) {
@@ -80,5 +85,5 @@ class IngredientsController extends Controller {
 
         return $this->redirect('delete');
     }
-  
+
 }
