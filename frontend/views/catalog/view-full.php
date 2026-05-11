@@ -443,7 +443,7 @@ use common\models\Pages;
             </div>
             <div class="product__tabs product-tabs product-tabs--layout--sidebar">
               <ul class="product-tabs__list">
-                <?php if(!empty($product['description'])) { ?>
+                <?php if(!empty($product['description']) || !empty($product['attributes_groups_description'])) { ?>
                 <li class="product-tabs__item product-tabs__item--active"> <a href="#product-tab-description">Описание</a> </li>
                 <?php } ?>
                 <li class="product-tabs__item product-tabs__item<?= empty($product['description']) ? '--active' : '' ?>"><a href="#product-tab-specification">Характеристики</a></li>
