@@ -460,7 +460,7 @@ use common\models\Pages;
                 </div>
                 <?php } ?>
 
-                <div class="product-tabs__pane<?= empty($product['description']) ? '--active' : ''   ?>" id="product-tab-specification">
+                <div class="product-tabs__pane<?= empty($product['description']) && empty($product['attributes_groups_description']) ? '--active' : ''   ?>" id="product-tab-specification">
                   <div class="spec">
                     <div class="spec__section">
                       <?php foreach ($product['materials'] as $material) { ?>
