@@ -446,7 +446,7 @@ use common\models\Pages;
                 <?php if(!empty($product['description']) || !empty($product['attributes_groups_description'])) { ?>
                 <li class="product-tabs__item product-tabs__item--active"> <a href="#product-tab-description">Описание</a> </li>
                 <?php } ?>
-                <li class="product-tabs__item product-tabs__item<?= empty($product['description']) ? '--active' : '' ?>"><a href="#product-tab-specification">Характеристики</a></li>
+                <li class="product-tabs__item product-tabs__item<?= empty($product['description']) && empty($product['attributes_groups_description']) ? '--active' : '' ?>"><a href="#product-tab-specification">Характеристики</a></li>
               </ul>
               <div class="product-tabs__content">
                 <?php if(!empty($product['description']) || !empty($product['attributes_groups_description'])) { ?>
