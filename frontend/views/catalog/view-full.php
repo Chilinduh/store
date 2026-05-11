@@ -455,7 +455,8 @@ use common\models\Pages;
                   <a name="description"></a><?= $product['description'] ?>
                   <?php } ?>
                   <?php if(!empty($product['attributes_groups_description'])) { ?>
-                  <hr> <p> <?= $product['attributes_groups_description'] ?> </p>
+                  <?= empty($product['description']) ? '<hr>' : '' ?>
+                    <p> <?= $product['attributes_groups_description'] ?> </p>
                   <?php } ?>
                 </div>
                 <?php } ?>
