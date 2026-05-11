@@ -449,14 +449,17 @@ use common\models\Pages;
                 <li class="product-tabs__item product-tabs__item<?= empty($product['description']) ? '--active' : '' ?>"><a href="#product-tab-specification">Характеристики</a></li>
               </ul>
               <div class="product-tabs__content">
-                <?php if(!empty($product['description'])) { ?>
+                <?php if(!empty($product['description']) || !empty($product['attributes_groups_description'])) { ?>
                 <div class="product-tabs__pane product-tabs__pane--active" id="product-tab-description">
+                  <?php if(!empty($product['description'])) { ?>
                   <a name="description"></a><?= $product['description'] ?>
+                  <?php } ?>
                   <?php if(!empty($product['attributes_groups_description'])) { ?>
                   <hr> <p> <?= $product['attributes_groups_description'] ?> </p>
                   <?php } ?>
                 </div>
                 <?php } ?>
+
                 <div class="product-tabs__pane<?= empty($product['description']) ? '--active' : ''   ?>" id="product-tab-specification">
                   <div class="spec">
                     <div class="spec__section">
