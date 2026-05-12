@@ -33,6 +33,8 @@ class m260227_050057_create_products_related extends Migration
       $tableOptions
     );
 
+    $this->getDb()->createCommand('ALTER SEQUENCE products_related_id_seq RESTART WITH 1')->execute();
+
   }
 
   /**
