@@ -24,3 +24,7 @@
   border-radius: 10px;
 }
 
+.pswp__zoom-wrap .pswp__img {
+  border-radius: 16px;
+}
+
