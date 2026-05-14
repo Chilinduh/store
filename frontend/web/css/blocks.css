@@ -7,4 +7,27 @@
 
 }
 
+  .block-banners-images .container:before,
+  .block-banners-images .container:after {
+    content: unset !important;
+  }
+
+  .block-banners-images .container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .block-banners-images__item {
+
+  }
+
+  .block-banners-images__item img {
+    width: auto; /* Изображение внутри растягивается */
+    max-height: 180px; /* Пропорции сохраняются */
+    display: block;
+    border-radius: 10px;
+  }
+
 
