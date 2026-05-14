@@ -18,13 +18,14 @@ use app\components\BreadcrumbWidget;
 use backend\models\Menu;
 
 $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
+
 ?>
 
 <?= BreadcrumbWidget::widget([
   'title' => $menu->name,
   'breadcrumbs' => [
     ['label' => $menu->name, 'url' => Yii::$app->getUrlManager()->createUrl([$menu->url])],
-    ['label' => $model->name ?? '']
+    ['label' => $model->title ?? '']
   ]
 ]);
 ?>

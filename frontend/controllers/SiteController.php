@@ -228,13 +228,13 @@ class SiteController extends Controller
     ]);
   }
 
-  public function actionFaqs()
+  public function actionFaq()
   {
 
     $faq = new Faq();
     $faq = $faq->find()->all();
 
-    return $this->render('faqs', [
+    return $this->render('faq', [
       'model' => $faq
     ]);
   }
