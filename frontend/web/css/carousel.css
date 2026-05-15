@@ -46,6 +46,13 @@
 }
 
 
+.block-banners-images__item img {
+  height: 170px; /* Пропорции сохраняются */
+}
+
+
+
+
 
 
 

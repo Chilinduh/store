@@ -58,6 +58,8 @@ class AppAsset extends AssetBundle
       'css/contacts.css',
       'css/favorites.css',
       'css/mobile_main.css',
+      'css/blocks.css',
+      'css/header.css',
       'vendor/fontawesome/css/all.min.css',
     ];
 

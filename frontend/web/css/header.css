@@ -1,0 +1,6 @@
+@media (max-width: 480px) {
+  .logo__image {
+    display: flex;
+    gap: 5px;
+  }
+}
