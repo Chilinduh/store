@@ -49,7 +49,7 @@ $this->beginPage();
     $this->title = Yii::$app->params['meta']['title']??'';
   }
 
-  echo $this->title = Yii::$app->params['yandex_metrica']??'';
+  echo $this->title = Yii::$app->params['yandex_counter']??'';
   ?>
 
   <!-- /Yandex.Metrika counter -->
