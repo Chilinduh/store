@@ -16,6 +16,8 @@
 }
 
 
+
+
 .image--type--category .image__body {
   padding-bottom: 60%;
 }
@@ -111,5 +113,22 @@ product-card__footer > button.product-card__addtocart-icon.data-icon.cart-open {
   /*transform: scale(0.5);*/
   color: #000;
 }
+
+@media (max-width: 768px) {
+  .block-split__item-sidebar {
+    -ms-flex-order: 0;
+    order: 0;
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+  .image--type--product .image__body {
+      padding-bottom: 70%;
+  }
+
+  .layout-switcher {
+    display: none;
+  }
+}
+
 
 

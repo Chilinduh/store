@@ -1,5 +1,10 @@
+<?php 
+
+$isMobile = intval(Yii::$app->mobileDetector->isMobile()) !== 1 ? false : true;
+?>
+
 <div class="widget-filters__item">
-  <div class="filter filter--opened" data-collapse-item>
+  <div class="filter <?= $isMobile ? '' : 'filter--opened' ?>" data-collapse-item>
     <button type="button" class="filter__title" data-collapse-trigger>
       <?= $title ?>
       <span class="filter__arrow">

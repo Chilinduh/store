@@ -186,7 +186,7 @@ C6,14.8,5.8,15,5.5,15h-2C3.2,15,3,14.8,3,14.5v-3C3,11.2,3.2,11,3.5,11z"/>
                   </div>
                 <?php } ?>
               </div>
-              <div class="products-view__list products-list products-list--grid--4" data-layout="list"
+              <div class="products-view__list products-list products-list--grid--4" data-layout="grid"
                    data-with-features="false">
                 <div class="products-list__head">
                   <div class="products-list__column products-list__column--image">Изображение</div>

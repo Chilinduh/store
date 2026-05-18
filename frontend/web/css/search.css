@@ -9,3 +9,16 @@
   height: 400px;
   overflow-y: auto;
 }
+
+.suggestions__product-image  {
+
+  border: 0px;
+}
+
+.suggestions__product {
+  align-items: center;
+}
+
+.suggestions__product-image:before {
+  content: unset !important;
+}

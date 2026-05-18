@@ -1130,8 +1130,22 @@
     $(function () {
         const input = $('.search__input');
         const suggestions = $('.search__dropdown--suggestions');
+        const suggestions_open = $('.search__dropdown--open');
         const vehiclePicker = $('.search__dropdown--vehicle-picker');
         const vehiclePickerButton = $('.search__button--start');
+
+        const suggestions_popup = document.querySelector('.search__dropdown--open');
+
+
+        document.addEventListener('click', (event) => {
+            // Проверяем: кликнули вне попапа И не по кнопке открытия
+            const withinPopup = suggestions_popup?.contains(event.target);
+
+            if (!withinPopup) {
+                suggestions.removeClass('search__dropdown--open');
+                $('.suggestions__group-content').html('')
+            }
+        });
 
         input.on('input', function() {
 
@@ -1163,14 +1177,16 @@
           }
         });
 
-        input.on('blur', function() {
+        suggestions_open.on('blur', function() {
+            alert('dsfdsf')
           suggestions.removeClass('search__dropdown--open');
           $('.suggestions__group-content').html('')
         });
 
         vehiclePickerButton.on('click', function() {
-            vehiclePickerButton.toggleClass('search__button--hover');
-            vehiclePicker.toggleClass('search__dropdown--open');
+            alert('11')
+           // vehiclePickerButton.toggleClass('search__button--hover');
+            //vehiclePicker.toggleClass('search__dropdown--open');
         });
 
         vehiclePicker.on('transitionend', function(event) {
