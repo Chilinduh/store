@@ -44,8 +44,10 @@ class UserProfile extends ActiveRecord {
 
   public function getProfile() {
 
-    $user = Yii::$app->user->getIdentity();
-    return self::findOne(['user_id' => $user->id]);
+    if($user = Yii::$app->user->getIdentity()) {
+      return self::findOne(['user_id' => $user->id]);
+    }
+    
   }
 
   public function beforeSave($insert) {

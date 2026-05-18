@@ -43,6 +43,9 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
     <?= $form->field($model, 'attribute_filter_id')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(AttributesFilters::Filters(), 'id', 'name'),
                 'options' => ['placeholder' => $model->getAttributeLabel('attribute_filter_id')],
+                'pluginOptions' => [
+                  'allowClear' => true
+                ]
               ]);
     ?>
 

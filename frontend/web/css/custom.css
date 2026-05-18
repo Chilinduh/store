@@ -262,6 +262,12 @@ a .logo {
   margin-top: 3px;
 }
 
+.header__navbar-phone .max {
+    width: 22px;
+    margin-top: 4px;
+    margin-left: 3px;
+}
+
 
 .category-card--layout--classic .category-card__body {
   border-radius: 10px;
