@@ -117,7 +117,7 @@ C17.9,5.2,17.7,5,17.5,5H9.4C9.2,5,9,4.8,9,4.6V3.4C9,3.2,9.2,3,9.4,3h9.2C19.4,3,2
         <div class="mobile-menu__divider"></div>
         <a class="mobile-menu__contacts hidden" href="">
           <div class="mobile-menu__contacts-subtitle">Звоните нам</div>
-          <div class="mobile-menu__contacts-title">+7 (495) 146-43-00</div>
+          <div class="mobile-menu__contacts-title"><?= Yii::$app->params['phone']??'' ?></div>
         </a>
       </div>
     </div>
