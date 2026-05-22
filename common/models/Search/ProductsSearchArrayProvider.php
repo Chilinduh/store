@@ -116,11 +116,6 @@ class ProductsSearchArrayProvider extends Model
       $catalogService = new CatalogFilterService();
       $filterParams = $catalogService->getFiltersProducts($params);
 
-      echo '<pre>';
-print_r($filterParams);
-echo '</pre>';
-die;
-
       $params['productsIds'] = $filterParams['products'];
 
       if(is_array($filterParams['filtersMain']) && count($filterParams['filtersMain'])) {
