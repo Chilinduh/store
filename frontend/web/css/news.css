@@ -21,3 +21,9 @@
   border-radius: 16px;
 }
 
+.post__body--content--text {
+    font-size: 14px;
+    max-width: 200px;
+}
+
+
