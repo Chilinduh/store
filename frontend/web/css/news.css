@@ -9,7 +9,7 @@
   border-radius: 16px;
 }
 .post__body--content--file {
-  max-width: 400px;
+  max-width: 200px;
 }
 
 .card.widget.widget-categories, .post-view__card.post {
@@ -23,7 +23,6 @@
 
 .post__body--content--text {
     font-size: 14px;
-    max-width: 200px;
 }
 
 
