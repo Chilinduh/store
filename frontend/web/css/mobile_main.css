@@ -8,7 +8,10 @@
   gap: 10px;
   margin-top: 10px;
 }
-
+.mobile-header__indicators .mobile-socials .phone {
+  margin-top: 5px;
+  font-size: 14px;
+}
 .mobile-header__indicators .mobile-socials a.max {
   margin-top: 2px;
 }
