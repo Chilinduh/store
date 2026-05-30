@@ -1,3 +1,18 @@
 .mobile-header__logo .logo__image img {
   height: 25px !important;
 }
+
+.mobile-header__indicators .mobile-socials {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.mobile-header__indicators .mobile-socials a.max {
+  margin-top: 2px;
+}
+
+.mobile-header__indicators .mobile-socials a {
+  width: 25px;
+}
