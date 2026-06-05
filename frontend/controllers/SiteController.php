@@ -65,15 +65,15 @@ class SiteController extends Controller
       ],
       'access' => [
         'class' => AccessControl::className(),
-        'only' => ['logout', 'signup'],
+        'only' => ['logout', 'signup', 'sitemap'],
         'rules' => [
           [
-            'actions' => ['signup'],
+            'actions' => ['signup', 'sitemap'],
             'allow' => true,
             'roles' => ['?'],
           ],
           [
-            'actions' => ['logout'],
+            'actions' => ['logout', 'sitemap'],
             'allow' => true,
             'roles' => ['@'],
           ],
@@ -83,6 +83,7 @@ class SiteController extends Controller
         'class' => VerbFilter::className(),
         'actions' => [
           'logout' => ['post'],
+          'sitemap' => ['get'],
           'contacts' => ['post','get'],
         ],
       ],
@@ -391,6 +392,17 @@ class SiteController extends Controller
       'send' => $send
     ]);
   }
+
+  public function actionSitemap()
+  {
+    
+    Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+    Yii::$app->response->headers->add('Content-Type', 'text/xml');
+    $products = Products::find()->where(['!=', 'show', 0])->all();
+
+    return $this->renderPartial('sitemap', ['products' => $products]);
+  }
+
 
   public function beforeAction($action)
   {
