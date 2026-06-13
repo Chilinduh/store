@@ -1,4 +1,10 @@
 @media (max-width: 480px) {
+
+  .block-brands {
+    display: none;
+
+  }
+
   .block-banners-images__item img {
     width: 180px !important;
     height: unset !important;
