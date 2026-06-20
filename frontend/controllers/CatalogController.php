@@ -21,6 +21,8 @@ use common\models\UserFavorites;
 use common\components\Catalog;
 use common\models\Attributes;
 use common\models\ProductAttributes;
+use common\models\CategoryKeywords;
+
 use frontend\components\Services\CatalogFilterService;
 
 
@@ -303,11 +305,13 @@ class CatalogController extends Controller
       }
     }
 
+    $categoryKeywords = CategoryKeywords::find()->where(['category_id' => $category_id])->one();
+
     Yii::$app->metaTags->register('catalog', [
       'title' => $category['name']??'',
-      'meta_tag_title' => $category['name']??'',
-      'meta_tag_keywords' => $category['name']??'',
-      'meta_tag_description' => $category['name']??''
+      'meta_tag_title' => $categoryKeywords['meta_tag_title']??$category['name'],
+      'meta_tag_keywords' => $categoryKeywords['meta_tag_keywords']??$category['name'],
+      'meta_tag_description' => $categoryKeywords['meta_tag_description']??$category['name']
     ]);
 
     switch ($lvl) {

@@ -3,6 +3,7 @@
 namespace common\models;
 
 use common\models\Files;
+use common\models\CategoryKeywords;
 use Yii;
 
 class Tree extends \kartik\tree\models\Tree
@@ -15,6 +16,10 @@ class Tree extends \kartik\tree\models\Tree
   public const LVL_TWO = 2;
 
   public $file = null;
+  public $meta_tag_title = null;
+  public $meta_tag_keywords = null;
+  public $meta_tag_description = null;
+  
 
   public static function tableName()
   {
@@ -26,6 +31,9 @@ class Tree extends \kartik\tree\models\Tree
     $rules = parent::rules();
 
     $rules[] = [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg'];
+    $rules[] = [['meta_tag_title', 'meta_tag_keywords', 'meta_tag_description', 'created_at'], 'safe'];
+
+    
 
     return $rules;
   }
@@ -33,7 +41,10 @@ class Tree extends \kartik\tree\models\Tree
   public function attributeLabels() {
 
     return [
-      'file' => 'Изображение'
+      'file' => 'Изображение',      
+      'meta_tag_title' => 'Заголовок (title)',
+      'meta_tag_keywords' => 'Ключевые слова (keywords)',
+      'meta_tag_description' => 'Описание (description)',
     ];
   }
 
@@ -65,6 +76,26 @@ class Tree extends \kartik\tree\models\Tree
       ], ['width' => 200, 'height' => 200]);
 
     }
+
+    $categoryKeywords = new CategoryKeywords();
+
+    if($categoryKeywords = CategoryKeywords::find()->where(['category_id' => $this->id])->one()) {
+
+      $categoryKeywords->meta_tag_title = $this->meta_tag_title;
+      $categoryKeywords->meta_tag_keywords = $this->meta_tag_keywords;
+      $categoryKeywords->meta_tag_description = $this->meta_tag_description;
+      
+    } else {
+
+      $categoryKeywords = new CategoryKeywords([
+        'category_id' => $this->id,
+        'meta_tag_title' => $this->meta_tag_title,
+        'meta_tag_keywords' => $this->meta_tag_keywords,
+        'meta_tag_description' => $this->meta_tag_description,
+      ]);
+    }
+
+    $categoryKeywords->save();
 
     return parent::beforeSave($insert);
   }

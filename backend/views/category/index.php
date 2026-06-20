@@ -38,7 +38,7 @@ echo TreeView::widget([
   'softDelete'      => false,                        // normally not needed to change
   'cacheSettings' => ['enableCache' => false],      // normally not needed to change
   'nodeAddlViews' => [
-    \kartik\tree\Module::VIEW_PART_3 => '@backend/views/category/_image'
+    \kartik\tree\Module::VIEW_PART_3 => '@backend/views/category/_fields'
   ]
 ]);
 ?>
