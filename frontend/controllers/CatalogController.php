@@ -245,10 +245,10 @@ class CatalogController extends Controller
     }
 
     Yii::$app->metaTags->register('catalog', [
-      'title' => $model['name']??'',
-      'meta_tag_title' => $model['name']??'',
-      'meta_tag_keywords' => $model['name']??'',
-      'meta_tag_description' => $model['name']??''
+      'title' => $model['tag_title']??$model['name'],
+      'meta_tag_title' => $model['tag_title']??$model['name'],
+      'meta_tag_keywords' => $model['tag_keywords']??$model['name'],
+      'meta_tag_description' => $model['tag_description']??$model['name']
     ]);
 
     return $this->render('view-full', [

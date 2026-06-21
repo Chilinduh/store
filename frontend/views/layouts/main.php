@@ -40,11 +40,14 @@ $this->beginPage();
 
   <?php
   if(isset(Yii::$app->params['meta'])) {
-    $this->registerMetaTag(['name' => 'title', 'content' => Yii::$app->params['meta']['title']??'']);
+
+    $title = Yii::$app->params['meta']['title']??'';
+
+    $this->registerMetaTag(['name' => 'title', 'content' => ucfirst($title)]);
     $this->registerMetaTag(['name' => 'keywords', 'content' => Yii::$app->params['meta']['keywords']??'']);
     $this->registerMetaTag(['name' => 'description', 'content' => Yii::$app->params['meta']['description']??'']);
     $this->registerMetaTag(['property' => 'og:title', 'content' => Yii::$app->params['meta']['title']??'']);
-    $this->registerMetaTag(['property' => 'og:description', 'content' => Yii::$app->params['meta']['title']??'']);
+    $this->registerMetaTag(['property' => 'og:description', 'content' => Yii::$app->params['meta']['description']??'']);
     //Yii::$app->view->registerMetaTag(['property' => 'og:url', 'content' => '']); //canonical URL
     $this->title = Yii::$app->params['meta']['title']??'';
   }
