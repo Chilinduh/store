@@ -100,6 +100,15 @@ class ProductsController extends Controller
     ]);
   }
 
+  public function actionKeywords()
+  {
+
+    
+
+
+
+  }
+
   public function actionCreate()
   {
 

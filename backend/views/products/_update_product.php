@@ -157,6 +157,11 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
           // other widget settings
         ]);
 
+              
+        echo $form->field($model, 'tag_title')->textarea(['rows' => 2, 'value' => $model->tag_title??'']);
+        echo $form->field($model, 'tag_keywords')->textarea(['rows' => 2, 'value' => $model->tag_keywords??'']);
+        echo $form->field($model, 'tag_description')->textarea(['rows' => 2, 'value' => $model->tag_description??'']);
+
         echo $form->field($model, 'main')->widget(CheckboxX::classname(), [
           'autoLabel' => true,
           'pluginOptions' => [
