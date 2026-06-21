@@ -99,6 +99,7 @@ class Products extends ActiveRecord
       'tag_title' => 'Тэг Title',
       'tag_keywords' => 'Тэг Keywords',
       'tag_description' => 'Тэг Description',
+      'announce' => 'Анонс (краткое описание в карточке товара)'
     ];
   }
 
