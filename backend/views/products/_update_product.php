@@ -152,6 +152,8 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
           ],
         ]);
 
+        echo $form->field($model, 'announce')->textarea(['rows' => 2, 'value' => $model->announce??'']);
+
         echo $form->field($model, 'description')->widget(Summernote::class, [
           'useKrajeePresets' => true,
           // other widget settings
