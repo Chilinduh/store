@@ -360,7 +360,7 @@ class ProductsSearchArrayProvider extends Model
         'availability' => $item->getAvailability()->name??'',
         'availability_color' => $item->getAvailability()->color??'',
         'tag_title' => $item->tag_title,
-        'tag_words' => $item->tag_words,
+        'tag_keywords' => $item->tag_keywords,
         'tag_description' => $item->tag_description
       ];
     }
