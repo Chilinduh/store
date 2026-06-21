@@ -325,6 +325,10 @@ class ProductsSearchArrayProvider extends Model
         }
       }
 
+      $announce = !empty($item->announce) 
+      ? (strlen($item->announce) > 300 ? mb_substr($item->announce, 0, 300) . ' ...': $item->announce)
+      : (strlen($item->description) > 300 ? mb_substr($item->description, 0, 300) . ' ...': $item->description);
+
       $products[] = [
         'id' => $item->id,
         'name' => $item->name,
@@ -361,7 +365,8 @@ class ProductsSearchArrayProvider extends Model
         'availability_color' => $item->getAvailability()->color??'',
         'tag_title' => $item->tag_title,
         'tag_keywords' => $item->tag_keywords,
-        'tag_description' => $item->tag_description
+        'tag_description' => $item->tag_description,
+        'announce' => $announce
       ];
     }
 

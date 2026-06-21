@@ -95,7 +95,7 @@ use common\models\Pages;
             </div>
             <div class="product__main">
               <div class="product__excerpt">
-                <?= !empty($product['description']) && strlen($product['description']) > 300 ? mb_substr($product['description'], 0, 300) . ' ...': $product['description'] ?>
+                <?= !empty($product['announce']) ? $product['announce'] : '' ?>
               </div>
               <?php if ($product['attributes']) { ?>
                 <div class="product__features">

@@ -59,7 +59,7 @@ class Products extends ActiveRecord
       [['show', 'main', 'show_previous_price'], 'boolean'],
       [['id', 'attribute_group_id','availability_id',  'price', 'property_id', 'color_id', 'size_id', 'brand_id', 'packaging_type_id', 'category_id', 'city_id', 'stock_id', 'manufacturer_id'], 'integer'],
       [['name', 'category_id'], 'required'],
-      [['attributes', 'tag_title', 'tag_keywords', 'tag_description', 'manufacturer', 'file', 'color_id', 'size_id', 'attributes_groups_description', 'color', 'size', 'weight', 'previous_price', 'availability_color', 'availability', 'views'], 'safe'],
+      [['announce', 'attributes', 'tag_title', 'tag_keywords', 'tag_description', 'manufacturer', 'file', 'color_id', 'size_id', 'attributes_groups_description', 'color', 'size', 'weight', 'previous_price', 'availability_color', 'availability', 'views'], 'safe'],
     ];
   }
 
