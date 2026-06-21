@@ -358,7 +358,10 @@ class ProductsSearchArrayProvider extends Model
         'colors' => $colors ?? [],
         'views' => $item->views ?? [],
         'availability' => $item->getAvailability()->name??'',
-        'availability_color' => $item->getAvailability()->color??''
+        'availability_color' => $item->getAvailability()->color??'',
+        'tag_title' => $item->tag_title,
+        'tag_words' => $item->tag_words,
+        'tag_description' => $item->tag_description
       ];
     }
 
