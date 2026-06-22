@@ -100,12 +100,14 @@ class ProductsController extends Controller
     ]);
   }
 
-  public function actionKeywords()
+  public function actionAll()
   {
 
-    
+    $products = Products::find()->select(['id', 'name', 'category_id'])->orderBy(['category_id' => SORT_DESC])->asArray()->all();
 
-
+    return $this->render('all', [
+      'products' => $products,
+    ]);
 
   }
 
