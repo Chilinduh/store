@@ -117,6 +117,7 @@ return [
 
   'POST products/<id:\d+>/ingredients/create' => 'products/ingredients-update',
   'products/<id:\d+>/ingredients/<ingredient_id:\d+>/delete' => 'products/ingredients-delete',
+  'products/all/<category_id:\d+>' => 'products/all',
 
   'color-groups' => 'color-groups/index',
   'color-groups/<id:\d+>' => 'color-groups/update',

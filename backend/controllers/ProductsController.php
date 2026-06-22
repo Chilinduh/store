@@ -100,10 +100,18 @@ class ProductsController extends Controller
     ]);
   }
 
-  public function actionAll()
+  public function actionAll($category_id = null)
   {
 
-    $products = Products::find()->select(['id', 'name', 'category_id'])->orderBy(['category_id' => SORT_DESC])->asArray()->all();
+
+    $query = Products::find()->select(['id', 'name', 'category_id']);
+
+    if($category_id) {
+      $query->where(['category_id' => $category_id ]);
+    }
+
+    $products = $query->orderBy(['category_id' => SORT_DESC])->asArray()->all();
+
 
     return $this->render('all', [
       'products' => $products,
