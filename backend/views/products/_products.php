@@ -78,11 +78,12 @@ use common\models\Products;
             </a><sup><span class="badge badge-light-'.$class.'">'.($images? count($images) : 0).'</span></sup>
             <div class="ms-5">
               <a href="/products/' . $model->id . '">
-                  <div class="fw-bold fs-5 text-left">' . $model->name . '</div>
+                <div class="fw-bold fs-5 text-left"><span style="color:#000;font-weight:normal">'.($model->code??'').'</span> ' . $model->name . '</div>
               </a>
-              <div class="text-left">Арт: '.($model->code??'').', Произв.: '.($manufacturer->name??'').', Бренд: '.($brand->name??'').'</div>
+              <div class="text-left">Произв.: '.($manufacturer->name??'').', Бренд: '.($brand->name??'').'</div>
               <div class="text-left">'.$source.' Описание: '.strlen($model->description).' / '.$sourceRewrite.' символов, </div>
               <div class="text-left">Количество аттрибутов: <span class="badge badge-light-'.($classOptions[$emptyAttributesCount]??'primary').'">'.$emptyAttributesCount.'</span> из '.count($model->attributesValues).'</div>
+              <div class="text-left">SEO: '.(strlen($model->announce)).'/'.(strlen($model->description)).'/'.(strlen($model->tag_title)).'/'.(strlen($model->tag_keywords)).'/'.(strlen($model->tag_description)).'</div>
               <div class="text-left"><a href="'.(Yii::$app->params['imageUrl']).'catalog/'.$model->category_id.'/'.$model->id.'" target="_blank">На сайте</a></div>
             </div>
           </div>';
