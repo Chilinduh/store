@@ -104,7 +104,7 @@ class ProductsController extends Controller
   {
 
 
-    $query = Products::find()->select(['id', 'name', 'category_id']);
+    $query = Products::find()->select(['id', 'description', 'name', 'category_id']);
 
     if($category_id) {
       $query->where(['category_id' => $category_id ]);
