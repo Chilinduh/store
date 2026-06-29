@@ -251,7 +251,7 @@ class CatalogController extends Controller
       'meta_tag_description' => $model['tag_description']??$model['name'],
       'og:title' => $model['tag_title']??$model['name'],
       'og:url' => Yii::$app->params['siteUrl'].'/catalog/'.$category_id.'/'.$id,
-      'og:image' =>  Yii::$app->params['siteUrl'].'/'.$model['images'][0]['thumbnail']
+      'og:image' =>  Yii::$app->params['siteUrl'].$model['images'][0]['thumbnail']
     ]);
 
     return $this->render('view-full', [
