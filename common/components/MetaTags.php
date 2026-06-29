@@ -26,6 +26,9 @@ class MetaTags extends \yii\base\Component {
           $meta_tag_title = $data['meta_tag_title']??'';
           $meta_tag_keywords = $data['meta_tag_keywords']??'';
           $meta_tag_description = $data['meta_tag_description']??'';
+
+          $meta_tag_og_url = $data['og:url']??'';
+          $meta_tag_og_image = $data['og:image']??'';
           break;
 
         default:
@@ -44,7 +47,9 @@ class MetaTags extends \yii\base\Component {
       Yii::$app->params['meta'] = [
         'title'=> $meta_tag_title,
         'keywords' => $meta_tag_keywords,
-        'description' => $meta_tag_description
+        'description' => $meta_tag_description,
+        'og:url' => $meta_tag_og_url,
+        'og:image' => $meta_tag_og_image,
       ];
   }
 }
