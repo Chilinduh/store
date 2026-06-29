@@ -326,7 +326,7 @@ class ProductsSearchArrayProvider extends Model
       }
 
       $announce = !empty($item->announce) 
-      ? (strlen($item->announce) > 300 ? mb_substr($item->announce, 0, 300) . ' ...': $item->announce)
+      ? (strlen($item->announce) > 1300 ? mb_substr($item->announce, 0, 1300) . ' ...': $item->announce)
       : (strlen($item->description) > 300 ? mb_substr($item->description, 0, 300) . ' ...': $item->description);
 
       $products[] = [
