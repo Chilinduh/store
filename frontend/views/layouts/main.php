@@ -52,6 +52,9 @@ $this->beginPage();
     $this->registerMetaTag(['name' => 'og:url', 'content' => Yii::$app->params['meta']['og:url']??'']);
     $this->registerMetaTag(['name' => 'og:image', 'content' => Yii::$app->params['meta']['og:image']??'']);
 
+    $this->registerMetaTag(['name' => 'og:type', 'content' => 'website']);
+    
+
     $this->title = Yii::$app->params['meta']['title']??'';
   }
 
