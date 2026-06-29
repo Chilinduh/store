@@ -48,8 +48,8 @@ class MetaTags extends \yii\base\Component {
         'title'=> $meta_tag_title,
         'keywords' => $meta_tag_keywords,
         'description' => $meta_tag_description,
-        'og:url' => $meta_tag_og_url,
-        'og:image' => $meta_tag_og_image,
+        'og:url' => $meta_tag_og_url??'',
+        'og:image' => $meta_tag_og_image??'',
       ];
   }
 }
