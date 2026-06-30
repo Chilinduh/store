@@ -29,6 +29,9 @@ class MetaTags extends \yii\base\Component {
 
           $meta_tag_og_url = $data['og:url']??'';
           $meta_tag_og_image = $data['og:image']??'';
+
+          $meta_tag_og_price = $data['product:price:amount']??'';
+          $meta_tag_og_currency = $data['product:price:currency']??'';
           break;
 
         default:
@@ -50,6 +53,8 @@ class MetaTags extends \yii\base\Component {
         'description' => $meta_tag_description,
         'og:url' => $meta_tag_og_url??'',
         'og:image' => $meta_tag_og_image??'',
+        'product:price:amount' => $meta_tag_og_price,
+        'product:price:currency' => $meta_tag_og_currency
       ];
   }
 }

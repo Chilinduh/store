@@ -53,7 +53,9 @@ $this->beginPage();
     $this->registerMetaTag(['name' => 'og:image', 'content' => Yii::$app->params['meta']['og:image']??'']);
 
     $this->registerMetaTag(['name' => 'og:type', 'content' => 'website']);
-    
+
+    $this->registerMetaTag(['name' => 'product:price:amount', 'content' => Yii::$app->params['meta']['product:price:amount']??'']);
+    $this->registerMetaTag(['name' => 'product:price:currency', 'content' => Yii::$app->params['meta']['product:price:currency']??'']);
 
     $this->title = Yii::$app->params['meta']['title']??'';
   }
