@@ -104,6 +104,8 @@ class ProductsController extends Controller
   {
 
 
+    $productsDone = Products::find()->where(['!=', 'announce', ''])->all();
+
     $query = Products::find()->select(['id', 'description', 'name', 'category_id']);
 
     if($category_id) {
@@ -115,6 +117,7 @@ class ProductsController extends Controller
 
     return $this->render('all', [
       'products' => $products,
+      'productsDone' => $productsDone,
     ]);
 
   }

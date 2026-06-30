@@ -13,7 +13,17 @@ use app\components\PanelWidget;
 echo PanelWidget::start();
 
 ?>
+<br><BR>
+Заполненные товары (всего <?= count($productsDone) ?>):
 
+<br><BR>
+
+<?php foreach($productsDone as $item) { 
+  
+  echo '<a href="'.Yii::$app->params['siteUrl'].'/catalog/'.$item['category_id'].'/'.$item['id'].'" target="_blank">'.$item['name'].'</a><br>';
+
+ } ?>
+<br><BR>
 Список товаров:
 
 <br><BR>
