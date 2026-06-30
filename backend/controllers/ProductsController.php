@@ -104,7 +104,9 @@ class ProductsController extends Controller
   {
 
 
-    $productsDone = Products::find()->where(['!=', 'announce', ''])->all();
+    $productsDone = Products::find()
+    ->select(['id', 'description', 'name', 'category_id'])
+    ->orderBy(['category_id' => SORT_DESC])->where(['!=', 'announce', ''])->all();
 
     $query = Products::find()->select(['id', 'description', 'name', 'category_id']);
 
