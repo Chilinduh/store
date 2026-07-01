@@ -36,7 +36,16 @@ class FeedsController extends Controller {
 
   public function actionIndex($id) {
 
-    $columns = ['ID','ID2','Title','URL','Image','Description','Price','Old price','Currency'];
+  $columns = [];  
+  $columns['columns'][] = 'ID';
+  $columns['columns'][] = 'ID2';
+  $columns['columns'][] = 'Title';
+  $columns['columns'][] = 'URL';
+  $columns['columns'][] = 'Image';
+  $columns['columns'][] = 'Description';
+  $columns['columns'][] = 'Price';
+  $columns['columns'][] = 'Old price';
+  $columns['columns'][]= 'Currency';
 
     $response = Yii::$app->response;
     $response->format = \yii\web\Response::FORMAT_RAW;
@@ -44,20 +53,25 @@ class FeedsController extends Controller {
     $filePath = \Yii::getAlias('@feeds/feed'.$id.'.csv');
     $fp = fopen($filePath, 'w');
     fputs($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
+
+
+    foreach ($columns as $fields) {
+        fputcsv($fp, $fields, ',');
+    }
+
     if($model = $this->findModel($id)) {
 
         $feedsItems = FeedsItems::find()->where(['feed_id' => $id])->all();
+
         
 
         foreach($feedsItems as $item) {
 
             $product = Products::findOne($item->product_id);
-
-            $data['columns'] = $columns;
             
             $data[$item->product_id][] = $product->id;
             $data[$item->product_id][] = '';
-            $data[$item->product_id][] = ucfirst(mb_strtolower($product->name, 'UTF-8'));
+            $data[$item->product_id][] = mb_ucfirst(mb_strtolower($product->name, 'UTF-8'));
             $data[$item->product_id][] = Yii::$app->params['siteUrl'].'/catalog/'.$product->category_id.'/'.$product->id;
             $data[$item->product_id][] = $product->images[0]->original??'';
             $data[$item->product_id][] = $product->announce;
