@@ -23,7 +23,7 @@ class m260701_102653_create_feeds_types extends Migration
       $this->dropTable(self::TABLE_NAME);
     }
 
-    //$this->execute("CREATE SEQUENCE attributes_feeds_types_id_seq START WITH 1 INCREMENT BY 1;");
+    $this->execute("CREATE SEQUENCE attributes_feeds_types_id_seq START WITH 1 INCREMENT BY 1;");
 
     $this->createTable(
       self::TABLE_NAME,
