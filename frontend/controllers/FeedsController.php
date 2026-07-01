@@ -47,6 +47,7 @@ class FeedsController extends Controller {
     if($model = $this->findModel($id)) {
 
         $feedsItems = FeedsItems::find()->where(['feed_id' => $id])->all();
+        
 
         foreach($feedsItems as $item) {
 
