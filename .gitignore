@@ -22,6 +22,7 @@ common/config/
 tmp/
 .idea/
 
+frontend/web/feeds
 frontend/web/images
 frontend/web/images/logo.gif
 

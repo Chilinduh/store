@@ -109,6 +109,10 @@ return [
   'colors/<id:\d+>/delete' => 'colors/delete',
   'GET, POST colors/<id:\d+>/update' => 'colors/update',
 
+  'feeds/<id:\d+>' => 'feeds/update',
+  'feeds/<id:\d+>/delete' => 'feeds/delete',
+  'GET, POST feeds/<id:\d+>/update' => 'feeds/update',
+
   'city/update/<id:\d+>' => 'city/update',
   'city/delete/<id:\d+>' => 'city/delete',
   'GET, POST city/update/<id:\d+>' => 'city/update',
