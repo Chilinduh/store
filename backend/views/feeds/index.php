@@ -73,7 +73,8 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
 
             foreach($feedsItems as $item) {
                 if($product = Products::findOne($item->product_id)) {
-                    $html .= $product->name . '<br>';
+                    $html .= '<span style="'.(strlen($product->announce) < 10 ? 'color:red' :'').'">'.$product->name . '</span>   <strong>SEO</strong>: '.(strlen($product->announce)).'/'.(strlen($product->description)).'/'.(strlen($product->tag_title)).'/'.(strlen($product->tag_keywords)).'/'.(strlen($product->tag_description)).'
+              <a href="'.(Yii::$app->params['imageUrl']).'catalog/'.$product->category_id.'/'.$product->id.'" target="_blank">На сайте</a>'.'<br>';
                 }                
             }
 
