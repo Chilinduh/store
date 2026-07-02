@@ -35,17 +35,25 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
 <?php
 
 $form = ActiveForm::begin(); ?>
-
+<div class="row">
+  <div class="col-md-12">
 <?= $form->field($model, 'name'); ?>
-
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
   <?= $form->field($model, 'product_id')->widget(Select2::classname(), [
     'data' => ArrayHelper::map(\common\models\Products::find()->asArray()->all(), 'id', 'name'),
     'options' => ['placeholder' => 'Выбрать товары', 'multiple' => true],
   ]); ?>
-
-<br>
-
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
 <?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+  </div>
+</div>
+
 
 <?php ActiveForm::end(); ?>
 <?php PanelWidget::finish() ?>
