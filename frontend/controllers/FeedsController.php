@@ -73,7 +73,7 @@ class FeedsController extends Controller {
             $data[$item->product_id][] = '';
             $data[$item->product_id][] = ucfirst(mb_strtolower($product->name, 'UTF-8'));
             $data[$item->product_id][] = Yii::$app->params['siteUrl'].'/catalog/'.$product->category_id.'/'.$product->id;
-            $data[$item->product_id][] = Yii::$app->params['siteUrl'].$product->images[0]->original??'';
+            $data[$item->product_id][] = Yii::$app->params['siteUrl'].($product->images[0]->original??'');
             $data[$item->product_id][] = $product->announce;
             $data[$item->product_id][] = $product->price;
             $data[$item->product_id][] = '';
@@ -87,7 +87,7 @@ class FeedsController extends Controller {
 
     fclose($fp);
     
-    die;//return Yii::$app->response->sendFile($filePath);
+    return Yii::$app->response->sendFile($filePath);
 
   }
 
