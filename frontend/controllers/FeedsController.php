@@ -77,7 +77,7 @@ class FeedsController extends Controller {
             $data[$item->product_id][] = $product->announce;
             $data[$item->product_id][] = $product->price;
             $data[$item->product_id][] = '';
-            $data[$item->product_id][] = 'Руб.';
+            $data[$item->product_id][] = 'RUR';
         }
 
         foreach ($data as $fields) {
