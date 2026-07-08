@@ -30,7 +30,7 @@ $urls = [];
 
  } ?>
 <br><BR>
-<textarea><?= implode(', ', $urls) ?></textarea>
+<textarea><?= implode(PHP_EOL, $urls) ?></textarea>
 <br><BR>
 Список товаров:
 
