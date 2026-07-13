@@ -21,13 +21,7 @@ $this->title = 'Контакты';
 <div class="block">
   <div class="container container--max--lg">
     <div class="card contacts">
-      <?php if (0) { ?>
-        <div class="contacts__map">
-          <iframe
-            src='https://maps.google.com/maps?q=Москва%20Высоковольтный%20проезд&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
-            frameborder='0' scrolling='no' marginheight='0' marginwidth='0'></iframe>
-        </div>
-      <?php } ?>
+
       <div class="card-body card-body--padding--2">
         <div class="row">
           <div class="col-12 col-lg-6 pb-4 pb-lg-0">
@@ -67,7 +61,14 @@ $this->title = 'Контакты';
           </div>
         </div>
       </div>
+
+      <?php if (Yii::$app->params['yandexMap']) { ?>
+        <div class="contacts__map">        
+          <?= Yii::$app->params['yandexMap'] ?> 
+        </div>
+      <?php } ?>
     </div>
   </div>
 </div>
 <div class="block-space block-space--layout--before-footer"></div>
+
