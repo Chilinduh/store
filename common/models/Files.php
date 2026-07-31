@@ -33,7 +33,7 @@ class Files extends ActiveRecord
       [['id', 'table_id', 'file_type_id'], 'integer'],
       [['thumbnail', 'size', 'table_name', 'original'], 'string'],
       [['main'], 'boolean'],
-      [['show'], 'boolean'],
+      [['show', 'is_creative'], 'boolean'],
       [['file'], 'file', 'extensions' => 'png, jpg, jpeg'],
 
     ];
@@ -52,6 +52,7 @@ class Files extends ActiveRecord
       'table_name' => 'Имя таблицы',
       'table_id' => 'ID таблицы',
       'show' => 'Статус',
+      'is_creative' => 'Креатив',
       'path' => 'Путь к картинке',
       'file' => 'Email',
       'created_at' => 'Дата создания',

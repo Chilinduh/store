@@ -93,7 +93,11 @@ use common\models\Pages;
             <div class="product__header">
               <h1 class="product__title"><?= $product['name'] ?></h1>
             </div>
+            
             <div class="product__main">
+              <?php if(in_array($category['id'], Yii::$app->params['custom_banners']['catalogs'])) { ?>
+              <div style="margin-bottom:20px"><img src="/images/present<?= rand(1,2); ?>.jpg"></div>
+              <?php } ?>
               <div class="product__excerpt">
                 <?= !empty($product['announce']) ? $product['announce'] : '' ?>
               </div>

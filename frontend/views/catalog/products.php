@@ -211,11 +211,15 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
                                   value="100">100
                           </option>
                         </select>
+                      </div>
                     </form>
                   </div>
                 </div>
 
               </div>
+              <?php if(in_array($category['id'], Yii::$app->params['custom_banners']['catalogs'])) { ?>
+              <div style="margin-bottom:20px"><img src="/images/present_banner.jpg"></div>
+              <?php } ?>
               <div class="products-view__list products-list products-list--grid--4" data-layout="grid"
                    data-with-features="false">
                 <div class="products-list__head">

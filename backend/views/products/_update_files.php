@@ -123,6 +123,20 @@ $menu = Menu::findOne(['url' => Yii::$app->controller->id]);
         ],
 
         [
+
+          'hAlign' => 'center',
+          'vAlign' => 'middle',
+          'filter' => false,
+          'attribute' => 'is_creative',
+          'format' => 'raw',
+          'value' => function ($model) {
+
+            return $this->render('_creative_checkbox', ['model' => $model]);
+
+          },
+        ],
+
+        [
           'class' => 'yii\grid\ActionColumn',
           'headerOptions' => ['width' => '60'],
           'contentOptions' => ['class' => 'actions'],
