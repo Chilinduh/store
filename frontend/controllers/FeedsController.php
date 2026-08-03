@@ -69,7 +69,7 @@ class FeedsController extends Controller {
 
             $product = Products::findOne($item->product_id);
 
-            print_r($product->creativeFile()); die;
+            print_r($product->creativeFile); die;
             
             $data[$item->product_id][] = $product->id;
             $data[$item->product_id][] = '';

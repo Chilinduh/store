@@ -325,7 +325,7 @@ class Products extends ActiveRecord
   {
 
     return $this->hasOne(Files::className(), ['table_id' => 'id'])->andWhere(['table_name' => 'products'])
-        ->andWhere(['files.is_creative' => 1])->orderBy('main DESC');
+        ->andWhere(['files.is_creative' => 1]);
   }
   
   public static function getFilesCreatives($settings = false, $params = [])
