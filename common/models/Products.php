@@ -320,6 +320,13 @@ class Products extends ActiveRecord
     return static::find();
   }
 
+
+  public function getCreativeFile()
+  {
+
+    return $this->hasOne(Files::className(), ['table_id' => 'id'])->andWhere(['table_name' => 'products'])
+        ->andWhere(['files.is_creative' => 1])->orderBy('main DESC');
+  }
   
   public static function getFilesCreatives($settings = false, $params = [])
   {
