@@ -68,14 +68,12 @@ class FeedsController extends Controller {
         foreach($feedsItems as $item) {
 
             $product = Products::findOne($item->product_id);
-
-            print_r($product->creativeFile); die;
             
             $data[$item->product_id][] = $product->id;
             $data[$item->product_id][] = '';
             $data[$item->product_id][] = ucfirst(mb_strtolower($product->name, 'UTF-8'));
             $data[$item->product_id][] = Yii::$app->params['siteUrl'].'/catalog/'.$product->category_id.'/'.$product->id;
-            $data[$item->product_id][] = Yii::$app->params['siteUrl'].($product->files[0]->original??'');
+            $data[$item->product_id][] = Yii::$app->params['siteUrl'].($product->creativeFile->original??'');
             $data[$item->product_id][] = $product->announce;
             $data[$item->product_id][] = $product->price;
             $data[$item->product_id][] = '';
