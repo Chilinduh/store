@@ -65,8 +65,7 @@ class FeedsController extends Controller
 
     if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
 
-
-        foreach($model->product_id as $key=>$item) {
+        foreach(is_array($model->product_id) ? $model->product_id : $model->product_creative_id as $key=>$item) {
 
             $feedsItems = new FeedsItems([
                 'product_id' => $item,

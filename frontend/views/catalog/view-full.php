@@ -95,7 +95,7 @@ use common\models\Pages;
             </div>
             
             <div class="product__main">
-              <?php if(in_array($category['id'], Yii::$app->params['custom_banners']['catalogs'])) { ?>
+              <?php if(in_array($product['category_id'], Yii::$app->params['custom_banners']['catalogs'])) { ?>
               <div style="margin-bottom:20px"><img src="/images/present<?= rand(1,2); ?>.jpg"></div>
               <?php } ?>
               <div class="product__excerpt">

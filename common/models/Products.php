@@ -320,6 +320,19 @@ class Products extends ActiveRecord
     return static::find();
   }
 
+  
+  public static function getFilesCreatives($settings = false, $params = [])
+  {
+
+    $products = static::find()->select(['products.*'])
+      ->leftJoin('files', 'files.table_id = products.id')
+      ->where(['table_name' => 'products'])      
+      ->andWhere(['files.is_creative' => 1])
+      ->asArray()->all();
+
+    return $products;
+  }
+
   public static function getAll($settings = false, $params = [])
   {
 

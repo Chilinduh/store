@@ -18,6 +18,8 @@ class Feeds extends \yii\db\ActiveRecord
 
 
     public $product_id = [];
+    public $product_creative_id = [];
+    
 
     /**
      * {@inheritdoc}
@@ -35,7 +37,7 @@ class Feeds extends \yii\db\ActiveRecord
         return [
             [['type_id'], 'default', 'value' => null],
             [['type_id'], 'integer'],
-            [['created_at', 'product_id'], 'safe'],
+            [['created_at', 'product_id', 'product_creative_id'], 'safe'],
             [['name'], 'string', 'max' => 255],
         ];
     }
@@ -50,6 +52,7 @@ class Feeds extends \yii\db\ActiveRecord
             'name' => 'Название фида',
             'type_id' => 'Тип фида (По умолчанию Yandex)',
             'product_id' => 'Товары для фида',
+            'product_creative_id' => 'Товары с креативами',
             'created_at' => 'Created At',
         ];
     }
