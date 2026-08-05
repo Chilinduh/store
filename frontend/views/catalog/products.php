@@ -218,7 +218,15 @@ foreach (explode('&', http_build_query($get)) as $key => $str) {
 
               </div>
               <?php if(in_array($category['id'], Yii::$app->params['custom_banners']['catalogs'])) { ?>
-              <div style="margin-bottom:20px"><img src="/images/present_banner.jpg"></div>
+              <div style="margin-bottom:20px">
+                
+                <?php if(isset(Yii::$app->params['custom_banners']['link'])) { ?>  
+                  <a href="<?= Yii::$app->params['custom_banners']['link']?>"><img src="/images/present_banner.jpg"></a>
+                <?php } else { ?>
+                  <img src="/images/present_banner.jpg">
+                <?php } ?>     
+            
+            </div>
               <?php } ?>
               <div class="products-view__list products-list products-list--grid--4" data-layout="grid"
                    data-with-features="false">

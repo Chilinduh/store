@@ -96,7 +96,13 @@ use common\models\Pages;
             
             <div class="product__main">
               <?php if(in_array($product['category_id'], Yii::$app->params['custom_banners']['catalogs'])) { ?>
-              <div style="margin-bottom:20px"><img src="/images/present<?= rand(1,2); ?>.jpg"></div>
+              <div style="margin-bottom:20px">
+                <?php if(isset(Yii::$app->params['custom_banners']['link'])) { ?>  
+                  <a href="<?= Yii::$app->params['custom_banners']['link']?>"><img src="/images/present<?= rand(1,2); ?>.jpg"></a>
+                <?php } else { ?>
+                  <img src="/images/present<?= rand(1,2); ?>.jpg">
+                <?php } ?>              
+              </div>
               <?php } ?>
               <div class="product__excerpt">
                 <?= !empty($product['announce']) ? $product['announce'] : '' ?>

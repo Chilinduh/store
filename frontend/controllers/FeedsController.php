@@ -54,7 +54,6 @@ class FeedsController extends Controller {
     $fp = fopen($filePath, 'w');
     fputs($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
 
-
     foreach ($columns as $fields) {
         fputcsv($fp, $fields, ',');
     }
@@ -62,8 +61,6 @@ class FeedsController extends Controller {
     if($model = $this->findModel($id)) {
 
         $feedsItems = FeedsItems::find()->where(['feed_id' => $id])->all();
-
-        
 
         foreach($feedsItems as $item) {
 
